@@ -5,48 +5,52 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Blühen Corporate / Site Structure Map</title>
 <style>
-:root{--bg:#ececec;--paper:#fff;--ink:#111;--muted:#6d6d6d;--line:#999;--soft:#f6f6f6;--retain:#eef4f7;--new:#fff;--future:#f7f7f7}
+:root{--bg:#ececec;--paper:#fff;--ink:#111;--muted:#6d6d6d;--line:#aaa;--soft:#f6f6f6;--retain:#eef4f7;--future:#f7f7f7}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink)}
 .topbar{height:44px;background:#191919;color:#fff;display:flex;align-items:center;gap:8px;padding:0 14px;position:sticky;top:0;z-index:20}.topbar strong{font-size:11px;letter-spacing:.06em}.topbar .grow{flex:1}.topbar a{border:1px solid #666;background:#292929;color:#fff;border-radius:4px;padding:6px 9px;text-decoration:none;font-size:10px}
-.intro{max-width:1500px;margin:15px auto 8px;padding:0 14px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:end}.intro h1{font-size:19px;margin:0 0 6px}.intro p{margin:0;max-width:980px;color:#606060;font-size:10px;line-height:1.65}.legend{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}.legend span{font-size:9px;border:1px solid #aaa;background:#fff;padding:4px 6px;white-space:nowrap}.legend .retain{background:var(--retain)}.legend .cms{border-style:dashed}.legend .form{border-width:2px}.legend .future{background:var(--future);border-style:dotted}
-.map-wrap{padding:6px 14px 20px;overflow:auto}.canvas{position:relative;width:1480px;height:730px;margin:0 auto;background:#fff;border:1px solid #aaa;box-shadow:0 5px 18px rgba(0,0,0,.07);overflow:hidden}svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.tree{stroke:#9a9a9a;stroke-width:1.1;fill:none}.node{position:absolute;width:165px;min-height:92px;background:#fff;border:1px solid #777;padding:9px 10px;color:#111;text-decoration:none;display:flex;flex-direction:column;justify-content:center;z-index:2;transform:translateX(-50%)}.node:hover{outline:2px solid #bbb}.node .id{font-size:8px;color:#888;margin-bottom:3px}.node strong{font-size:11px;line-height:1.3}.node .route{font-size:8px;color:#6f6f6f;margin-top:4px;word-break:break-all}.node .meta{font-size:7px;margin-top:6px;color:#555;line-height:1.35}.node.root{border:2px solid #111;width:185px;background:#f0f0f0}.node.retain{background:var(--retain)}.node.cms{border-style:dashed}.node.form{border-width:2px}.node.future{background:var(--future);border-style:dotted}.node .wire{font-size:7px;font-weight:700;margin-top:5px;letter-spacing:.05em}.hint{position:absolute;right:12px;top:10px;font-size:8px;color:#999}.solution-note{position:absolute;left:450px;top:344px;width:580px;border:1px dashed #777;background:#fafafa;padding:12px 14px;z-index:2}.solution-note strong{font-size:10px}.solution-note p{font-size:8px;line-height:1.55;color:#666;margin:5px 0 0}.role-note{position:absolute;left:42px;right:42px;bottom:26px;border-top:1px solid #bbb;padding-top:10px}.role-note>p{font-size:8px;color:#777;margin:0 0 8px}.role-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.role-box{background:#f8f8f8;border:1px solid #bbb;padding:9px 10px;min-height:60px}.role-box strong{font-size:9px}.role-box p{font-size:8px;line-height:1.45;color:#666;margin:4px 0 0}
-@media(max-width:760px){.intro{grid-template-columns:1fr}.legend{justify-content:flex-start}.map-wrap{padding-left:8px}.canvas{margin-left:0}}
+.intro{max-width:1500px;margin:15px auto 10px;padding:0 14px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:end}.intro h1{font-size:19px;margin:0 0 6px}.intro p{margin:0;max-width:980px;color:#606060;font-size:10px;line-height:1.65}.legend{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}.legend span{font-size:9px;border:1px solid #aaa;background:#fff;padding:4px 6px;white-space:nowrap}.legend .retain{background:var(--retain)}.legend .cms{border-style:dashed}.legend .form{border-width:2px}.legend .future{background:var(--future);border-style:dotted}
+.map-wrap{padding:6px 14px 24px}.canvas{max-width:1500px;margin:0 auto;background:#fff;border:1px solid #aaa;box-shadow:0 5px 18px rgba(0,0,0,.07);padding:24px}.root-wrap{display:flex;justify-content:center;position:relative;padding-bottom:32px}.root-wrap:after{content:"";position:absolute;bottom:0;left:50%;height:24px;border-left:1px solid #aaa}.node{display:block;background:#fff;border:1px solid #777;padding:12px 13px;color:#111;text-decoration:none;min-height:96px}.node:hover{outline:2px solid #bbb}.node .id{font-size:8px;color:#888;margin-bottom:3px}.node strong{display:block;font-size:11px;line-height:1.35}.node .route{display:block;font-size:8px;color:#6f6f6f;margin-top:4px;word-break:break-all}.node .meta{display:block;font-size:8px;margin-top:7px;color:#555;line-height:1.45}.node .wire{display:block;font-size:7px;font-weight:700;margin-top:7px;letter-spacing:.05em}.node.root{border:2px solid #111;width:220px;background:#f0f0f0;text-align:center}.node.retain{background:var(--retain)}.node.cms{border-style:dashed}.node.form{border-width:2px}.node.future{background:var(--future);border-style:dotted}
+.sitemap-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr 1.15fr 1.2fr;gap:16px;position:relative;padding-top:26px}.sitemap-grid:before{content:"";position:absolute;top:0;left:9%;right:9%;border-top:1px solid #aaa}.group{position:relative;border:1px solid #c5c5c5;background:#fafafa;padding:14px;min-width:0}.group:before{content:"";position:absolute;top:-27px;left:50%;height:27px;border-left:1px solid #aaa}.group-title{font-size:9px;font-weight:800;letter-spacing:.08em;color:#666;margin-bottom:10px;text-transform:uppercase}.group .node+.node{margin-top:10px}.child-stack{margin:10px 0 0 15px;padding-left:12px;border-left:1px solid #bbb}.child-stack .node{position:relative}.child-stack .node:before{content:"";position:absolute;left:-13px;top:29px;width:12px;border-top:1px solid #bbb}.solution-note{margin-top:18px;border:1px dashed #777;background:#fafafa;padding:12px 14px}.solution-note strong{font-size:10px}.solution-note p{font-size:8px;line-height:1.55;color:#666;margin:5px 0 0}.role-note{margin-top:18px;border-top:1px solid #bbb;padding-top:12px}.role-note>p{font-size:8px;color:#777;margin:0 0 8px}.role-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.role-box{background:#f8f8f8;border:1px solid #bbb;padding:9px 10px;min-height:60px}.role-box strong{font-size:9px}.role-box p{font-size:8px;line-height:1.45;color:#666;margin:4px 0 0}
+@media(max-width:1120px){.sitemap-grid{grid-template-columns:repeat(2,1fr)}.sitemap-grid:before,.group:before,.root-wrap:after{display:none}.role-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.intro{grid-template-columns:1fr}.legend{justify-content:flex-start}.canvas{padding:14px}.sitemap-grid{grid-template-columns:1fr;padding-top:8px}.role-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="topbar"><strong>BLÜHEN CORPORATE / SITE STRUCTURE MAP</strong><span class="grow"></span><a href="wireframe.html?page=top">TOPワイヤー</a></div>
-<div class="intro"><div><h1>コーポレートサイト / 初期サイトマップ</h1><p>事業理解とリード獲得を中心に再設計した初期構成。既存SEO資産を活かすため、役割を引き継げるURLは維持します。破線はmicroCMS、太枠はフォーム、点線は将来拡張です。各主要ボックスから会議用ワイヤーを開けます。</p></div><div class="legend"><span class="retain">既存URL維持</span><span>新規</span><span class="cms">CMS</span><span class="form">フォーム</span><span class="future">将来拡張</span></div></div>
-<div class="map-wrap"><div class="canvas" id="canvas"><div class="hint">Initial IA / Solutions launch as in-page sections</div><svg><g id="treeLines"></g></svg><div id="nodes"></div>
-<div class="solution-note"><strong>Solutionsの扱い</strong><p>初期公開では Global IR / Global Marketing の各ページ内で提供メニューとして説明。検索需要・単独受注・事例・FAQが十分に揃ったSolutionのみ、将来 `/work/global-ir/{solution}/` 等へ独立させる。</p></div>
-<div class="role-note"><p>※ URL階層とユーザー導線は別。検索・事例・Knowledgeから各事業へ直接遷移できるよう相互接続する。</p><div class="role-grid"><div class="role-box"><strong>Business</strong><p>サービス理解・商談検討</p></div><div class="role-box"><strong>Cases</strong><p>実行力・成果の証明</p></div><div class="role-box"><strong>Knowledge</strong><p>教育・検索流入・専門性</p></div><div class="role-box"><strong>About</strong><p>企業理解・信頼形成</p></div><div class="role-box"><strong>Contact</strong><p>相談種別を分けて商談化</p></div></div></div>
+<div class="intro"><div><h1>コーポレートサイト / 初期サイトマップ</h1><p>事業理解とリード獲得を中心に再設計した初期構成。既存SEO資産を活かすため、役割を引き継げるURLは維持します。破線はmicroCMS、太枠はフォームです。主要ページから会議用ワイヤーを開けます。</p></div><div class="legend"><span class="retain">既存URL維持</span><span>新規</span><span class="cms">CMS</span><span class="form">フォーム</span><span class="future">将来拡張</span></div></div>
+<div class="map-wrap"><div class="canvas">
+  <div class="root-wrap"><a class="node root" href="wireframe.html?page=top"><span class="id">P01</span><strong>TOP</strong><span class="route">/</span><span class="meta">初見理解 / 信頼 / 振り分け</span><span class="wire">WIREFRAME ↗</span></a></div>
+  <div class="sitemap-grid">
+    <section class="group"><div class="group-title">Business</div>
+      <a class="node retain" href="wireframe.html?page=top"><span class="id">P02</span><strong>Business / 事業紹介</strong><span class="route">/work/</span><span class="meta">既存URL維持 / 2事業＋その他事業のハブ</span></a>
+      <div class="child-stack">
+        <a class="node" href="wireframe.html?page=global-ir"><span class="id">P03</span><strong>Global IR</strong><span class="route">/work/global-ir/</span><span class="meta">Solutionsは初期はページ内</span><span class="wire">WIREFRAME ↗</span></a>
+        <a class="node" href="wireframe.html?page=global-marketing"><span class="id">P04</span><strong>Global Marketing</strong><span class="route">/work/global-marketing/</span><span class="meta">Solutionsは初期はページ内</span><span class="wire">WIREFRAME ↗</span></a>
+      </div>
+    </section>
+    <section class="group"><div class="group-title">Proof</div>
+      <a class="node cms" href="wireframe.html?page=top"><span class="id">P05</span><strong>Case Studies / 実績・事例</strong><span class="route">/cases/</span><span class="meta">microCMS: cases</span></a>
+      <div class="child-stack"><a class="node cms" href="wireframe.html?page=top"><span class="id">P06</span><strong>Case Detail</strong><span class="route">/cases/{slug}/</span><span class="meta">課題 → 支援 → 成果</span></a></div>
+    </section>
+    <section class="group"><div class="group-title">Knowledge</div>
+      <a class="node cms" href="wireframe.html?page=top"><span class="id">P07</span><strong>Knowledge / 知見</strong><span class="route">/knowledge/</span><span class="meta">microCMS: knowledge / 初期記事数でNav表示判断</span></a>
+      <div class="child-stack"><a class="node cms" href="wireframe.html?page=top"><span class="id">P08</span><strong>Knowledge Detail</strong><span class="route">/knowledge/{slug}/</span><span class="meta">記事 → Solution / Case → Contact</span></a></div>
+    </section>
+    <section class="group"><div class="group-title">Company</div>
+      <a class="node retain" href="wireframe.html?page=top"><span class="id">P09</span><strong>About Blühen</strong><span class="route">/about/</span><span class="meta">既存URL維持 / Company統合</span></a>
+      <a class="node retain" href="wireframe.html?page=top"><span class="id">P10</span><strong>Sustainability / SDGs</strong><span class="route">/sdgs/</span><span class="meta">既存URL維持</span></a>
+      <a class="node" href="wireframe.html?page=top"><span class="id">P11</span><strong>Recruit</strong><span class="route">/recruit/</span><span class="meta">採用情報</span></a>
+    </section>
+    <section class="group"><div class="group-title">Operations / Conversion</div>
+      <a class="node retain cms" href="wireframe.html?page=top"><span class="id">P12</span><strong>News</strong><span class="route">/news/</span><span class="meta">既存URL維持 / microCMS: news</span></a>
+      <div class="child-stack"><a class="node retain cms" href="wireframe.html?page=top"><span class="id">P13</span><strong>News Detail</strong><span class="route">既存記事URL</span><span class="meta">維持できない場合のみ1:1 301</span></a></div>
+      <a class="node retain form" href="wireframe.html?page=top"><span class="id">P14</span><strong>Contact</strong><span class="route">/contact/</span><span class="meta">既存URL維持 / 事業別分岐</span></a>
+      <div class="child-stack"><a class="node" href="wireframe.html?page=top"><span class="id">P15</span><strong>Contact Thanks</strong><span class="route">/contact/thanks/</span><span class="meta">必要に応じて実装</span></a></div>
+      <a class="node retain" href="wireframe.html?page=top"><span class="id">P16</span><strong>Legal / Privacy</strong><span class="route">既存path維持</span><span class="meta">既存URLを棚卸しして継承</span></a>
+    </section>
+  </div>
+  <div class="solution-note"><strong>Solutionsの扱い</strong><p>初期公開では Global IR / Global Marketing の各ページ内で提供メニューとして説明。検索需要・単独受注・事例・FAQが十分に揃ったSolutionのみ、将来 `/work/global-ir/{solution}/` 等へ独立させる。</p></div>
+  <div class="role-note"><p>※ URL階層とユーザー導線は別。検索・事例・Knowledgeから各事業へ直接遷移できるよう相互接続する。</p><div class="role-grid"><div class="role-box"><strong>Business</strong><p>サービス理解・商談検討</p></div><div class="role-box"><strong>Cases</strong><p>実行力・成果の証明</p></div><div class="role-box"><strong>Knowledge</strong><p>教育・検索流入・専門性</p></div><div class="role-box"><strong>About</strong><p>企業理解・信頼形成</p></div><div class="role-box"><strong>Contact</strong><p>相談種別を分けて商談化</p></div></div></div>
 </div></div>
-<script>
-const nodes=[
-{id:'P01',route:'/',name:'TOP',type:'root',parent:null,wire:'top',meta:'初見理解 / 信頼 / 振り分け'},
-{id:'P02',route:'/work/',name:'Business / 事業紹介',type:'retain',parent:'P01',wire:'top',meta:'既存URL維持'},
-{id:'P05',route:'/cases/',name:'Case Studies / 実績・事例',type:'cms',parent:'P01',wire:'top',meta:'microCMS: cases'},
-{id:'P07',route:'/knowledge/',name:'Knowledge / 知見',type:'cms',parent:'P01',wire:'top',meta:'microCMS: knowledge / 初期記事数でNav表示判断'},
-{id:'P09',route:'/about/',name:'About Blühen',type:'retain',parent:'P01',wire:'top',meta:'既存URL維持 / Company統合'},
-{id:'P10',route:'/sdgs/',name:'Sustainability / SDGs',type:'retain',parent:'P01',wire:'top',meta:'既存URL維持'},
-{id:'P11',route:'/recruit/',name:'Recruit',type:'new',parent:'P01',wire:'top',meta:'採用情報'},
-{id:'P12',route:'/news/',name:'News',type:'retain cms',parent:'P01',wire:'top',meta:'既存URL維持 / microCMS: news'},
-{id:'P14',route:'/contact/',name:'Contact',type:'retain form',parent:'P01',wire:'top',meta:'既存URL維持 / 事業別分岐'},
-{id:'P16',route:'既存path維持',name:'Legal / Privacy',type:'retain',parent:'P01',wire:'top',meta:'既存URLを棚卸しして継承'},
-{id:'P03',route:'/work/global-ir/',name:'Global IR',type:'new',parent:'P02',wire:'global-ir',meta:'Solutionsはページ内'},
-{id:'P04',route:'/work/global-marketing/',name:'Global Marketing',type:'new',parent:'P02',wire:'global-marketing',meta:'Solutionsはページ内'},
-{id:'P06',route:'/cases/{slug}/',name:'Case Detail',type:'cms',parent:'P05',wire:'top',meta:'課題 → 支援 → 成果'},
-{id:'P08',route:'/knowledge/{slug}/',name:'Knowledge Detail',type:'cms',parent:'P07',wire:'top',meta:'記事 → Solution / Case → Contact'},
-{id:'P13',route:'既存記事URL',name:'News Detail',type:'cms retain',parent:'P12',wire:'top',meta:'維持できない場合のみ1:1 301'},
-{id:'P15',route:'/contact/thanks/',name:'Contact Thanks',type:'new',parent:'P14',wire:'top',meta:'必要に応じて実装'}
-];
-const pos={P01:[740,25],P02:[90,165],P05:[235,165],P07:[380,165],P09:[525,165],P10:[670,165],P11:[815,165],P12:[960,165],P14:[1105,165],P16:[1250,165],P03:[40,305],P04:[185,305],P06:[300,305],P08:[445,305],P13:[960,305],P15:[1105,305]};
-const host=document.getElementById('nodes'),canvas=document.getElementById('canvas');
-function cls(n){let c='node';if(n.type.includes('root'))c+=' root';if(n.type.includes('retain'))c+=' retain';if(n.type.includes('cms'))c+=' cms';if(n.type.includes('form'))c+=' form';if(n.type.includes('future'))c+=' future';return c}
-function render(){host.innerHTML=nodes.map(n=>{const [x,y]=pos[n.id];return `<a class="${cls(n)}" id="${n.id}" style="left:${x}px;top:${y}px" href="wireframe.html?page=${n.wire}"><span class="id">${n.id}</span><strong>${n.name}</strong><span class="route">${n.route}</span><span class="meta">${n.meta}</span><span class="wire">WIREFRAME / NOTE ↗</span></a>`}).join('')}
-function point(el,edge){const r=el.getBoundingClientRect(),c=canvas.getBoundingClientRect();return [r.left-c.left+r.width/2,edge==='bottom'?r.bottom-c.top:r.top-c.top]}
-function path(a,b){const [x1,y1]=point(a,'bottom'),[x2,y2]=point(b,'top'),m=(y1+y2)/2;return `M${x1},${y1} V${m} H${x2} V${y2}`}
-function lines(){const g=document.getElementById('treeLines');g.innerHTML='';nodes.filter(n=>n.parent).forEach(n=>g.insertAdjacentHTML('beforeend',`<path class="tree" d="${path(document.getElementById(n.parent),document.getElementById(n.id))}"/>`))}
-render();requestAnimationFrame(lines);window.addEventListener('resize',()=>requestAnimationFrame(lines));
-</script>
 </body>
 </html>
