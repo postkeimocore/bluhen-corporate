@@ -40,9 +40,9 @@ if (fs.existsSync(path.join(root, 'index.html'))) {
   for (const route of requiredRoutes) {
     if (!html.includes(route)) failures.push(`sitemap missing route: ${route}`);
   }
-  if (!html.includes('Solutions')) failures.push('sitemap missing Solutions future-expansion note');
-  if (!html.includes('既存URL維持')) failures.push('sitemap missing retained URL legend/label');
-  if (!html.includes('sitemap-grid')) failures.push('sitemap should use non-overlapping grouped grid layout');
+  if (!html.includes('Solutions')) failures.push('sitemap missing Solutions note');
+  if (!html.includes('既存URL維持')) failures.push('sitemap missing retained URL labels');
+  if (!html.includes('sitemap-grid')) failures.push('sitemap should use grouped grid layout');
 }
 
 if (fs.existsSync(path.join(root, 'wireframe-data.js'))) {
@@ -53,9 +53,9 @@ if (fs.existsSync(path.join(root, 'wireframe-data.js'))) {
   if (!data.includes("mode:'service'")) failures.push('service pages must render as full wireframes');
   if (!data.includes("type:'solutions'")) failures.push('service pages missing Solutions section');
   if (!data.includes("type:'faq'")) failures.push('service pages missing FAQ section');
-  if (!data.includes('Global IRについて相談する')) failures.push('wireframe missing IR contact CTA');
+  if (!data.includes('英文IRについて相談する')) failures.push('wireframe missing IR contact CTA');
   if (!data.includes('海外展開について相談する')) failures.push('wireframe missing marketing contact CTA');
-  if (!data.includes('確認要')) failures.push('wireframe missing confirmation-required markers');
+  if (!data.includes('グローバル展開のナレッジ')) failures.push('wireframe missing Knowledge section title');
 }
 
 if (fs.existsSync(path.join(root, 'wireframe-app.js'))) {
