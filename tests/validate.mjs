@@ -19,12 +19,13 @@ const requiredRoutes = [
 ];
 
 const requiredTopLabels = [
-  'Global IR × Global Marketing',
-  'BUSINESS',
+  'Communication Design Company',
+  'GLOBAL COMMUNICATION',
+  'Global Branding & Marketing',
   'SELECTED CASES',
-  'WHAT POWERS BLÜHEN',
+  'WHY BLÜHEN',
   'KNOWLEDGE',
-  'OTHER BUSINESSES',
+  'SPECIALIZED BUSINESSES',
   'ABOUT BLÜHEN',
   'NEWS',
   'CONTACT'
@@ -56,6 +57,9 @@ if (fs.existsSync(path.join(root, 'wireframe-data.js'))) {
   if (!data.includes('英文IRについて相談する')) failures.push('wireframe missing IR contact CTA');
   if (!data.includes('海外展開について相談する')) failures.push('wireframe missing marketing contact CTA');
   if (!data.includes('グローバル展開のナレッジ')) failures.push('wireframe missing Knowledge section title');
+  if (!data.includes('IR Strategy & Narrative')) failures.push('wireframe missing latest IR solution structure');
+  if (!data.includes('Communication & Experience')) failures.push('wireframe missing latest branding solution structure');
+  if (!data.includes('講演・登壇・セミナー')) failures.push('wireframe missing speaking section/contact option');
 }
 
 if (fs.existsSync(path.join(root, 'wireframe-app.js'))) {
