@@ -305,6 +305,308 @@ window.BLUHEN_WIREFRAME = {
           note:'個別施策ありきではなく、現在地から必要な支援範囲を整理できる相談導線を置く。'
         }
       ]
+    },
+    'work': {
+      nav:'Business / Global Communication', route:'/work/', title:'Global Communication', mode:'service',
+      purpose:'Blühenの中核事業であるGlobal Communicationの考え方と2つの事業領域を理解し、自社の課題に合う事業へ進めるハブページにする。',
+      sections:[
+        {
+          type:'serviceHero', eyebrow:'GLOBAL COMMUNICATION', title:'企業・ブランドと世界との\nコミュニケーションを設計する。',
+          lead:'価値の見せ方から、世界で選ばれる仕組みまで。',
+          body:'Blühenは、企業や商品が持つ本質的な価値を捉え、誰に、何を、どのように伝え、どのように見られたいかを整理し、あらゆる接点で一貫したコミュニケーションとして実装します。',
+          visual:'価値を捉える → 伝わる形に設計する → 接点へ実装する',
+          ctas:[],
+          note:'Global Communicationそのものを説明する事業ハブ。新しい独立URLは作らず、既存の/work/をこの役割にする。'
+        },
+        {
+          type:'statement', eyebrow:'WHAT WE DESIGN', title:'単なる翻訳、広告、\nWeb制作、EC構築ではない。',
+          lead:'言葉、デザイン、コンテンツ、体験、メディア、デジタル、リアルな接点までを横断して、企業と世界とのコミュニケーションをつくります。',
+          body:'個別の施策を先に決めるのではなく、まず企業や商品にある価値を理解し、相手や市場の文脈に合わせて「どう見え、どう語られ、どう理解され、どう感じられるか」を設計します。',
+          points:[
+            ['01','価値を捉える','企業・商品・文化の背景まで理解し、何を伝えるべきかを見つける。'],
+            ['02','言葉と表現にする','コンセプト、言葉、ビジュアル、体験へ整理し、伝える軸をつくる。'],
+            ['03','世界の文脈へ変換する','単純な翻訳ではなく、市場・文化・読み手に合わせて伝え方を再設計する。'],
+            ['04','実装まで動かす','必要な専門家を束ね、Web、PR、IR、EC、展示会など実際の接点へ落とし込む。']
+          ],
+          note:'前回MTGで整理されたBlühenのコアを、サービス名ではなく仕事の進め方として説明する。'
+        },
+        {
+          type:'business', eyebrow:'BUSINESS', title:'Global Communicationは、\n2つの領域で展開しています。',
+          lead:'対象とする相手は異なりますが、価値を捉え、伝わる形へ設計し、実装する考え方は共通しています。',
+          cards:[
+            {
+              title:'Global Branding & Marketing',copy:'商品・サービスの価値を、世界へ。',
+              description:'顧客・市場・社会に対して、企業や商品がどう見え、どう語られ、どう感じられ、どう選ばれるかを設計します。',
+              solutions:['Strategy','Brand','Communication & Experience','Go-to-Market'],href:'?page=global-marketing'
+            },
+            {
+              title:'Global IR',copy:'企業価値を、世界へ。',
+              description:'投資家・株主・ステークホルダーに対して、企業の価値、経営の意思、戦略、将来性が正しく魅力的に伝わるコミュニケーションを設計します。',
+              solutions:['IR Strategy & Narrative','English Editorial & Translation','Executive Communication','Digital IR & Ongoing Communication'],href:'?page=global-ir'
+            }
+          ],
+          note:'Global Branding & Marketingを先に置き、次にGlobal IRへ分岐させる。'
+        },
+        {
+          type:'capabilityCards', eyebrow:'WHY BLÜHEN', title:'価値を見つけ、言葉にし、\n世界で伝わる形まで実装する。',
+          lead:'Blühenのコアにあるのは、企業や商品の中にある価値を理解し、コンセプトと言葉へ変える力です。その軸をもとに、海外の文化や文脈に合わせ、国内外の専門家を束ねながら必要なアウトプットまでディレクションします。',
+          cards:[
+            ['価値を見つける','企業や商品の背景・文化まで理解し、そのものの中にある本質的な価値を捉える。'],
+            ['コンセプトと言葉にする','見つけた価値を、ブランドやコミュニケーションの軸となる言葉へ整理する。'],
+            ['世界の文脈へ再設計する','市場・文化・読み手に合わせて、見せ方と伝え方を組み替える。'],
+            ['適切なチームで実装する','国内外のライター、デザイナー、クリエイター等を目的に応じて編成し、実装までディレクションする。']
+          ],
+          note:'TOPと2事業ページで共通するBlühenの強みを、事業ハブでは最も明確に説明する。'
+        },
+        {
+          type:'other', eyebrow:'SPECIALIZED BUSINESSES', title:'各領域に特化した事業',
+          lead:'Global Communicationで培う考え方や実行力を、特定の市場・課題に合わせて展開しています。',
+          items:[
+            {title:'PATHOS',copy:'SaaS企業の展示会における接点を、成果につながるリードへ。',meta:'展示会 / リード獲得'},
+            {title:'NEXT VISA',copy:'企業と海外人材の可能性が、正しく出会う仕組みをつくる。',meta:'海外人材 / 採用'},
+            {title:'AI / Technology',copy:'AI時代の業務・購買体験を、使える仕組みへ。',meta:'AI / 業務・購買体験'}
+          ],
+          note:'Corporate Brandの中核より前には出さず、Global Communicationの後に関連事業として扱う。'
+        },
+        {
+          type:'cases', eyebrow:'CASES', title:'Global Communicationの実績・事例',
+          lead:'Global Branding & MarketingとGlobal IR、それぞれの支援を課題・支援内容・成果の流れで紹介します。',
+          pending:'社名・数値・対象市場など、公開可能な実績情報はクライアント確認後に差し替え。',
+          proofs:[
+            ['対象','企業・ブランド / 上場企業等'],['領域','Branding & Marketing / Global IR'],['支援範囲','戦略・言語・制作・運用'],['実績情報','公開可能な数値・期間へ差し替え']
+          ],
+          cases:[
+            {cat:'GLOBAL BRANDING & MARKETING',title:'海外向けブランド・コミュニケーション支援',challenge:'海外市場での価値の見せ方・伝え方・接点を整理する必要があった。',scope:'Strategy / Brand / Communication & Experience / Go-to-Market',result:'公開可能な成果情報を掲載。'},
+            {cat:'GLOBAL IR',title:'上場企業等のGlobal IR支援',challenge:'企業価値や経営意図を海外の読み手へ一貫した言葉で伝える必要があった。',scope:'Narrative / Editorial & Translation / Executive Communication / Quality Management',result:'公開可能な成果情報を掲載。'}
+          ],
+          note:'具体的な実績情報は捏造せず、掲載許諾後に差し替える。'
+        },
+        {
+          type:'knowledge', eyebrow:'KNOWLEDGE', title:'Global Communicationのナレッジ',
+          lead:'海外展開、ブランディング、ローカライゼーション、英文IRなど、実務で培った知見を継続的に発信します。',
+          cards:[
+            ['Global Branding & Marketing','海外ブランディング','海外市場で価値の見せ方・伝え方を設計する考え方'],
+            ['Global Branding & Marketing','ローカライゼーション','翻訳だけでは届かないときに、何を現地向けに再設計するか'],
+            ['Global IR','英文IR','企業価値を海外投資家へ伝えるための言葉の設計']
+          ],
+          note:'記事テーマ・キーワードは今後の調査で精査する。'
+        },
+        {
+          type:'serviceContact', eyebrow:'CONTACT', title:'企業・ブランドと世界との\nコミュニケーションについてご相談ください。',
+          body:'海外展開、ブランド、IRなど、現在地と課題を伺いながら必要な支援領域を整理します。',
+          cta:'お問い合わせ',
+          note:'具体的なSolution名が決まっていない段階でも相談できるハブCTA。'
+        }
+      ]
+    },
+
+    'about': {
+      nav:'About Blühen', route:'/about/', title:'About Blühen', mode:'service',
+      purpose:'Blühenが何を大切にし、どのような会社・組織として事業を行っているかを伝え、取引・採用・登壇依頼に必要な信頼を形成する。',
+      sections:[
+        {
+          type:'serviceHero', eyebrow:'ABOUT BLÜHEN', title:'価値と、それを必要とする人との間を\nデザインする。',
+          lead:'価値を、花開かせる。',
+          body:'Blühenは、価値がどう見え、どう語られ、どう理解され、どう感じられ、どう選ばれるかを設計するCommunication Design Companyです。',
+          visual:'BRAND / PEOPLE / ORGANIZATION / COMPANY',
+          ctas:[],
+          note:'PurposeとBrand Essenceを軸に、会社の考え方と現在の事業定義を最初に示す。'
+        },
+        {
+          type:'statement', eyebrow:'BRAND CORE', title:'「伝える」で終わらせず、\n価値が動き出すところまで。',
+          lead:'表面的な施策ではなく、その企業や商品にある価値そのものを捉え、相手の理解・選択・行動につながるコミュニケーションをつくります。',
+          body:'Brand Systemでは、BlühenのCharacterを「知性 × 人間味 × 推進力」と定義しています。知的で洗練されていることと、人や可能性への温度、実装まで進める力を両立させます。',
+          points:[
+            ['01','Brand Essence','価値を、花開かせる。'],
+            ['02','Purpose','価値と、それを必要とする人との間をデザインする。'],
+            ['03','What We Do','Communication Design Company'],
+            ['04','Brand Promise','「伝える」で終わらせず、価値が動き出すところまで。']
+          ],
+          note:'最新Brand Coreをそのまま基準にする。旧Mission / Visionは廃止が明示されていないため、この時点で統廃合しない。'
+        },
+        {
+          type:'statement', eyebrow:'OUR ORIGIN', title:'人の可能性が、\n環境の変化で途切れないように。',
+          lead:'Blühenは、結婚や出産などライフステージが変化しても、一人ひとりが持つスキルや能力を活かし続けられる場をつくりたいという思いから始まりました。',
+          body:'現在はBtoBのCommunication Designを事業の中核に据えていますが、人の可能性を尊重し、価値がふさわしい相手や舞台に出会う状態をつくるという原点は、組織づくりや働き方にもつながっています。',
+          points:[
+            ['01','事業','Communication Designを中核に、企業・ブランドの価値を世界へ届ける。'],
+            ['02','組織','多様な経験や専門性を持つ人が、力を発揮できるチームをつくる。'],
+            ['03','働き方','ライフステージに左右されず、専門性を活かし続けられる環境を考える。']
+          ],
+          note:'創業時の背景を残しつつ、現在のCorporate Brandより前面には出しすぎない。'
+        },
+        {
+          type:'infoGrid', eyebrow:'PEOPLE & ORGANIZATION', title:'人と組織',
+          lead:'代表メッセージ、メンバー、組織、働き方を通じて、Blühenがどのように仕事を進めているかを紹介します。',
+          items:[
+            ['代表メッセージ','代表者の言葉・プロフィールを掲載。','会社案内・最新プロフィール素材を受領後に本文化。'],
+            ['メンバー / チーム','社内メンバーと、案件に応じて編成する国内外の専門家・クリエイターの関係を紹介。','掲載メンバー・肩書・写真は確認後に差し替え。'],
+            ['組織・働き方','専門性や経験を活かしながら働ける組織づくり、仕事の進め方を紹介。','採用訴求だけに寄せず、取引先から見た実行体制の信頼にもつなげる。'],
+            ['Recruit','現在の採用情報と、Blühenが求める人物像への導線。','採用は現時点で優先度を上げすぎず、独立Recruitページへ接続。']
+          ],
+          note:'人物・組織の事実情報は資料受領後に差し替え。'
+        },
+        {
+          type:'infoGrid', eyebrow:'SPEAKING', title:'講演・登壇・セミナー',
+          lead:'Blühenでは、本業に関するテーマに加え、これまでの事業・組織づくりの経験をもとにした講演・登壇のご相談も受け付けています。',
+          items:[
+            ['女性の働き方・組織づくり','ライフステージとキャリア、柔軟な組織づくりなど。',''],
+            ['女性起業家支援','起業・事業づくりに関するテーマ。',''],
+            ['AI','AI活用や新しい業務・購買体験に関するテーマ。',''],
+            ['海外展開・ブランディング','海外市場に向けた価値の伝え方、ブランド・コミュニケーション設計。','']
+          ],
+          note:'独立ページは作らず、About内の1セクションとして掲載。問い合わせは共通Contactへ集約する。'
+        },
+        {
+          type:'infoGrid', eyebrow:'COMPANY', title:'会社情報',
+          lead:'会社概要・沿革など、取引や採用時に必要な基本情報をまとめます。',
+          items:[
+            ['会社概要','会社名 / 代表 / 所在地 / 設立 / 事業内容等','最新の会社案内に合わせて確定情報へ差し替え。'],
+            ['沿革','設立から現在までの主な出来事','掲載する出来事を確認後に差し替え。'],
+            ['Sustainability','既存のSDGs / Sustainabilityページへ接続','既存URLを維持。'],
+            ['Contact','事業相談、講演・登壇、その他のお問い合わせ','共通フォームへ接続。']
+          ],
+          note:'会社概要の具体情報は確認できた一次資料をもとに実装する。'
+        },
+        {
+          type:'serviceContact', eyebrow:'CONTACT', title:'Blühenへのご相談・ご依頼',
+          body:'事業に関するご相談、講演・登壇・セミナーのご依頼、その他のお問い合わせを共通フォームから受け付けます。',
+          cta:'お問い合わせ',
+          note:'問い合わせフォームで内容を選択して振り分ける。'
+        }
+      ]
+    },
+
+    'cases': {
+      nav:'Cases', route:'/cases/', title:'Cases / 実績・事例', mode:'service',
+      purpose:'Blühenがどのような課題に対して、何を考え、どこまで支援し、どのような成果につながったかを確認できる事例一覧にする。',
+      sections:[
+        {
+          type:'serviceHero', eyebrow:'CASES', title:'実績・事例',
+          lead:'企業・ブランドの課題に対して、Blühenが担った支援と、その結果を紹介します。',
+          body:'Global Branding & Marketing / Global IRを中心に、課題、考え方、支援範囲、成果が分かる形で事例を蓄積します。',
+          visual:'課題 → Insight / Concept → 支援 → 成果',
+          ctas:[],
+          note:'CMSで運用する事例一覧。公開可能な案件から順次追加する。'
+        },
+        {
+          type:'listing', eyebrow:'CASE STUDIES', title:'事例を探す',
+          lead:'事業領域や支援内容から事例を絞り込める構成を想定します。',
+          filters:['すべて','Global Branding & Marketing','Global IR'],
+          items:[
+            ['Global Branding & Marketing','海外向けブランド・コミュニケーション支援','業界 / 対象市場 / 支援領域','課題・支援・成果の要約を掲載。'],
+            ['Global IR','上場企業等のGlobal IR支援','業界 / 文書種別 / 支援領域','課題・支援・成果の要約を掲載。'],
+            ['Global Branding & Marketing','事例タイトル','業界 / 対象市場 / 支援領域','公開可能な案件受領後に差し替え。'],
+            ['Global IR','事例タイトル','業界 / 文書種別 / 支援領域','公開可能な案件受領後に差し替え。']
+          ],
+          note:'初期はBusinessカテゴリーを主軸にし、事例数が増えたらSolution等の絞り込みを追加する。'
+        },
+        {
+          type:'infoGrid', eyebrow:'CASE DETAIL', title:'事例詳細ページの基本構成',
+          lead:'案件ごとに情報量がばらついても、比較しやすい基本フォーマットを持たせます。',
+          items:[
+            ['Overview','Client / Industry / Region / Business / 支援期間','公開可能な範囲で基本情報を表示。'],
+            ['Challenge','相談前の状況・課題','なぜ支援が必要だったのかを説明。'],
+            ['Insight / Concept','Blühenが捉えた価値・方針','単なる制作実績ではなく、考え方を残す。'],
+            ['Scope / Process','支援範囲・進め方','Strategy / Brand / IR等の関連領域と接続。'],
+            ['Output / Outcome','制作物・成果','公開可能な定量・定性成果を掲載。'],
+            ['Related','関連Business / Knowledge','事業・ナレッジ・問い合わせへ回遊。']
+          ],
+          note:'microCMSのCase Detailで持つ基本フィールド想定。'
+        },
+        {
+          type:'serviceContact', eyebrow:'CONTACT', title:'近い課題について、\nまずはご相談ください。',
+          body:'事例と同じ支援内容に限らず、現在の課題や対象市場を伺いながら必要な支援範囲を整理します。',
+          cta:'お問い合わせ',
+          note:'事例閲覧から相談へ接続する。'
+        }
+      ]
+    },
+
+    'knowledge': {
+      nav:'Knowledge', route:'/knowledge/', title:'Knowledge / ナレッジ', mode:'service',
+      purpose:'Global Branding & MarketingとGlobal IRの専門知識を継続的に蓄積し、検索・SNS等からの情報収集ユーザーを事業・事例へつなぐ。',
+      sections:[
+        {
+          type:'serviceHero', eyebrow:'KNOWLEDGE', title:'世界へ価値を届けるためのナレッジ',
+          lead:'海外展開、ブランディング、ローカライゼーション、英文IRなど、実務で培った知見を発信します。',
+          body:'情報収集だけで終わらず、関連する事業・事例を通じて、自社の課題を具体化できるコンテンツを目指します。',
+          visual:'Knowledge → Business / Case → Contact',
+          ctas:[],
+          note:'SEO / SNS / Note等からの流入を受けるコンテンツハブ。'
+        },
+        {
+          type:'listing', eyebrow:'ARTICLES', title:'記事を探す',
+          lead:'事業領域・テーマから記事を探せる構成を想定します。キーワードやカテゴリは調査結果をもとに今後精査します。',
+          filters:['すべて','Global Branding & Marketing','Global IR'],
+          items:[
+            ['Global Branding & Marketing','海外市場で価値の見せ方・伝え方を設計する考え方','海外展開 / ブランディング','記事概要・更新日・関連Businessを表示。'],
+            ['Global Branding & Marketing','翻訳だけでは届かないときに、何を現地向けに再設計するか','ローカライゼーション','記事概要・更新日・関連Businessを表示。'],
+            ['Global IR','企業価値を海外投資家へ伝えるための言葉の設計','英文IR / Corporate Narrative','記事概要・更新日・関連Businessを表示。'],
+            ['Global IR','統合報告書の英文品質を一貫させる考え方','英文編集・翻訳','記事概要・更新日・関連Businessを表示。']
+          ],
+          note:'記事タイトルは現時点ではテーマ例。SEOキーワードは外部調査後に確定する。'
+        },
+        {
+          type:'infoGrid', eyebrow:'ARTICLE DETAIL', title:'記事詳細ページの基本構成',
+          lead:'記事単体で完結させず、専門性の証明と関連サービスへの回遊を両立します。',
+          items:[
+            ['Article','タイトル / 導入 / 本文 / 更新日','検索意図に対して明確に回答する。'],
+            ['Expertise','著者 / 監修 / 会社情報','誰の知見か分かる状態にする。'],
+            ['Related Business','関連する事業・支援領域','記事内容と直接関係するBusinessへ接続。'],
+            ['Related Cases','関連事例','同じテーマの実行例がある場合に接続。'],
+            ['Related Knowledge','関連記事','テーマ理解を深める内部回遊。'],
+            ['Contact','相談導線','記事テーマに沿った問い合わせへ接続。']
+          ],
+          note:'AIO専用の不自然な文章を作るのではなく、定義・一次知見・実例・発信主体を明確にする。'
+        },
+        {
+          type:'serviceContact', eyebrow:'CONTACT', title:'記事で扱っているテーマについて\nご相談いただけます。',
+          body:'海外展開、ブランド、IRなど、記事内容に関連する課題があればお問い合わせください。',
+          cta:'お問い合わせ',
+          note:'KnowledgeからBusiness / Caseを経由せず直接相談するユーザーにも対応する。'
+        }
+      ]
+    },
+
+    'contact': {
+      nav:'Contact', route:'/contact/', title:'Contact / お問い合わせ', mode:'service',
+      purpose:'問い合わせ内容を一つのフォームで受け付け、事業相談・講演依頼・その他の問い合わせを適切に振り分ける。',
+      sections:[
+        {
+          type:'serviceHero', eyebrow:'CONTACT', title:'お問い合わせ',
+          lead:'事業に関するご相談、講演・登壇・セミナーのご依頼、その他のお問い合わせを受け付けています。',
+          body:'ご相談内容が具体的に固まっていない場合も、現在の状況や課題を伺いながら必要な支援範囲を整理します。',
+          visual:'1 FORM / INQUIRY TYPE',
+          ctas:[],
+          note:'問い合わせ窓口は分散させず、共通フォーム内の問い合わせ種別で振り分ける。'
+        },
+        {
+          type:'contactForm', eyebrow:'FORM', title:'お問い合わせフォーム',
+          lead:'以下の内容を入力して送信してください。',
+          inquiryTypes:['Global Branding & Marketingについて','Global IRについて','講演・登壇・セミナーのご依頼','採用について','メディア・取材について','その他'],
+          fields:[
+            ['会社名','text','required'],
+            ['お名前','text','required'],
+            ['メールアドレス','email','required'],
+            ['電話番号','tel','optional'],
+            ['お問い合わせ種別','select','required'],
+            ['お問い合わせ内容','textarea','required']
+          ],
+          note:'最終的な項目数は営業フローと個人情報方針に合わせて調整。問い合わせ種別は一つのフォーム内で管理する。'
+        },
+        {
+          type:'infoGrid', eyebrow:'BEFORE CONTACT', title:'ご相談時に分かる範囲でお知らせください',
+          lead:'初回相談をスムーズにするための参考情報です。すべて揃っていなくてもお問い合わせいただけます。',
+          items:[
+            ['海外展開・ブランディング','対象商品・サービス / 対象市場 / 現在の課題',''],
+            ['Global IR','対象文書・発信内容 / 希望時期 / 現在の英文運用状況',''],
+            ['講演・登壇','テーマ / 開催時期 / 対象者 / 開催形式',''],
+            ['その他','ご相談の背景と、確認したいこと','']
+          ],
+          note:'入力必須項目を増やしすぎず、詳細は初回対応で確認する。'
+        }
+      ]
     }
   }
 };
