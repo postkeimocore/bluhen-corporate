@@ -60,6 +60,9 @@ if (fs.existsSync(path.join(root, 'wireframe-data.js'))) {
   if (!data.includes('IR Strategy & Narrative')) failures.push('wireframe missing latest IR solution structure');
   if (!data.includes('Communication & Experience')) failures.push('wireframe missing latest branding solution structure');
   if (!data.includes('講演・登壇・セミナー')) failures.push('wireframe missing speaking section/contact option');
+  for (const pageKey of ["'work': {","'about': {","'cases': {","'knowledge': {","'contact': {"]) {
+    if (!data.includes(pageKey)) failures.push(`wireframe missing page: ${pageKey}`);
+  }
 }
 
 if (fs.existsSync(path.join(root, 'wireframe-app.js'))) {
@@ -67,6 +70,9 @@ if (fs.existsSync(path.join(root, 'wireframe-app.js'))) {
   if (app.includes('nav-preview')) failures.push('dropdown previews must not be permanently visible');
   if (!app.includes('nav-dropdown')) failures.push('interactive dropdown markup missing');
   if (!app.includes('renderService')) failures.push('full service-page renderer missing');
+  if (!app.includes('renderInfoGrid')) failures.push('info-grid renderer missing');
+  if (!app.includes('renderListing')) failures.push('listing renderer missing');
+  if (!app.includes('renderContactForm')) failures.push('contact form renderer missing');
 }
 
 if (fs.existsSync(path.join(root, 'wireframe.css'))) {
