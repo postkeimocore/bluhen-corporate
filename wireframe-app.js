@@ -76,12 +76,16 @@
     return `<section class="section hero"><div class="hero-grid"><div>${eyebrow(section.eyebrow)}<h1>${withBreaks(section.title)}</h1>${paragraph('lead', section.lead)}${paragraph('subcopy', section.body)}<div class="cta-row">${section.ctas.map((label, index) => `<a class="btn ${index === 0 ? 'primary' : ''}" href="#">${escapeHtml(label)}</a>`).join('')}</div>${note(section.note)}</div>${section.visual ? `<div class="visual">${withBreaks(section.visual)}</div>` : ''}</div></section>`;
   }
 
+  function renderStatement(section) {
+    return `<section class="section statement-section">${eyebrow(section.eyebrow)}<div class="statement-grid"><div><h2>${withBreaks(section.title)}</h2>${paragraph('lead', section.lead)}${paragraph('subcopy', section.body)}</div><div class="statement-points">${section.points.map((point) => `<div class="statement-point"><span>${escapeHtml(point[0])}</span><strong>${escapeHtml(point[1])}</strong><p>${escapeHtml(point[2])}</p></div>`).join('')}</div></div>${note(section.note)}</section>`;
+  }
+
   function renderBusiness(section) {
-    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2><div class="grid-2 module">${section.cards.map((card) => `<a class="card business-card" href="${card.href}" style="text-decoration:none"><div class="business-head"><strong>${escapeHtml(card.title)}</strong><span>${escapeHtml(card.copy)}</span></div><div class="solution-label">主なSolutions</div><ul class="solution-list">${card.solutions.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul><p class="card-link">詳しく見る →</p></a>`).join('')}</div>${note(section.note)}</section>`;
+    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2>${paragraph('lead', section.lead)}<div class="grid-2 module">${section.cards.map((card) => `<a class="card business-card" href="${card.href}" style="text-decoration:none"><div class="business-head"><strong>${escapeHtml(card.title)}</strong><span>${escapeHtml(card.copy)}</span></div>${card.description ? `<p class="business-description">${escapeHtml(card.description)}</p>` : ''}<div class="solution-label">主な領域</div><ul class="solution-list">${card.solutions.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul><p class="card-link">詳しく見る →</p></a>`).join('')}</div>${note(section.note)}</section>`;
   }
 
   function renderCases(section) {
-    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2><div class="proof-strip">${section.proofs.map((proof) => `<div class="proof"><b>${escapeHtml(proof[0])}</b><span>${escapeHtml(proof[1])}</span></div>`).join('')}</div>${section.pending ? `<div class="pending">${escapeHtml(section.pending)}</div>` : ''}<div class="grid-2 module">${section.cases.map((item) => `<div class="case-card"><div class="case-cat">${escapeHtml(item.cat)}</div><h3>${escapeHtml(item.title)}</h3><div class="case-kv"><b>課題</b><span>${escapeHtml(item.challenge)}</span><b>支援</b><span>${escapeHtml(item.scope)}</span><b>成果</b><span>${escapeHtml(item.result)}</span></div></div>`).join('')}</div><div class="cta-row module"><a class="btn" href="#">すべての実績を見る →</a></div>${note(section.note)}</section>`;
+    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2>${paragraph('lead', section.lead)}<div class="proof-strip">${section.proofs.map((proof) => `<div class="proof"><b>${escapeHtml(proof[0])}</b><span>${escapeHtml(proof[1])}</span></div>`).join('')}</div>${section.pending ? `<div class="pending">${escapeHtml(section.pending)}</div>` : ''}<div class="grid-2 module">${section.cases.map((item) => `<div class="case-card"><div class="case-cat">${escapeHtml(item.cat)}</div><h3>${escapeHtml(item.title)}</h3><div class="case-kv"><b>課題</b><span>${escapeHtml(item.challenge)}</span><b>支援</b><span>${escapeHtml(item.scope)}</span><b>成果</b><span>${escapeHtml(item.result)}</span></div></div>`).join('')}</div><div class="cta-row module"><a class="btn" href="#">すべての実績を見る →</a></div>${note(section.note)}</section>`;
   }
 
   function renderCapabilities(section) {
@@ -90,15 +94,15 @@
   }
 
   function renderKnowledge(section) {
-    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${escapeHtml(section.title)}</h2><div class="grid-3 module">${section.cards.map((card) => `<div class="card"><span class="tag">${escapeHtml(card[0])}</span><strong>${escapeHtml(card[1])}</strong><p>${escapeHtml(card[2])}</p></div>`).join('')}</div><div class="cta-row module"><a class="btn" href="#">ナレッジをすべて見る →</a></div>${note(section.note)}</section>`;
+    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${escapeHtml(section.title)}</h2>${paragraph('lead', section.lead)}<div class="grid-3 module">${section.cards.map((card) => `<div class="card knowledge-card"><span class="tag">${escapeHtml(card[0])}</span><strong>${escapeHtml(card[1])}</strong><p>${escapeHtml(card[2])}</p></div>`).join('')}</div><div class="cta-row module"><a class="btn" href="#">ナレッジをすべて見る →</a></div>${note(section.note)}</section>`;
   }
 
   function renderOther(section) {
-    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${escapeHtml(section.title)}</h2><div class="other-row module">${section.items.map((item) => `<div class="other-chip">${escapeHtml(item)}</div>`).join('')}</div>${note(section.note)}</section>`;
+    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${escapeHtml(section.title)}</h2>${paragraph('lead', section.lead)}<div class="other-row module">${section.items.map((item) => typeof item === 'string' ? `<div class="other-chip">${escapeHtml(item)}</div>` : `<div class="other-card"><span>${escapeHtml(item.meta || '')}</span><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.copy)}</p></div>`).join('')}</div>${note(section.note)}</section>`;
   }
 
   function renderAbout(section) {
-    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${escapeHtml(section.title)}</h2>${paragraph('lead', section.lead)}<div class="about-structure module">${section.groups.map((group) => `<div class="about-group"><span>${escapeHtml(group[0])}</span><strong>${escapeHtml(group[1])}</strong></div>`).join('')}</div><div class="cta-row module"><a class="btn" href="#">Blühenについて →</a></div>${note(section.note)}</section>`;
+    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${escapeHtml(section.title)}</h2>${paragraph('lead', section.lead)}${paragraph('subcopy', section.body)}<div class="about-structure module">${section.groups.map((group) => `<div class="about-group"><span>${escapeHtml(group[0])}</span><strong>${escapeHtml(group[1])}</strong>${group[2] ? `<p>${escapeHtml(group[2])}</p>` : ''}</div>`).join('')}</div><div class="cta-row module"><a class="btn" href="#">Blühenについて →</a><a class="btn" href="#">採用情報を見る →</a></div>${note(section.note)}</section>`;
   }
 
   function renderNews(section) {
@@ -106,7 +110,7 @@
   }
 
   function renderContact(section) {
-    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2><div class="contact-grid module">${section.cards.map((card) => `<div class="contact-card"><strong>${escapeHtml(card[0])}</strong><p>${escapeHtml(card[1])}</p><a class="btn primary" href="#">相談する →</a></div>`).join('')}</div>${note(section.note)}</section>`;
+    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2>${paragraph('lead', section.body)}<div class="contact-grid module">${section.cards.map((card) => `<div class="contact-card"><strong>${escapeHtml(card[0])}</strong><p>${escapeHtml(card[1])}</p><a class="btn primary" href="#">相談する →</a></div>`).join('')}</div>${section.info ? `<p class="contact-info">${escapeHtml(section.info)}</p>` : ''}${note(section.note)}</section>`;
   }
 
   function renderServiceHero(section) {
@@ -138,7 +142,7 @@
   }
 
   function renderCapabilityCards(section) {
-    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${escapeHtml(section.title)}</h2><div class="grid-4 module">${section.cards.map((card) => `<div class="card capability-card"><strong>${escapeHtml(card[0])}</strong><p>${escapeHtml(card[1])}</p></div>`).join('')}</div>${note(section.note)}</section>`;
+    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2>${paragraph('lead', section.lead)}<div class="grid-4 module">${section.cards.map((card, index) => `<div class="card capability-card"><span class="step-no">${String(index + 1).padStart(2,'0')}</span><strong>${escapeHtml(card[0])}</strong><p>${escapeHtml(card[1])}</p></div>`).join('')}</div>${note(section.note)}</section>`;
   }
 
   function renderServiceContact(section) {
@@ -148,6 +152,7 @@
   function renderSection(section) {
     const renderers = {
       hero: renderHero,
+      statement: renderStatement,
       business: renderBusiness,
       cases: renderCases,
       capabilities: renderCapabilities,
