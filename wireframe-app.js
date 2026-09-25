@@ -35,9 +35,9 @@
           <div class="nav-dropdown business-dropdown">
             <div class="dropdown-label">BUSINESS</div>
             <div class="drop-grid">
+              <a class="drop-link" href="${hrefFor('global-marketing')}"><b>Global Branding & Marketing</b><span>商品・サービスを、世界へ。</span></a>
               <a class="drop-link" href="${hrefFor('global-ir')}"><b>Global IR</b><span>企業価値を、世界へ。</span></a>
-              <a class="drop-link" href="${hrefFor('global-marketing')}"><b>Global Marketing</b><span>商品・サービスを、世界へ。</span></a>
-              <div class="drop-link wide"><b>Other Businesses</b><span>人材・採用 / PATHOS / AI・業務 / 地域</span></div>
+              <div class="drop-link wide"><b>Specialized Businesses</b><span>PATHOS / NEXT VISA / AI / Technology</span></div>
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
           <div class="nav-dropdown about-dropdown">
             <div class="dropdown-label">ABOUT</div>
             <div class="drop-grid single">
-              <div class="drop-link wide"><b>About Blühen</b><span>Mission / Vision / Story / Organization / Company</span></div>
+              <div class="drop-link wide"><b>About Blühen</b><span>Brand Core / Story / Organization / 講演・登壇 / Company</span></div>
               <div class="drop-link"><b>Sustainability</b></div>
               <div class="drop-link"><b>Recruit</b></div>
             </div>
@@ -86,7 +86,7 @@
 
   function renderCapabilities(section) {
     const [a, b, c, d] = section.items;
-    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2><div class="capability-system module"><span class="connect-line v top"></span><span class="connect-line v bottom"></span><span class="connect-line h left"></span><span class="connect-line h right"></span><div class="cap a"><b>${escapeHtml(a[0])}</b><span>${escapeHtml(a[1])}</span></div><div class="cap b"><b>${escapeHtml(b[0])}</b><span>${escapeHtml(b[1])}</span></div><div class="cap c"><b>${escapeHtml(c[0])}</b><span>${escapeHtml(c[1])}</span></div><div class="cap d"><b>${escapeHtml(d[0])}</b><span>${escapeHtml(d[1])}</span></div><div class="capability-center">BLÜHEN<br>CAPABILITIES</div></div>${note(section.note)}</section>`;
+    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2><div class="capability-system module"><span class="connect-line v top"></span><span class="connect-line v bottom"></span><span class="connect-line h left"></span><span class="connect-line h right"></span><div class="cap a"><b>${escapeHtml(a[0])}</b><span>${escapeHtml(a[1])}</span></div><div class="cap b"><b>${escapeHtml(b[0])}</b><span>${escapeHtml(b[1])}</span></div><div class="cap c"><b>${escapeHtml(c[0])}</b><span>${escapeHtml(c[1])}</span></div><div class="cap d"><b>${escapeHtml(d[0])}</b><span>${escapeHtml(d[1])}</span></div><div class="capability-center">BLÜHEN<br>APPROACH</div></div>${note(section.note)}</section>`;
   }
 
   function renderKnowledge(section) {
@@ -170,7 +170,7 @@
   }
 
   function footer() {
-    return `<footer class="site-footer"><div class="footer-grid"><div><div class="footer-logo">BLÜHEN</div></div><div class="footer-col"><strong>Business</strong><a>Global IR</a><a>Global Marketing</a><a>Other Businesses</a></div><div class="footer-col"><strong>Company</strong><a>About</a><a>Sustainability</a><a>Recruit</a></div><div class="footer-col"><strong>Contents</strong><a>Cases</a><a>Knowledge</a><a>News</a><a>Contact</a></div></div></footer>`;
+    return `<footer class="site-footer"><div class="footer-grid"><div><div class="footer-logo">BLÜHEN</div></div><div class="footer-col"><strong>Business</strong><a>Global Branding & Marketing</a><a>Global IR</a><a>Specialized Businesses</a></div><div class="footer-col"><strong>Company</strong><a>About</a><a>Sustainability</a><a>Recruit</a></div><div class="footer-col"><strong>Contents</strong><a>Cases</a><a>Knowledge</a><a>News</a><a>Contact</a></div></div></footer>`;
   }
 
   function renderTop(page) {
