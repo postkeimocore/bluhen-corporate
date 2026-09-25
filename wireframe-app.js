@@ -16,7 +16,9 @@
   }
 
   function renderSidebar(active) {
-    pageNav.innerHTML = Object.entries(model.pages).map(([key, page]) => `
+    const preferred = ['top','work','global-marketing','global-ir','cases','knowledge','about','contact'];
+    const entries = preferred.filter((key) => model.pages[key]).map((key) => [key, model.pages[key]]);
+    pageNav.innerHTML = entries.map(([key, page]) => `
       <a class="page-link ${key === active ? 'active' : ''}" href="${hrefFor(key)}">
         ${escapeHtml(page.nav)}<small>${escapeHtml(page.route)}</small>
       </a>`).join('');
