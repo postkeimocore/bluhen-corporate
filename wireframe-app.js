@@ -73,7 +73,8 @@
   }
 
   function renderHero(section) {
-    return `<section class="section hero"><div class="hero-grid"><div>${eyebrow(section.eyebrow)}<h1>${withBreaks(section.title)}</h1>${paragraph('lead', section.lead)}${paragraph('subcopy', section.body)}<div class="cta-row">${section.ctas.map((label, index) => `<a class="btn ${index === 0 ? 'primary' : ''}" href="#">${escapeHtml(label)}</a>`).join('')}</div>${note(section.note)}</div>${section.visual ? `<div class="visual">${withBreaks(section.visual)}</div>` : ''}</div></section>`;
+    const ctas = section.ctas || [];
+    return `<section class="section hero"><div class="hero-grid"><div>${eyebrow(section.eyebrow)}<h1>${withBreaks(section.title)}</h1>${paragraph('lead', section.lead)}${paragraph('subcopy', section.body)}${ctas.length ? `<div class="cta-row">${ctas.map((label, index) => `<a class="btn ${index === 0 ? 'primary' : ''}" href="#">${escapeHtml(label)}</a>`).join('')}</div>` : ''}${note(section.note)}</div>${section.visual ? `<div class="visual">${withBreaks(section.visual)}</div>` : ''}</div></section>`;
   }
 
   function renderStatement(section) {
