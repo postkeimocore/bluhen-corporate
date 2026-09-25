@@ -10,8 +10,8 @@ window.BLUHEN_WIREFRAME = {
           lead:'企業・ブランドと世界とのコミュニケーションを設計する。',
           body:'Blühenは、価値がどう見え、どう語られ、どう理解され、どう感じられ、どう選ばれるかを設計するコミュニケーションデザインの会社です。',
           visual:'KEY VISUAL / TYPOGRAPHY / MOTION',
-          ctas:['事業を見る','相談する'],
-          note:'ファーストビューで「何者か」と「どんな価値を生むか」を端的に伝え、中核事業のGlobal Communicationへつなげる。'
+          ctas:[],
+          note:'ファーストビューではコピーとビジュアルに集中させ、CTAボタンは置かない。次のGlobal Communicationセクションから事業理解へつなげる。'
         },
         {
           type:'statement', eyebrow:'GLOBAL COMMUNICATION',
