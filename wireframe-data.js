@@ -91,7 +91,7 @@ window.BLUHEN_WIREFRAME = {
             {title:'NEXT VISA',copy:'企業と海外人材の可能性が、正しく出会う仕組みをつくる。',meta:'海外人材 / 採用'},
             {title:'AI / Technology',copy:'AI時代の業務・購買体験を、使える仕組みへ。',meta:'AI / 業務・購買体験'}
           ],
-          note:'「専門事業」という不自然な日本語は避け、特定領域にフォーカスした事業であることが分かる見出しにする。'
+          note:'特定の市場・課題にフォーカスした事業であることが自然に伝わる見出しにする。'
         },
         {
           type:'about', eyebrow:'ABOUT BLÜHEN', title:'Blühenについて',
