@@ -35,20 +35,21 @@
           <div class="nav-dropdown business-dropdown">
             <div class="dropdown-label">BUSINESS</div>
             <div class="drop-grid">
+              <a class="drop-link wide" href="${hrefFor('work')}"><b>Global Communication</b><span>事業全体を見る</span></a>
               <a class="drop-link" href="${hrefFor('global-marketing')}"><b>Global Branding & Marketing</b><span>商品・サービスを、世界へ。</span></a>
               <a class="drop-link" href="${hrefFor('global-ir')}"><b>Global IR</b><span>企業価値を、世界へ。</span></a>
               <div class="drop-link wide"><b>Specialized Businesses</b><span>PATHOS / NEXT VISA / AI / Technology</span></div>
             </div>
           </div>
         </div>
-        <span class="nav-item">Cases</span>
-        <span class="nav-item">Knowledge</span>
+        <a class="nav-item nav-link" href="${hrefFor('cases')}">Cases</a>
+        <a class="nav-item nav-link" href="${hrefFor('knowledge')}">Knowledge</a>
         <div class="nav-item has-drop">
           <button class="nav-trigger" type="button">About <span class="dropmark">▼</span></button>
           <div class="nav-dropdown about-dropdown">
             <div class="dropdown-label">ABOUT</div>
             <div class="drop-grid single">
-              <div class="drop-link wide"><b>About Blühen</b><span>Brand Core / Story / Organization / 講演・登壇 / Company</span></div>
+              <a class="drop-link wide" href="${hrefFor('about')}"><b>About Blühen</b><span>Brand Core / Story / Organization / 講演・登壇 / Company</span></a>
               <div class="drop-link"><b>Sustainability</b></div>
               <div class="drop-link"><b>Recruit</b></div>
             </div>
@@ -56,7 +57,7 @@
         </div>
         <span class="nav-item">News</span>
       </nav>
-      <div class="site-actions"><span class="lang">JP / EN</span><a class="contact-btn" href="#">Contact</a></div>
+      <div class="site-actions"><span class="lang">JP / EN</span><a class="contact-btn" href="${hrefFor('contact')}">Contact</a></div>
     </header>`;
   }
 
@@ -104,6 +105,18 @@
 
   function renderAbout(section) {
     return `<section class="section">${eyebrow(section.eyebrow)}<h2>${escapeHtml(section.title)}</h2>${paragraph('lead', section.lead)}${paragraph('subcopy', section.body)}<div class="about-structure module">${section.groups.map((group) => `<div class="about-group"><span>${escapeHtml(group[0])}</span><strong>${escapeHtml(group[1])}</strong>${group[2] ? `<p>${escapeHtml(group[2])}</p>` : ''}</div>`).join('')}</div><div class="cta-row module"><a class="btn" href="#">Blühenについて →</a><a class="btn" href="#">採用情報を見る →</a></div>${note(section.note)}</section>`;
+  }
+
+  function renderInfoGrid(section) {
+    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2>${paragraph('lead', section.lead)}<div class="info-grid module">${section.items.map((item) => `<div class="info-card"><strong>${escapeHtml(item[0])}</strong><p>${escapeHtml(item[1])}</p>${item[2] ? `<small>${escapeHtml(item[2])}</small>` : ''}</div>`).join('')}</div>${note(section.note)}</section>`;
+  }
+
+  function renderListing(section) {
+    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2>${paragraph('lead', section.lead)}<div class="filter-row module">${(section.filters || []).map((item, index) => `<span class="filter-chip ${index === 0 ? 'active' : ''}">${escapeHtml(item)}</span>`).join('')}</div><div class="listing-grid module">${section.items.map((item) => `<article class="listing-card"><span class="tag">${escapeHtml(item[0])}</span><h3>${escapeHtml(item[1])}</h3><div class="listing-meta">${escapeHtml(item[2])}</div><p>${escapeHtml(item[3])}</p><span class="card-link">詳しく見る →</span></article>`).join('')}</div>${note(section.note)}</section>`;
+  }
+
+  function renderContactForm(section) {
+    return `<section class="section">${eyebrow(section.eyebrow)}<h2>${withBreaks(section.title)}</h2>${paragraph('lead', section.lead)}<div class="form-wire module"><div class="form-type"><span>お問い合わせ種別</span><div class="radio-grid">${section.inquiryTypes.map((item) => `<label><input type="radio" disabled> ${escapeHtml(item)}</label>`).join('')}</div></div>${section.fields.map((field) => `<div class="form-field"><div class="form-label">${escapeHtml(field[0])}<span class="${field[2] === 'required' ? 'req' : 'opt'}">${field[2] === 'required' ? '必須' : '任意'}</span></div><div class="form-control ${escapeHtml(field[1])}">${field[1] === 'textarea' ? 'お問い合わせ内容を入力' : field[1] === 'select' ? '選択してください ▼' : ''}</div></div>`).join('')}<div class="form-submit"><span class="btn primary">送信内容を確認する</span></div></div>${note(section.note)}</section>`;
   }
 
   function renderNews(section) {
@@ -160,6 +173,9 @@
       knowledge: renderKnowledge,
       other: renderOther,
       about: renderAbout,
+      infoGrid: renderInfoGrid,
+      listing: renderListing,
+      contactForm: renderContactForm,
       news: renderNews,
       contact: renderContact,
       serviceHero: renderServiceHero,
@@ -176,7 +192,7 @@
   }
 
   function footer() {
-    return `<footer class="site-footer"><div class="footer-grid"><div><div class="footer-logo">BLÜHEN</div></div><div class="footer-col"><strong>Business</strong><a>Global Branding & Marketing</a><a>Global IR</a><a>Specialized Businesses</a></div><div class="footer-col"><strong>Company</strong><a>About</a><a>Sustainability</a><a>Recruit</a></div><div class="footer-col"><strong>Contents</strong><a>Cases</a><a>Knowledge</a><a>News</a><a>Contact</a></div></div></footer>`;
+    return `<footer class="site-footer"><div class="footer-grid"><div><div class="footer-logo">BLÜHEN</div></div><div class="footer-col"><strong>Business</strong><a href="${hrefFor('work')}">Global Communication</a><a href="${hrefFor('global-marketing')}">Global Branding & Marketing</a><a href="${hrefFor('global-ir')}">Global IR</a></div><div class="footer-col"><strong>Company</strong><a href="${hrefFor('about')}">About</a><a>Sustainability</a><a>Recruit</a></div><div class="footer-col"><strong>Contents</strong><a href="${hrefFor('cases')}">Cases</a><a href="${hrefFor('knowledge')}">Knowledge</a><a>News</a><a href="${hrefFor('contact')}">Contact</a></div></div></footer>`;
   }
 
   function renderTop(page) {
