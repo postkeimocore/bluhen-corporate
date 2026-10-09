@@ -1,29 +1,1304 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Blühen Corporate / Wireframe</title>
-<link rel="stylesheet" href="wireframe.css" />
-</head>
-<body>
-<div class="app" id="app">
-  <div class="toolbar">
-    <strong>BLÜHEN CORPORATE / WIREFRAME</strong>
-    <button id="sideToggle" type="button">ナビを隠す</button>
-    <button id="metaToggle" type="button">構成意図を表示</button>
-    <a href="index.html">サイトマップ</a>
-    <span class="grow"></span>
-  </div>
-  <div class="layout" id="layout">
-    <aside class="sidebar">
-      <div class="side-head"><div class="side-title">VIEWS</div></div>
-      <div id="pageNav"></div>
-    </aside>
-    <main class="workspace"><div class="browser" id="browser"></div></main>
-  </div>
-</div>
-<script src="wireframe-data.js"></script>
-<script src="wireframe-app.js"></script>
-</body>
-</html>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bluhen｜全ページワイヤーフレーム v1.3</title><style>
+:root{--sidebar-width:272px;--ui-bg:#ebebeb;--ui-ink:#111;--ui-rule:#bbb}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden}
+body{font-family:Arial,"Hiragino Kaku Gothic ProN",sans-serif;background:var(--ui-bg);color:var(--ui-ink)}
+button{font:inherit;cursor:pointer}
+.preview-bar{height:56px;background:#171717;color:#fff;display:flex;align-items:center;gap:16px;padding:0 24px;position:relative;z-index:3}
+.preview-bar strong{font-size:14px;font-weight:600;letter-spacing:.04em}
+.preview-bar .preview-actions{margin-left:auto;display:flex;gap:8px;align-items:center}
+.preview-bar button{color:#fff;border:1px solid #777;background:none;padding:8px 16px;font-size:13px;min-height:36px}
+.preview-bar button:hover,.preview-bar button[aria-pressed=true]{background:#fff;color:#111;border-color:#fff}
+.preview-application{display:grid;grid-template-columns:var(--sidebar-width) minmax(0,1fr);height:calc(100dvh - 56px);transition:grid-template-columns .24s ease}
+.preview-application.is-collapsed{grid-template-columns:0 minmax(0,1fr)}
+.preview-sidebar{border-right:1px solid #c9c9c9;background:#f7f7f7;min-width:0;overflow-y:auto;overflow-x:hidden}
+.preview-application.is-collapsed .preview-sidebar{visibility:hidden;border:0}
+.preview-sidebar-header{padding:24px 16px 16px;border-bottom:1px solid #ddd}
+.preview-sidebar-header b{font-size:15px}
+.preview-sidebar-header p{font-size:12px;line-height:1.6;margin:8px 0 0}
+.preview-side-group{padding:16px 8px 8px}
+.preview-side-group h2{font-size:12px;font-weight:700;letter-spacing:.02em;padding:0 8px;margin:0 0 8px}
+.preview-side-link{display:flex;flex-direction:column;width:100%;align-items:flex-start;gap:4px;text-align:left;border:0;background:transparent;border-radius:3px;padding:10px 12px;color:#111;font-size:13px;line-height:20px}
+.preview-side-link small{font-size:11px;color:#555;font-weight:400}
+.preview-side-link:hover{background:#e8e8e8}
+.preview-side-link.is-current{color:#fff;background:#222}
+.preview-side-link.is-current small{color:#e5e5e5}
+.preview-workspace{min-width:0;background:#e9e9e9;padding:20px;display:flex;justify-content:center;align-items:stretch}
+.preview-window{display:flex;flex-direction:column;width:100%;max-width:1440px;min-width:0;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.1);border:1px solid #bdbdbd}
+.preview-browser-chrome{height:36px;flex:0 0 36px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #d4d4d4;background:#f7f7f7;padding:0 16px;color:#555}
+.preview-dot{border-radius:50%;background:#bdbdbd;width:8px;height:8px;display:inline-block}
+.preview-address{margin-left:8px;background:#fff;border:1px solid #ddd;border-radius:4px;padding:4px 12px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.preview-site-frame{width:100%;height:100%;border:0;display:block;background:#fff;flex:1;min-height:0}
+button:focus-visible{outline:3px solid #145dda;outline-offset:3px}
+@media(max-width:900px){.preview-workspace{padding:8px}.preview-browser-chrome{height:28px;flex-basis:28px}.preview-bar{gap:8px;padding:0 12px}.preview-bar strong{font-size:12px}.preview-bar button{font-size:12px;padding:7px 9px}.preview-application{grid-template-columns:0 minmax(0,1fr)}.preview-sidebar{visibility:hidden}.preview-application:not(.is-collapsed) .preview-sidebar{visibility:visible;position:fixed;top:56px;bottom:0;left:0;width:272px;z-index:2;box-shadow:16px 0 32px rgba(0,0,0,.18)}.preview-application:not(.is-collapsed){grid-template-columns:0 minmax(0,1fr)}.preview-application.is-collapsed .preview-sidebar{visibility:hidden}}
+</style></head><body>
+<header class="preview-bar"><strong>BLUHEN / WIREFRAME</strong><button id="side-toggle" aria-expanded="true" type="button">ナビを隠す</button><div class="preview-actions"><button id="jump-sitemap" type="button" onclick="document.querySelector('[data-sidebar-page=sitemap]').click()">サイトマップ</button><button id="grid-toggle" aria-pressed="false" type="button">GRID</button></div></header>
+<div class="preview-application" id="preview-app"><aside aria-label="ワイヤーフレームのページ一覧" class="preview-sidebar"><div class="preview-sidebar-header"><b>VIEWS</b><p>ページを選択して内容を確認できます。</p></div><section class="preview-side-group"><h2>トップ・主力事業</h2><button type="button" class="preview-side-link is-current" data-sidebar-page="top" aria-current="page"><span>TOP</span><small>/</small></button><button type="button" class="preview-side-link" data-sidebar-page="bm" aria-current="false"><span>Global Branding &amp; Marketing</span><small>/work/…</small></button><button type="button" class="preview-side-link" data-sidebar-page="ir" aria-current="false"><span>Global IR</span><small>/work/…</small></button></section><section class="preview-side-group"><h2>事業・会社</h2><button type="button" class="preview-side-link" data-sidebar-page="work" aria-current="false"><span>事業一覧</span><small>/work/</small></button><button type="button" class="preview-side-link" data-sidebar-page="about" aria-current="false"><span>会社情報</span><small>/about/</small></button><button type="button" class="preview-side-link" data-sidebar-page="sdgs" aria-current="false"><span>サステナビリティ</span><small>/sdgs/</small></button><button type="button" class="preview-side-link" data-sidebar-page="recruit" aria-current="false"><span>採用情報</span><small>/recruit/</small></button></section><section class="preview-side-group"><h2>コンテンツ</h2><button type="button" class="preview-side-link" data-sidebar-page="knowledge" aria-current="false"><span>ナレッジ一覧</span><small>/knowledge/</small></button><button type="button" class="preview-side-link" data-sidebar-page="knowledge-detail" aria-current="false"><span>ナレッジ記事詳細</span><small>/knowledge/{slug}/</small></button><button type="button" class="preview-side-link" data-sidebar-page="news" aria-current="false"><span>お知らせ一覧</span><small>/news/</small></button><button type="button" class="preview-side-link" data-sidebar-page="news-detail" aria-current="false"><span>お知らせ詳細</span><small>/news/{slug}/</small></button></section><section class="preview-side-group"><h2>その他</h2><button type="button" class="preview-side-link" data-sidebar-page="contact" aria-current="false"><span>お問い合わせ</span><small>/contact/</small></button><button type="button" class="preview-side-link" data-sidebar-page="sitemap" aria-current="false"><span>サイトマップ</span><small>構成図</small></button></section></aside>
+<div class="preview-workspace"><div class="preview-window"><div class="preview-browser-chrome"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span><div class="preview-address" id="preview-address">https://bluhen.org/</div></div><iframe class="preview-site-frame" id="site-preview-frame" title="Bluhen コーポレートサイトワイヤーフレーム" srcdoc="&lt;!DOCTYPE html&gt;
+
+&lt;html lang=&quot;ja&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;/&gt;
+&lt;meta content=&quot;width=device-width, initial-scale=1&quot; name=&quot;viewport&quot;/&gt;
+&lt;meta content=&quot;light&quot; name=&quot;color-scheme&quot;/&gt;
+&lt;title&gt;Bluhen｜サイト構成プレビュー v1.3&lt;/title&gt;
+&lt;link href=&quot;https://fonts.googleapis.com&quot; rel=&quot;preconnect&quot;/&gt;
+&lt;link crossorigin=&quot;&quot; href=&quot;https://fonts.gstatic.com&quot; rel=&quot;preconnect&quot;/&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;amp;family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot;/&gt;
+&lt;style&gt;
+/* BLUHEN WIREFRAME / DESIGN SYSTEM v0.2
+   8px base grid. Typography: 16 / 24 / 32 / 40 / 56 / 64 px.
+   Text: #111111 on light surfaces, #ffffff on blue/dark surfaces.
+   Layout: 12 columns, 24px gutter, 80px desktop lateral margins, 24px mobile.
+   Spacing tokens: 8 / 16 / 24 / 32 / 40 / 48 / 64 / 80 / 96 / 128.
+   Provisional brand colors / not official CI.
+*/
+:root{
+ --unit:8px;--space-1:8px;--space-2:16px;--space-3:24px;--space-4:32px;--space-5:40px;
+ --space-6:48px;--space-8:64px;--space-10:80px;--space-12:96px;--space-16:128px;
+ --paper:#f8f8f5;--white:#ffffff;--pale:#eaf0f8;--blue:#34578a;--deep:#244574;
+ --ink:#111111;--rule:rgba(17,17,17,.22);--white-rule:rgba(255,255,255,.5);
+ --font:&quot;Satoshi&quot;,&quot;LINE Seed JP_OTF&quot;,&quot;LINE Seed JP&quot;,&quot;LINESeedJP&quot;,&quot;Hiragino Sans&quot;,&quot;Noto Sans JP&quot;,&quot;Helvetica Neue&quot;,Arial,sans-serif;
+ --container:1280px;--cols:12;--gap:24px;--bar:56px;--nav:80px;
+ --text:16px;--card:24px;--section-title:40px;--page-title:56px;--hero-title:64px;
+}
+*,*:before,*:after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:160px}
+body{margin:0;background:#e5e5e2;color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;font-size:var(--text);line-height:1.5}
+a,button{font:inherit;color:inherit}a{text-decoration:none}button{cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #0d70ff;outline-offset:4px}button{border:0}p,h1,h2,h3,h4{margin:0}ul{padding:0;margin:0;list-style:none}
+main{max-width:1440px;margin:auto;background:var(--paper);position:relative;min-height:100vh;box-shadow:0 8px 56px rgba(0,0,0,.12)}
+.frame{width:calc(100% - 160px);max-width:var(--container);margin-inline:auto}
+.grid-12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap)}
+.page{display:none}.page.is-active{display:block}
+/* REVIEW UI */
+.review-bar{background:#111;color:#fff;min-height:var(--bar);display:flex;align-items:center;gap:24px;padding:8px max(24px,calc((100vw - 1360px)/2));position:sticky;top:0;z-index:100;border-bottom:1px solid #fff}
+.review-name{font-weight:750;font-size:16px;white-space:nowrap}
+.review-tabs{display:flex;gap:8px;margin-left:auto;align-items:center;flex-wrap:wrap}
+.review-tab,.grid-toggle{min-height:40px;padding:8px 16px;color:#fff;background:transparent;border:1px solid #fff;font-size:16px;font-weight:600;white-space:nowrap}
+.review-tab.active,.grid-toggle.active{background:white;color:#111}
+.review-label{font-size:16px;white-space:nowrap}
+/* GRID OVERLAY */
+.debug-grid{display:none;position:fixed;pointer-events:none;inset:calc(var(--bar) + var(--nav)) max(24px,calc((100vw - 1280px)/2)) 0;z-index:90;background-image:repeating-linear-gradient(to bottom,rgba(21,81,156,.17),rgba(21,81,156,.17) 1px,transparent 1px,transparent 8px)}
+.show-grid .debug-grid{display:block}
+/* SITE HEADER */
+.site-header{height:var(--nav);position:sticky;top:var(--bar);z-index:80;background:var(--paper);border-bottom:1px solid var(--rule)}
+.site-header-inner{height:100%;display:flex;align-items:center;gap:32px}
+.wordmark{display:flex;flex-direction:column;justify-content:center;flex-shrink:0;min-width:160px;gap:4px}
+.wordmark strong{font-size:32px;font-weight:800;line-height:1;letter-spacing:-.05em}
+.wordmark span{font-size:16px;line-height:24px;font-weight:600;white-space:nowrap}
+.site-menu{display:flex;align-items:center;gap:24px;margin-left:auto}
+.site-menu button{padding:16px 0;background:transparent;border-bottom:2px solid transparent;font-size:16px;font-weight:650;white-space:nowrap}
+.site-menu button:hover{border-bottom-color:currentColor}
+.site-menu .contact-link{background:var(--blue);color:#fff;padding:16px 24px;border-bottom:0}
+.lang{font-size:16px;font-weight:700;border-left:1px solid var(--rule);padding-left:24px;white-space:nowrap}
+.mobile-toggle{display:none;background:transparent;padding:8px;margin-left:auto;font-weight:700}
+/* TEXT HIERARCHY */
+.tag,.section-index,.micro-title{font-size:16px;line-height:24px;font-weight:700;letter-spacing:0}
+.roman{font-size:16px;line-height:24px;font-weight:700;letter-spacing:.03em}
+.section-index{display:flex;gap:16px;align-items:center;white-space:nowrap}
+.section-index:before{content:&quot;&quot;;width:24px;height:2px;background:currentColor}
+h1{font-size:var(--hero-title);line-height:80px;letter-spacing:-.04em;font-weight:800}
+h2{font-size:var(--section-title);line-height:56px;letter-spacing:-.035em;font-weight:750}
+h3{font-size:var(--card);line-height:32px;letter-spacing:-.025em;font-weight:750}
+.text-lead{font-size:24px;line-height:40px;font-weight:500;letter-spacing:-.015em}
+.text-body{font-size:16px;line-height:32px;font-weight:450}
+.text-note{font-size:16px;line-height:24px;font-weight:500}
+.meta{font-size:16px;line-height:24px;font-weight:650}
+.rule{height:1px;background:var(--rule);width:100%}
+.rule-white{height:1px;background:var(--white-rule);width:100%}
+/* SECTION COMPOSITION */
+.section{padding-block:var(--space-12)}
+.section--white{background:var(--white)}
+.section--paper{background:var(--paper)}
+.section--pale{background:var(--pale)}
+.section--blue{background:var(--blue);color:var(--white)}
+.section--deep{background:var(--deep);color:var(--white)}
+.section-title-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start;margin-bottom:48px}
+.section-title-row&gt;.section-index{grid-column:span 3;padding-top:16px}
+.section-title-row&gt;.section-copy{grid-column:span 9}
+.section-copy h2{max-width:950px}
+.section-copy p{max-width:720px;margin-top:24px}
+.section-copy .text-lead{max-width:850px}
+.button-line{display:inline-flex;align-items:center;gap:32px;padding:16px 0;border-bottom:2px solid currentColor;font-size:16px;font-weight:750;line-height:24px;background:transparent}
+.button-line .arr{font-size:24px;line-height:24px}
+.button-solid{display:inline-flex;align-items:center;justify-content:space-between;gap:56px;padding:24px 32px;background:var(--white);color:var(--ink);font-size:16px;font-weight:750;min-width:256px;line-height:24px}
+.button-solid--blue{background:var(--blue);color:#fff}
+.button-solid .arr{font-size:24px;line-height:24px}
+.outline-chip{border:1px solid currentColor;display:inline-block;padding:8px 16px;font-size:16px;line-height:24px;font-weight:650}
+.note-box{border-left:4px solid var(--blue);padding:16px 24px;background:var(--white);font-size:16px;line-height:24px;margin-top:24px;max-width:920px}
+.note-box strong{font-weight:750}
+/* HERO — one planned hierarchy and one graphic system */
+.hero{padding:112px 0 96px;min-height:792px;position:relative;overflow:hidden}
+.hero-layout{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center;min-height:592px}
+.hero-left{grid-column:span 7;position:relative;z-index:2}
+.hero-right{grid-column:span 5;display:flex;align-items:center;justify-content:center;align-self:stretch}
+.hero-overline{margin-top:24px;font-size:14px;line-height:24px;letter-spacing:.08em;opacity:.72}
+.hero h1{max-width:780px;margin-bottom:0}
+.hero h1 .line{display:block;white-space:nowrap}
+.hero h1 .line2{padding-left:56px}
+.hero-lead{max-width:560px;margin-top:32px;font-size:16px;line-height:32px;font-weight:550}
+.hero-bottom{border-top:1px solid var(--rule);padding-top:24px;display:flex;justify-content:space-between;gap:32px;font-size:16px;font-weight:700}
+.hero-art{width:100%;max-width:620px;height:auto;display:block;transform:translateX(24px)}
+/* STATEMENT */
+.statement-panel{grid-column:4 / span 9}
+.statement-panel h2{font-size:40px;line-height:56px;max-width:850px}
+.statement-panel .statement-note{margin-top:32px;max-width:710px}
+/* SERVICE LIST */
+.business-list{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--white-rule);border-bottom:1px solid var(--white-rule)}
+.business-item{padding:40px 32px 40px 0;display:flex;flex-direction:column;align-items:flex-start;gap:24px;min-height:336px}
+.business-item+ .business-item{padding-left:40px;border-left:1px solid var(--white-rule)}
+.business-item h3{font-size:32px;line-height:40px;letter-spacing:-.025em}
+.business-item .text-body{max-width:440px}
+.business-item .button-line{margin-top:auto}
+/* NETWORK */
+.diagram-panel{background:var(--white);border:1px solid var(--rule);padding:32px;margin-top:48px}
+.diagram-panel-head{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-bottom:24px;border-bottom:1px solid var(--rule)}
+.diagram-graphic{padding:24px 0 8px;display:flex;justify-content:center}
+.diagram-graphic svg{width:100%;max-width:920px;height:auto;display:block}
+.diagram-explanation{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px solid var(--rule);padding-top:32px}
+.diagram-explanation p{margin-top:16px}
+/* NUMBERS */
+.metric-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule);margin-top:48px}
+.metric{padding:24px 24px 32px 0;min-height:264px}
+.metric+.metric{border-left:1px solid var(--rule);padding-left:24px}
+.metric-value{display:flex;align-items:baseline;gap:8px;min-height:104px;margin:32px 0 16px;font-size:56px;line-height:72px;letter-spacing:-.05em;font-weight:800}
+.metric-value span{font-size:24px;line-height:32px;letter-spacing:0}
+.metric p{font-size:16px;line-height:24px}
+.metric .meta{border:1px solid var(--ink);display:inline-block;padding:8px 16px;margin-top:16px}
+.metric-footer{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:24px}
+/* STEP PANEL */
+.step-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.step-card{border-top:2px solid var(--ink);padding-top:24px;min-height:224px}
+.step-card h3{margin-top:32px;margin-bottom:16px}
+/* KNOWLEDGE */
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.article-card{border:1px solid var(--rule);padding:32px;background:var(--white);min-height:264px;display:flex;flex-direction:column;gap:24px}
+.article-card h3{font-size:24px;line-height:40px}
+.article-card .text-note{margin-top:auto}
+/* OTHER */
+.simple-list{border-top:1px solid var(--rule)}
+.simple-row{display:grid;grid-template-columns:112px 300px 1fr 32px;gap:24px;align-items:center;padding:32px 0;border-bottom:1px solid var(--rule)}
+.simple-row .roman{font-weight:750}
+.simple-row h3{font-size:24px}
+.simple-row p{max-width:580px}
+.simple-row .arr{font-size:24px}
+/* ABOUT BLOCK */
+.about-list{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:32px}
+.about-cell{padding:32px;background:var(--white);border:1px solid var(--rule);min-height:168px}
+.about-cell h3{margin-bottom:16px}
+/* CTA */
+.cta-stage{padding:96px 0;background:var(--blue);color:var(--white)}
+.cta-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
+.cta-grid .section-index{grid-column:span 3;padding-top:16px}
+.cta-text{grid-column:span 9}
+.cta-text h2{max-width:950px;font-size:40px;line-height:56px}
+.cta-text p{max-width:680px;margin-top:24px;margin-bottom:40px}
+/* SUBPAGE HERO */
+.subhero{padding:80px 0 64px;min-height:512px}
+.subhero .left{grid-column:span 8}
+.subhero .right{grid-column:span 4;align-self:stretch;display:flex;align-items:center;justify-content:center}
+.subhero .subhero-label{margin-bottom:40px}
+.subhero h1{font-size:56px;line-height:72px;letter-spacing:-.035em;max-width:880px}
+.subhero .text-body{max-width:690px;margin-top:32px}
+.subhero .sub-meta{margin-top:48px}
+.subhero-symbol{display:block;width:100%;max-width:384px;height:auto}
+/* SUBPAGE CHALLENGE */
+.challenge-list{border-top:1px solid var(--rule)}
+.challenge-row{display:grid;grid-template-columns:96px 1fr 1fr;gap:24px;padding:32px 0;border-bottom:1px solid var(--rule)}
+.challenge-row .problem,.challenge-row .response{padding-right:24px}
+.challenge-row .problem h3,.challenge-row .response p{margin-top:16px}
+.challenge-row .response{border-left:1px solid var(--rule);padding-left:24px}
+.challenge-row .response .roman{font-size:16px}
+.focus-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:32px}
+/* PROCESS */
+.process-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.process-step{border-top:2px solid var(--ink);padding-top:24px;min-height:216px}
+.process-step h3{margin:32px 0 16px}
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.service-tile{border:1px solid var(--rule);background:#fff;padding:32px;min-height:240px}
+.service-tile .row-title{display:flex;justify-content:space-between;align-items:start;gap:24px;margin-bottom:32px}
+.service-tile h3{font-size:24px;line-height:32px}
+/* SUBPAGE NETWORK */
+.network-columns{display:grid;grid-template-columns:7fr 5fr;gap:48px;align-items:center}
+.network-columns .diagram-panel{margin-top:0}
+.network-steps{border-top:1px solid var(--rule)}
+.network-steps article{padding:24px 0;border-bottom:1px solid var(--rule)}
+.network-steps article h3{margin:16px 0 8px}
+/* IR FLOW */
+.qa-list{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.qa-card{border:1px solid var(--rule);background:#fff;padding:32px;min-height:256px;position:relative}
+.qa-card h3{margin:32px 0 16px}
+.qa-card:not(:last-child):after{content:&quot;→&quot;;font-size:32px;position:absolute;right:-27px;top:50%;transform:translateY(-50%);background:var(--paper);z-index:1;padding:0 8px}
+.experience-list{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.experience-list article{border-top:2px solid var(--ink);padding:24px 8px 24px 0}
+.experience-list h3{margin:24px 0 16px}
+/* CONSULT */
+.consult-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:48px 0 32px}
+.consult-steps article{padding:24px 0;border-top:1px solid var(--white-rule)}
+.consult-steps h3{margin:24px 0 16px}
+/* SITEMAP */
+.sitemap-hero{padding:80px 0 64px}
+.sitemap-hero h1{font-size:56px;line-height:72px;margin:32px 0}
+.sitemap-layout{display:grid;grid-template-columns:7fr 5fr;gap:48px}
+.tree{border-top:2px solid var(--ink)}
+.tree-row{padding:24px 0;border-bottom:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:16px;align-items:baseline}
+.tree-row .path{font-size:16px;font-weight:600}
+.tree-sub{margin:0 0 16px 32px;border-left:2px solid var(--ink);padding-left:24px;display:grid;gap:16px}
+.tree-sub .tree-sub-row{font-size:16px}
+.sitemap-notes{background:#fff;border:1px solid var(--rule);padding:32px;align-self:start}
+.sitemap-notes h3{margin:24px 0 16px}.sitemap-notes h3:first-child{margin-top:0}
+.sitemap-notes li{padding-bottom:16px}
+/* FOOTER */
+.footer{background:#111;color:#fff;padding:32px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.footer-inner .meta{font-size:16px}
+/* RESPONSIVE */
+@media(max-width:1200px){
+ .frame{width:calc(100% - 96px)}.site-menu{gap:16px}.site-menu button{font-size:16px}
+ .site-header-inner{gap:24px}.wordmark{min-width:144px}.wordmark span{font-size:16px}
+ .hero{min-height:720px}.hero-layout{min-height:520px}
+ .hero h1{font-size:56px;line-height:72px}.hero h1 .line2{padding-left:32px}
+ .business-item h3{font-size:32px}
+}
+@media(max-width:900px){
+ :root{--nav:72px}
+ .review-bar{gap:8px;flex-wrap:wrap}.review-name{font-size:16px}.review-label{display:none}
+ .review-tabs{margin-left:0}.review-tab,.grid-toggle{padding:8px;font-size:16px}
+ .frame{width:calc(100% - 48px)}
+ .site-header{height:72px}.site-header-inner{gap:16px}
+ .mobile-toggle{display:block}
+ .site-menu{display:none;position:absolute;top:72px;left:0;right:0;background:var(--paper);border-bottom:2px solid var(--ink);padding:24px;flex-direction:column;align-items:stretch;gap:0}
+ .site-menu.is-open{display:flex}
+ .site-menu button{text-align:left;font-size:16px;padding:16px 0}
+ .site-menu .contact-link{padding:16px}
+ .lang{margin-left:0;padding-left:16px}
+ .hero{min-height:0;padding:64px 0 32px}
+ .hero-layout{min-height:0;display:flex;flex-direction:column;align-items:stretch;gap:24px}
+ .hero-left{order:1}.hero-right{order:2;justify-content:center}
+ .hero h1{font-size:48px;line-height:64px}.hero h1 .line2{padding-left:0}
+ .hero-art{max-width:480px}
+ .hero-bottom{margin-top:32px}
+ .section{padding-block:64px}
+ .section-title-row{display:block;margin-bottom:32px}
+ .section-title-row&gt;.section-index{padding-top:0;margin-bottom:32px}
+ .section-copy h2,h2{font-size:32px;line-height:48px}
+ .statement-panel{grid-column:span 12}.statement-panel h2{font-size:32px;line-height:48px}
+ .business-list,.network-columns,.sitemap-layout{grid-template-columns:1fr}
+ .business-item{min-height:0;padding:32px 0}
+ .business-item+.business-item{padding:32px 0;border-left:0;border-top:1px solid var(--white-rule)}
+ .metric-list{grid-template-columns:repeat(2,1fr)}
+ .metric:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--rule)}
+ .metric:nth-child(4){border-top:1px solid var(--rule)}
+ .step-row,.cards-3,.experience-list{grid-template-columns:1fr 1fr}
+ .simple-row{grid-template-columns:48px 1fr 32px}
+ .simple-row p{grid-column:2 / 3}
+ .cta-stage{padding:64px 0}.cta-grid{display:block}.cta-grid .section-index{margin-bottom:32px}.cta-text h2{font-size:32px;line-height:48px}
+ .subhero{padding:64px 0 48px;min-height:0}
+ .subhero .grid-12{display:flex;flex-direction:column;align-items:stretch}
+ .subhero .right{max-width:384px}.subhero h1{font-size:48px;line-height:64px}
+ .challenge-row{grid-template-columns:64px 1fr}.challenge-row .response{grid-column:2 / -1;border-left:0;padding-left:0}
+ .process-list,.services-grid,.qa-list,.consult-steps{grid-template-columns:repeat(2,1fr)}
+ .qa-card:not(:last-child):after{display:none}
+ .diagram-explanation{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+ :root{--bar:104px;--nav:72px}
+ .review-bar{min-height:104px;justify-content:space-between;padding:8px 16px}
+ .review-tabs{width:100%;gap:8px;justify-content:space-between}
+ .review-tab,.grid-toggle{font-size:16px;padding:8px;min-height:40px}
+ .grid-toggle{display:none}
+ .frame{width:calc(100% - 32px)}
+ .site-header-inner{gap:8px}.wordmark{min-width:112px}.wordmark strong{font-size:24px}.wordmark span{font-size:16px}
+ .lang{padding-left:8px}.site-menu{top:72px}
+ .section-index{font-size:16px}
+ .hero{padding-top:48px}.hero h1{font-size:40px;line-height:56px;letter-spacing:-.045em}
+ .hero h1 .line2{padding-left:0}.hero-overline{margin-bottom:32px}
+ .hero-lead{margin-top:24px}.hero-right{margin-top:8px}
+ .hero-bottom{gap:16px;flex-wrap:wrap}
+ .section{padding-block:64px}
+ .section-title-row&gt;.section-index{margin-bottom:24px}
+ h2,.section-copy h2,.statement-panel h2,.cta-text h2{font-size:32px;line-height:48px}
+ h3,.article-card h3{font-size:24px;line-height:32px}
+ .text-lead{font-size:24px;line-height:40px}
+ .business-item h3{font-size:24px;line-height:32px}
+ .diagram-panel{padding:16px;margin-top:32px}.diagram-panel-head{display:block}.diagram-panel-head .text-note{display:block;margin-top:16px}
+ .diagram-explanation,.metric-list,.step-row,.cards-3,.about-list,.experience-list,.services-grid,.process-list,.qa-list,.consult-steps{grid-template-columns:1fr}
+ .metric,.metric+.metric,.metric:nth-child(3){padding:24px 0;border-left:0;border-top:1px solid var(--rule);min-height:0}
+ .metric-list{border-top:0}.metric-value{font-size:56px;min-height:0;margin:24px 0 8px}
+ .step-card,.process-step{min-height:0}
+ .article-card{min-height:224px;padding:24px}
+ .simple-row{grid-template-columns:32px 1fr 24px;gap:16px;padding:24px 0}
+ .simple-row p{grid-column:2 / -1}
+ .cta-stage{padding:64px 0}.cta-text p{margin-bottom:32px}
+ .subhero{padding:48px 0}.subhero h1{font-size:40px;line-height:56px}
+ .subhero .subhero-label{margin-bottom:32px}.subhero .sub-meta{margin-top:32px}
+ .challenge-row{grid-template-columns:48px 1fr;gap:16px;padding:24px 0}
+ .service-tile,.qa-card{padding:24px;min-height:0}
+ .network-columns{gap:32px}
+ .sitemap-hero h1{font-size:40px;line-height:56px}
+ .sitemap-notes{padding:24px}.footer-inner{gap:16px}
+}
+@media(max-width:359px){.wordmark span{display:none}.wordmark{min-width:96px}.site-header-inner{gap:8px}.lang{padding-left:8px}.mobile-toggle{font-size:16px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media(max-width:600px){.subhero-label{white-space:normal;overflow-wrap:anywhere}}
+@media(max-width:359px){.site-header .lang{display:none}.review-bar{max-width:100vw;overflow-x:auto}.review-tabs{flex-wrap:nowrap;width:max-content;max-width:none}}
+
+/* v0.3 – Layout &amp; editorial refinement. All spacing uses 8px-based tokens. */
+.wordmark{min-width:144px}.wordmark strong{font-weight:800;letter-spacing:-.045em;font-size:32px}
+.site-header-inner{gap:24px}.site-menu{gap:20px}.site-menu button{font-size:16px}
+.hero-overline{display:block;margin-top:24px;font-size:14px;line-height:24px;font-weight:700;letter-spacing:.08em;opacity:1}.hero{padding-top:96px}.hero-bottom{justify-content:flex-end;padding-top:16px}
+.hero-bottom span:last-child{font-size:16px}
+.hero h1{font-size:64px;line-height:80px;max-width:640px}.hero-lead{font-weight:500}
+.section-copy h2{max-width:790px}.section-copy p{max-width:720px}
+.metric-value{align-items:baseline}.metric-slot{font-size:56px;line-height:72px}.metric{min-height:208px}.metric p{max-width:224px}.metric-list{margin-top:40px}.metric-footer{justify-content:flex-end}
+.metric .meta{border:0;padding:0;margin:0;display:block}.metric-value{margin:32px 0 16px}
+.editorial-card{padding:0;gap:0;overflow:hidden;min-height:392px;display:flex;flex-direction:column}
+.article-art{height:152px;flex:none;padding:16px 24px;background:var(--blue);color:#fff;display:flex;justify-content:space-between;align-items:flex-start;position:relative;overflow:hidden}
+.article-art:before,.article-art:after{content:&quot;&quot;;position:absolute;width:216px;height:216px;border:2px solid #fff;border-radius:50%;right:-32px;top:24px;opacity:.55;transform:rotate(22deg)}
+.article-art:after{width:152px;height:152px;top:64px;right:48px;opacity:.35}
+.editorial-card:nth-child(2) .article-art{background:var(--deep)}
+.editorial-card:nth-child(3) .article-art{background:#466a99}
+.article-art span,.article-art b{z-index:1;position:relative;font-size:16px;line-height:24px}.article-art b{max-width:50%;text-align:right}
+.article-body{padding:24px;display:flex;flex-direction:column;gap:16px;flex:1}.article-body h3{font-size:24px;line-height:32px}.article-body .text-body{line-height:28px}
+.section-head-with-controls{position:relative}.section-head-with-controls&gt;.section-title-row{padding-right:140px}
+.carousel-controls{display:flex;gap:8px;flex-shrink:0}
+.section-head-with-controls&gt;.carousel-controls{position:absolute;right:0;bottom:48px}
+.carousel-arrow{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border:1px solid var(--ink);background:transparent;color:var(--ink);font-size:24px;line-height:32px;transition:background .15s,color .15s}
+.carousel-arrow:hover{background:var(--ink);color:#fff}
+.horizontal-carousel{display:grid;grid-auto-columns:minmax(288px,calc((100% - 48px)/3));grid-auto-flow:column;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;scroll-padding-inline:0;padding-bottom:16px;overscroll-behavior-inline:contain}
+.horizontal-carousel&gt;*{scroll-snap-align:start}
+.business-carousel-card{display:flex;flex-direction:column;border:1px solid var(--rule);background:var(--paper);min-width:0;transition:transform .15s}
+.business-carousel-card:hover{transform:translateY(-4px)}
+.business-cover{height:208px;position:relative;overflow:hidden;background:var(--pale);color:var(--blue);display:flex;align-items:stretch;justify-content:stretch}
+.business-cover&gt;span{display:none}
+.business-cover--2{background:#dae3ef;color:var(--deep)}.business-cover--3{background:#e6eaf2}.business-cover--4{background:#f0eee8;color:var(--ink)}.business-cover--5{background:#d3e0e8;color:var(--deep)}
+.business-cover:before{content:&quot;&quot;;position:absolute;left:24px;bottom:24px;width:140px;height:96px;border:2px solid currentColor;opacity:.42}.business-cover:after{content:&quot;&quot;;position:absolute;width:240px;height:240px;right:-72px;top:-88px;border:2px solid currentColor;border-radius:50%;opacity:.48}
+.art-line{position:absolute;width:120%;height:2px;left:-8%;bottom:56px;background:currentColor;transform:rotate(-11deg);opacity:.75}
+.business-card-text{padding:24px;display:flex;flex-direction:column;gap:16px;min-height:216px}
+.business-card-text&gt;.roman{font-size:16px}.business-card-title{display:flex;justify-content:space-between;gap:16px;align-items:start}
+.business-card-title h3{font-size:24px;line-height:32px;letter-spacing:-.025em}.business-card-title span{font-size:24px;line-height:32px}
+.business-card-text p{line-height:28px}.section-bottom-link{margin-top:24px;text-align:right}
+.company-news-grid{display:grid;grid-template-columns:5fr 7fr;gap:24px;align-items:stretch}
+.company-intro,.news-panel{border:1px solid var(--rule);background:var(--white);padding:32px;min-width:0}
+.company-intro{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.company-intro .company-visual{height:224px;width:100%;background:var(--blue);display:flex;align-items:center;justify-content:center;overflow:hidden;margin:8px 0 8px}
+.company-visual-inside{font-size:72px;font-weight:850;letter-spacing:-.06em;color:#fff;transform:none;white-space:nowrap}
+.company-visual-inside&gt;span{font-weight:700;font-style:normal}
+.company-intro&gt;h3{font-size:24px}.company-intro .button-line{margin-top:auto}
+.news-panel{padding:32px}.news-panel-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:24px;border-bottom:2px solid var(--ink);gap:24px}
+.news-panel-head .button-line{padding:8px 0}.news-list{display:flex;flex-direction:column}
+.news-row{padding:24px 0;border-bottom:1px solid var(--rule)}
+.news-meta{display:flex;gap:16px;align-items:center;margin-bottom:8px;font-size:16px;font-weight:700;flex-wrap:wrap}
+.news-meta span{border:1px solid var(--ink);padding:0 8px;line-height:24px}
+.news-row h4{font-size:16px;line-height:28px;font-weight:700;margin:0 0 8px}
+.news-row p{font-size:16px;line-height:28px}
+.recruit-strip{margin-top:24px;padding:24px 32px;background:var(--white);border:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;gap:32px}
+.recruit-strip h3{margin:8px 0}.recruit-strip .button-line{white-space:nowrap}
+.member-strip{margin-top:64px;padding-top:40px;border-top:2px solid var(--ink)}
+.member-head{display:flex;align-items:end;justify-content:space-between;gap:32px;margin-bottom:32px}
+.member-head h3{font-size:32px;line-height:48px;margin:8px 0 16px}.member-head p{max-width:656px}
+.people-card{display:flex;flex-direction:column;min-width:0;background:var(--paper);border:1px solid var(--rule)}
+.people-portrait{height:240px;background:var(--pale);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.people-portrait--2{background:#dce5ef}.people-portrait--3{background:#f2f0e9}.people-portrait--4{background:#dbe4f1}.people-portrait--5{background:#e3e6ed}
+.people-portrait&gt;span{position:absolute;left:16px;top:16px;z-index:2;font-size:16px;font-weight:700}
+.portrait-shape{width:160px;height:160px;border:2px solid var(--blue);border-radius:50%;position:relative;transform:rotate(-12deg)}
+.portrait-shape:after{content:&quot;&quot;;position:absolute;left:-36px;right:-36px;bottom:-80px;height:112px;border-radius:80px 80px 0 0;border:2px solid var(--blue);background:var(--blue)}
+.portrait-shape span{position:absolute;left:48px;top:32px;width:64px;height:80px;border-radius:50%;background:var(--blue)}
+.people-portrait--2 .portrait-shape{transform:rotate(12deg) scale(.9)}.people-portrait--3 .portrait-shape{transform:rotate(-5deg) scale(1.03)}
+.people-info{padding:24px;display:flex;flex-direction:column;gap:16px;min-height:232px}
+.people-info h4{font-size:24px;line-height:32px;font-weight:750;margin:0}.people-info .text-body{line-height:28px}
+.sitemap-layout--single{display:block;max-width:840px}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap}.footer-links a{font-size:16px;font-weight:600}
+@media(max-width:1000px){.company-news-grid{grid-template-columns:1fr}.site-header .site-menu{gap:16px}}
+@media(max-width:900px){.horizontal-carousel{grid-auto-columns:minmax(280px,calc((100% - 24px)/2))}.hero{padding-top:88px;min-height:680px}.section-head-with-controls&gt;.carousel-controls{bottom:32px}.member-head h3{font-size:24px;line-height:32px}}
+@media(max-width:600px){.hero{padding-top:72px;min-height:640px}.section-head-with-controls&gt;.section-title-row{padding-right:0;margin-bottom:80px}.section-head-with-controls&gt;.carousel-controls{bottom:-64px}.horizontal-carousel{grid-auto-columns:88%;gap:16px}.business-card-text{padding:24px}.company-intro,.news-panel{padding:24px}.company-visual-inside{font-size:56px}.recruit-strip{padding:24px;flex-direction:column;align-items:flex-start}.member-head{align-items:start;flex-direction:column}.member-head .carousel-controls{align-self:flex-end}.news-panel-head{align-items:flex-start}.news-panel-head .button-line{white-space:nowrap}.article-art{height:144px}.member-strip{margin-top:48px}}
+
+/* v0.6: editorial hierarchy; preserve 8px layout rhythm */
+
+/* v0.6 – content-driven small-screen typography */
+.narrow-only{display:none}
+@media(max-width:600px){
+  .narrow-only{display:block}
+  #bm-top h1{font-size:32px;line-height:48px;letter-spacing:-.035em}
+  #top-statement h2{font-size:24px;line-height:40px}
+}
+@media(max-width:359px){
+  #bm-top h1{font-size:24px;line-height:40px}
+}
+
+/* ==================== v0.7 / TYPOGRAPHY &amp; SPATIAL SYSTEM ====================
+   Fonts: Zen Kaku Gothic New (JP) / DM Sans (Latin)
+   Weights: 400 body, 500 heading &amp; controls, 700 first-view statement only.
+   Rhythm: an 8px base grid, with deliberate text-column and negative space.
+   Brand colors remain provisional; editorial system is consistent across pages.
+*/
+:root {
+  --font-en: &quot;DM Sans&quot;, Arial, sans-serif;
+  --font-jp: &quot;Zen Kaku Gothic New&quot;, &quot;Hiragino Kaku Gothic ProN&quot;, &quot;Noto Sans JP&quot;, sans-serif;
+  --font: &quot;DM Sans&quot;, &quot;Zen Kaku Gothic New&quot;, &quot;Hiragino Kaku Gothic ProN&quot;, sans-serif;
+  --weight-body: 400;
+  --weight-medium: 500;
+  --weight-display: 700;
+  --space-section: 128px;
+  --section-heading-width: 800px;
+  --copy-width: 624px;
+}
+html {font-synthesis: none;}
+body {font-family:var(--font);font-weight:var(--weight-body);line-height:2;}
+h1,h2,h3,h4 {font-family:var(--font);font-weight:var(--weight-medium);letter-spacing:.01em;overflow-wrap:break-word;}
+h1 {font-size:64px;line-height:80px;}
+h2 {font-size:40px;line-height:64px;letter-spacing:.015em;}
+h3 {font-size:24px;line-height:40px;letter-spacing:.01em;}
+h4 {font-size:16px;line-height:32px;letter-spacing:0;}
+p {font-weight:var(--weight-body);letter-spacing:.005em;}
+strong,b {font-weight:var(--weight-medium);}
+button,a {font-weight:var(--weight-medium);}
+button {letter-spacing:.005em;}
+.text-body {font-size:16px;line-height:32px;font-weight:400;letter-spacing:.005em;}
+.text-lead {font-size:24px;line-height:40px;font-weight:500;letter-spacing:0;}
+.text-note,.meta {font-size:16px;line-height:32px;font-weight:400;letter-spacing:0;}
+.roman,.micro-title {font-family:var(--font-en);font-size:16px;line-height:24px;letter-spacing:.06em;font-weight:500;}
+.section-index,.tag {font-size:16px;line-height:24px;font-weight:500;letter-spacing:.015em;}
+.section-index {gap:16px;}
+.section-index:before{width:16px;height:1px;flex-shrink:0;}
+.review-name {font-family:var(--font-en);font-weight:500;}
+.review-tab,.grid-toggle {font-family:var(--font);font-size:16px;font-weight:500;}
+.wordmark strong {font-family:var(--font-en);font-weight:600;letter-spacing:-.025em;}
+.wordmark span {font-family:var(--font);font-weight:400;}
+.site-menu {gap:24px;}
+.site-menu button {font-weight:500;font-size:16px;letter-spacing:0;border-bottom-width:1px;}
+.site-menu .contact-link {padding:16px 24px;}
+.lang {font-family:var(--font-en);font-weight:500;font-size:16px;}
+.mobile-toggle {font-weight:500;}
+/* A spacious composition where the right side intentionally remains clear. */
+.section {padding-block:var(--space-section);}
+.section-title-row {margin-bottom:64px;column-gap:24px;}
+.section-title-row &gt; .section-index {padding-top:16px;}
+.section-title-row &gt; .section-copy {grid-column:span 9;min-width:0;}
+.section-copy h2 {max-width:var(--section-heading-width);font-size:40px;line-height:64px;font-weight:500;letter-spacing:.015em;}
+.section-copy p {max-width:var(--copy-width);margin-top:32px;}
+/* All-body label hierarchy stays legible with black or white text. */
+.button-line {padding:16px 0;gap:40px;border-bottom-width:1px;font-size:16px;font-weight:500;}
+.button-solid {font-size:16px;font-weight:500;padding:24px 32px;}
+.outline-chip {font-weight:500;}
+.note-box strong {font-weight:500;}
+/* TOP: genuine headline emphasis belongs in the hero alone. */
+.hero {padding:128px 0 120px;min-height:824px;}
+.hero-layout {min-height:568px;align-items:center;}
+.hero-left {grid-column:span 7;}
+.hero-right {grid-column:span 5;}
+.hero h1 {font-family:var(--font-jp);font-size:64px;line-height:88px;font-weight:700;letter-spacing:.005em;max-width:none;}
+.hero h1 .line2 {padding-left:48px;}
+.hero-overline {font-family:var(--font-en);margin-top:32px;font-size:16px;line-height:24px;font-weight:500;letter-spacing:.10em;opacity:1;}
+.hero-art {max-width:680px;transform:translateX(32px);}
+/* Editorial statement: an anchored left index and restrained copy width. */
+#top-statement {padding-top:160px;padding-bottom:160px;}
+.statement-panel {grid-column:4 / span 8;}
+.statement-panel h2 {font-size:40px;line-height:64px;font-weight:500;letter-spacing:.015em;max-width:800px;}
+.statement-panel .statement-note {margin-top:40px;max-width:624px;}
+/* Business panels don&#x27;t need artificial typographic weight. */
+#top-business {padding-top:144px;padding-bottom:144px;}
+.business-item {padding-top:48px;padding-bottom:48px;gap:24px;min-height:352px;}
+.business-item + .business-item {padding-left:48px;}
+.business-item h3 {font-family:var(--font-en);font-size:32px;line-height:48px;letter-spacing:-.015em;font-weight:500;}
+.business-item .text-body {max-width:424px;}
+.business-item .button-line{margin-top:auto;}
+/* Process, diagram and metrics breathe between groups. */
+.diagram-panel {padding:48px;margin-top:64px;}
+.diagram-panel-head {padding-bottom:24px;}
+.diagram-graphic {padding:32px 0 24px;}
+.diagram-graphic svg text {font-family:var(--font);font-weight:500;}
+.diagram-explanation {padding-top:40px;gap:40px;}
+.diagram-explanation p {max-width:312px;margin-top:16px;}
+.metric-list {margin-top:56px;}
+.metric {padding:32px 24px 40px 0;min-height:216px;}
+.metric + .metric {padding-left:32px;}
+.metric-value,.metric-slot {font-family:var(--font-en);font-size:56px;line-height:80px;font-weight:500;letter-spacing:-.025em;}
+.metric-value {margin:24px 0 8px;}
+.metric-value span {font-weight:500;}
+.metric .meta {font-weight:500;}
+.metric-footer {margin-top:40px;}
+.step-row {gap:32px;}
+.step-card,.process-step {padding-top:32px;min-height:0;}
+.step-card h3,.process-step h3 {margin-top:32px;margin-bottom:24px;}
+.step-card p,.process-step p {max-width:360px;}
+/* Article and carousel cards: calmer typography and generous interior padding. */
+.cards-3 {gap:24px;}
+.article-card h3,.article-body h3 {font-size:24px;line-height:40px;font-weight:500;letter-spacing:.01em;}
+.editorial-card {min-height:432px;}
+.article-art {height:176px;padding:24px;}
+.article-art span,.article-art b {font-family:var(--font-en);font-size:16px;font-weight:500;line-height:24px;letter-spacing:.035em;}
+.article-body {padding:32px;gap:24px;}
+.article-body .text-body {line-height:32px;}
+.business-cover {height:232px;}
+.business-card-text {padding:32px;gap:16px;min-height:248px;}
+.business-card-title h3 {font-family:var(--font);font-size:24px;line-height:40px;font-weight:500;letter-spacing:0;}
+.business-card-text p {line-height:32px;}
+.carousel-arrow {width:56px;height:56px;}
+.section-head-with-controls &gt; .carousel-controls {bottom:56px;}
+.section-bottom-link {margin-top:40px;}
+/* Company / news uses explicit hierarchy, not uniformly bold components. */
+.company-news-grid {gap:32px;grid-template-columns:5fr 7fr;}
+.company-intro,.news-panel {padding:40px;}
+.company-intro {gap:24px;}
+.company-intro .company-visual {height:240px;margin:8px 0;}
+.company-visual-inside {font-family:var(--font-en);font-weight:500;letter-spacing:-.02em;}
+.company-intro &gt; h3 {font-size:24px;font-weight:500;}
+.news-panel-head {border-bottom-width:1px;padding-bottom:24px;}
+.news-row {padding:24px 0;}
+.news-row h4 {font-size:16px;line-height:32px;font-weight:500;}
+.news-meta {font-size:16px;line-height:24px;font-weight:500;}
+.news-meta span {font-size:16px;}
+.recruit-strip {margin-top:32px;padding:32px 40px;gap:48px;}
+/* Subpage first views: editorial rather than full-display impact. */
+.subhero {min-height:608px;padding:112px 0 112px;}
+.subhero .left {grid-column:span 8;}
+.subhero .right {grid-column:span 4;}
+.subhero .subhero-label {margin-bottom:48px;}
+.subhero h1 {font-family:var(--font-jp);font-size:56px;line-height:80px;font-weight:500;letter-spacing:.01em;max-width:840px;}
+.subhero .text-body {max-width:608px;margin-top:40px;}
+.subhero .sub-meta {margin-top:40px;font-size:16px;line-height:24px;}
+.subhero-symbol {max-width:384px;}
+.subhero-symbol text {font-family:var(--font);font-weight:500;}
+/* B&amp;M challenge / process / services: width constrains Japanese line length. */
+.challenge-row {grid-template-columns:96px 1fr 1fr;gap:32px;padding:40px 0;}
+.challenge-row .problem h3 {font-size:24px;line-height:40px;font-weight:500;margin-top:24px;max-width:416px;}
+.challenge-row .response p {margin-top:24px;max-width:416px;}
+.challenge-row .response {padding-left:40px;}
+.focus-row {margin-top:48px;gap:8px;}
+.process-list {gap:32px;}
+.services-grid {gap:32px;}
+.service-tile {padding:40px;min-height:264px;}
+.service-tile .row-title {margin-bottom:40px;}
+.service-tile h3 {font-family:var(--font-en);font-size:24px;line-height:40px;font-weight:500;letter-spacing:0;}
+.service-tile p {max-width:512px;}
+.network-columns {gap:64px;}
+.network-steps article {padding:32px 0;}
+.network-steps article h3 {margin:16px 0 16px;}
+.member-strip {margin-top:80px;padding-top:48px;border-top-width:1px;}
+.member-head {margin-bottom:40px;}
+.member-head h3 {font-size:32px;line-height:48px;font-weight:500;margin:16px 0;}
+.people-portrait {height:256px;}
+.people-info {padding:32px;gap:16px;min-height:256px;}
+.people-info h4 {font-size:24px;line-height:40px;font-weight:500;}
+.people-info .text-body {line-height:32px;}
+/* Global IR */
+.qa-list {gap:32px;margin-top:64px;}
+.qa-card {padding:40px;min-height:280px;}
+.qa-card h3 {margin:40px 0 24px;}
+.experience-list {gap:32px;}
+.experience-list article {padding-top:32px;}
+.experience-list h3 {margin:32px 0 24px;}
+/* CTA: deliberately restrained, with white-space as part of its design. */
+.cta-stage {padding:144px 0;}
+.cta-text {grid-column:span 8;}
+.cta-text h2 {font-size:40px;line-height:64px;letter-spacing:.015em;font-weight:500;max-width:800px;}
+.cta-text p {max-width:608px;margin-top:32px;margin-bottom:48px;}
+.consult-steps {gap:32px;margin:64px 0 40px;}
+.consult-steps article {padding-top:32px;}
+.consult-steps h3 {margin:24px 0 16px;}
+/* Sitemap/footer */
+.sitemap-hero {padding:112px 0 80px;}
+.sitemap-hero h1 {font-size:56px;line-height:80px;font-weight:500;}
+.footer-links a,.footer-inner .meta {font-weight:400;}
+/* Tablet: retain structure where space allows; move to stacked on &lt;=900px. */
+@media (max-width:1200px) {
+ .hero {min-height:760px;padding:104px 0;}
+ .hero-layout {min-height:552px;}
+ .hero h1 {font-size:56px;line-height:80px;}
+ .hero h1 .line2 {padding-left:32px;}
+ .hero-art {max-width:560px;transform:translateX(16px);}
+ .business-item + .business-item {padding-left:32px;}
+ .company-intro,.news-panel {padding:32px;}
+ .business-card-text,.article-body {padding:24px;}
+ .service-tile,.qa-card {padding:32px;}
+ .network-columns {gap:40px;}
+}
+@media (max-width:900px) {
+ :root {--space-section:88px;}
+ .hero {padding:88px 0 80px;min-height:0;}
+ .hero-layout {min-height:0;gap:56px;}
+ .hero h1 {font-size:48px;line-height:72px;}
+ .hero-art {transform:none;max-width:512px;}
+ #top-statement {padding-top:112px;padding-bottom:112px;}
+ #top-business {padding-block:104px;}
+ .section {padding-block:88px;}
+ .section-title-row {margin-bottom:48px;}
+ .section-title-row&gt;.section-index {margin-bottom:32px;padding-top:0;}
+ .section-copy h2,h2 {font-size:32px;line-height:48px;font-weight:500;letter-spacing:.01em;}
+ .section-copy p {margin-top:24px;max-width:624px;}
+ .statement-panel {grid-column:span 12;}
+ .statement-panel h2 {font-size:32px;line-height:48px;max-width:720px;}
+ .statement-panel .statement-note {margin-top:32px;}
+ .business-item h3 {font-size:32px;line-height:48px;}
+ .diagram-panel {padding:32px;margin-top:48px;}
+ .diagram-explanation {gap:24px;}
+ .metric-list {margin-top:48px;}
+ .cta-stage {padding-block:104px;}
+ .cta-grid .section-index {margin-bottom:32px;}
+ .cta-text h2 {font-size:32px;line-height:48px;}
+ .subhero {padding:88px 0 96px;}
+ .subhero h1 {font-size:48px;line-height:72px;}
+ .subhero .text-body {margin-top:32px;}
+ .services-grid,.qa-list {gap:24px;}
+ .network-columns {gap:40px;}
+ .company-news-grid {grid-template-columns:1fr;gap:24px;}
+ .member-strip {margin-top:64px;}
+}
+@media (max-width:600px) {
+ :root {--space-section:72px;}
+ .frame {width:calc(100% - 48px);}
+ .section {padding-block:72px;}
+ .site-menu button,.site-menu .contact-link {font-weight:500;}
+ .wordmark strong {font-size:24px;}
+ .hero {padding:80px 0 72px;min-height:0;}
+ .hero-layout {gap:48px;}
+ .hero h1 {font-size:40px;line-height:56px;font-weight:700;letter-spacing:0;}
+ .hero h1 .line2 {padding-left:0;}
+ .hero-overline {font-size:16px;line-height:24px;margin:24px 0 0;letter-spacing:.03em;max-width:100%;overflow-wrap:normal;}
+ .hero-right {margin-top:0;}
+ .hero-art {max-width:440px;transform:none;}
+ #top-statement {padding-block:96px;}
+ #top-business {padding-block:88px;}
+ #top-statement h2,.statement-panel h2 {font-size:32px;line-height:48px;}
+ .statement-panel .statement-note {margin-top:32px;}
+ .section-title-row {margin-bottom:40px;}
+ .section-title-row&gt;.section-index {margin-bottom:24px;}
+ .section-copy h2,h2 {font-size:32px;line-height:48px;font-weight:500;}
+ .section-copy p {margin-top:24px;}
+ h3,.article-card h3,.article-body h3 {font-size:24px;line-height:40px;font-weight:500;}
+ .section-index {font-size:16px;line-height:24px;}
+ .business-item {padding:40px 0;gap:24px;}
+ .business-item + .business-item {padding:40px 0;}
+ .business-item h3 {font-size:32px;line-height:48px;}
+ .diagram-panel {padding:24px;margin-top:40px;}
+ .diagram-graphic {padding:24px 0 8px;}
+ .diagram-explanation {gap:32px;padding-top:32px;}
+ .metric-list {margin-top:40px;}
+ .metric,.metric + .metric,.metric:nth-child(3) {padding:32px 0;min-height:0;}
+ .metric-value,.metric-slot {font-size:56px;line-height:72px;}
+ .step-row,.process-list {gap:40px;}
+ .step-card,.process-step {padding-top:24px;}
+ .step-card h3,.process-step h3 {margin-top:24px;margin-bottom:16px;}
+ .cards-3 {gap:24px;}
+ .article-art {height:160px;}
+ .article-body {padding:24px;gap:16px;}
+ .editorial-card {min-height:0;}
+ .business-cover {height:216px;}
+ .business-card-text {padding:24px;min-height:232px;}
+ .company-intro,.news-panel {padding:24px;}
+ .company-intro .company-visual {height:208px;}
+ .company-news-grid {gap:24px;}
+ .news-row h4 {line-height:32px;}
+ .recruit-strip {padding:24px;}
+ .subhero {padding:72px 0 80px;}
+ .subhero .subhero-label {margin-bottom:40px;}
+ .subhero h1 {font-size:40px;line-height:56px;font-weight:500;letter-spacing:0;}
+ #bm-top h1 {font-size:32px;line-height:48px;}
+ .subhero .text-body {margin-top:32px;}
+ .subhero .sub-meta {margin-top:32px;}
+ .challenge-row {gap:16px;padding:32px 0;}
+ .challenge-row .problem h3 {margin-top:16px;}
+ .challenge-row .response p {margin-top:16px;}
+ .focus-row {margin-top:32px;}
+ .service-tile,.qa-card {padding:24px;}
+ .service-tile .row-title {margin-bottom:24px;}
+ .services-grid,.qa-list {gap:24px;}
+ .network-columns {gap:32px;}
+ .network-steps article {padding:24px 0;}
+ .member-strip {margin-top:56px;padding-top:32px;}
+ .member-head {margin-bottom:32px;}
+ .member-head h3 {font-size:24px;line-height:40px;}
+ .people-portrait {height:240px;}
+ .people-info {padding:24px;min-height:232px;}
+ .people-info h4 {font-size:24px;line-height:40px;}
+ .cta-stage {padding-block:88px;}
+ .cta-text h2 {font-size:32px;line-height:48px;}
+ .consult-steps {margin:48px 0 40px;gap:24px;}
+ .consult-steps article {padding-top:24px;}
+ .sitemap-hero {padding:72px 0;}
+ .sitemap-hero h1 {font-size:40px;line-height:56px;}
+}
+@media (max-width:359px) {
+ .hero h1 {font-size:32px;line-height:48px;}
+ #bm-top h1 {font-size:24px;line-height:40px;}
+ .subhero h1 {font-size:32px;line-height:48px;}
+ .review-bar {padding:8px 12px;}
+}
+
+
+/* TOP CONTACT — concise, specific and aligned to the 8px scale. */
+#top-contact {padding-block:120px;}
+#top-contact .cta-text {grid-column:span 9;}
+#top-contact .cta-text h2 {max-width:800px;font-size:40px;line-height:56px;font-weight:500;letter-spacing:0;}
+#top-contact .cta-text p {max-width:672px;margin-top:32px;margin-bottom:48px;font-size:16px;line-height:32px;font-weight:400;}
+#top-contact .top-cta-button {display:flex;width:416px;max-width:100%;min-height:80px;gap:24px;padding:24px 32px;align-items:center;font-weight:500;transition:background-color .18s ease;}
+#top-contact .top-cta-button:hover {background:#eaf0f8;}
+#top-contact .top-cta-button .arr {flex:none;font-family:var(--font-en);font-weight:500;}
+@media (max-width:900px) {
+  #top-contact {padding-block:96px;}
+  #top-contact .cta-text h2 {font-size:32px;line-height:48px;}
+  #top-contact .cta-text p {margin-top:24px;margin-bottom:40px;}
+  #top-contact .top-cta-body-break {display:none;}
+}
+@media (max-width:600px) {
+  #top-contact {padding-block:80px;}
+  #top-contact .cta-text h2 {font-size:24px;line-height:40px;}
+  #top-contact .cta-text p {margin-top:24px;margin-bottom:32px;}
+  #top-contact .top-cta-break {display:block;}
+  #top-contact .top-cta-button {width:100%;min-height:72px;padding:24px;}
+}
+
+/* v0.9: full subpage compositions, using v0.8 type &amp; spacing tokens */
+.review-bar{gap:12px;padding-inline:24px}.review-name{flex-shrink:0}.review-tabs{flex-wrap:nowrap;overflow-x:auto;gap:6px;margin-left:0;flex:1;scrollbar-width:none}.review-tabs::-webkit-scrollbar{display:none}.review-tab{flex-shrink:0;padding-inline:12px}.review-pick{border:1px solid #fff;background:#111;color:white;font-family:var(--font);font-size:16px;line-height:24px;padding:8px 12px;max-width:224px;min-width:200px;height:40px}
+.interior-hero{padding:96px 0 104px;min-height:488px;overflow:hidden}.interior-hero-grid{display:grid;grid-template-columns:8fr 4fr;gap:64px;align-items:center;min-height:288px}.interior-hero-copy{position:relative;z-index:2}.interior-hero-copy&gt;.section-index{margin-bottom:56px}.interior-hero-copy h1{font-size:56px;line-height:80px;font-weight:500;letter-spacing:.015em}.interior-hero-copy p{max-width:624px;margin-top:32px}.interior-hero-art{height:320px;position:relative;overflow:hidden}.orbit{position:absolute;border:2px solid rgba(52,87,138,.35);border-radius:50%;width:320px;height:320px;right:-70px;top:-32px}.orbit-two{width:240px;height:240px;right:56px;top:112px;border-color:rgba(52,87,138,.22)}.interior-hero-compact{min-height:432px}.interior-hero-compact .interior-hero-grid{min-height:224px}
+.work-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.work-feature{min-height:432px;padding:40px;display:flex;flex-direction:column;gap:24px;border:1px solid var(--rule)}.work-feature h3{font-family:var(--font-en);font-size:40px;line-height:56px;font-weight:500}.work-feature p{max-width:448px}.work-feature button{margin-top:auto;align-self:flex-start}.feature-blue{background:var(--blue);color:#fff}.feature-plain{background:#fff}
+.work-cards-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.work-cards-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.work-card{border:1px solid var(--rule);background:white;min-width:0;display:flex;flex-direction:column}.work-cover{height:240px;position:relative;overflow:hidden;background:#dfe8f2}.work-cover-ring{width:280px;height:280px;position:absolute;right:-48px;top:-80px;border:2px solid rgba(52,87,138,.5);border-radius:50%}.work-cover:after{content:&quot;&quot;;position:absolute;width:50%;height:2px;left:8%;top:60%;background:#34578a;transform:rotate(-22deg)}.cover-b{background:#d4dfeb}.cover-c{background:#e9eef6}.cover-d{background:#f1f0eb}.cover-e{background:#d7e1e8}.work-card-content{padding:32px;display:flex;flex-direction:column;gap:16px;flex:1;min-height:272px}.work-card-content h3{font-size:32px;line-height:48px;font-weight:500}.work-card-content p{max-width:480px}.work-card-content .button-line{align-self:flex-start;margin-top:auto}
+.editorial-split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}.editorial-copy{max-width:536px}.editorial-copy .text-body{margin-top:24px}.editorial-copy button{margin-top:24px}.editorial-visual{background:var(--blue);height:368px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:white}.editorial-visual span{font-family:var(--font-en);font-weight:500;font-size:64px;letter-spacing:-.025em}.editorial-visual i{width:280px;height:280px;border:2px solid rgba(255,255,255,.45);position:absolute;top:-160px;right:-72px;border-radius:50%}
+.statement-pair{display:grid;grid-template-columns:1fr 1fr;gap:64px}.statement-pair article{border-top:1px solid var(--ink);padding-top:32px}.statement-pair h3{font-size:32px;line-height:56px;margin:32px 0}.statement-pair p{max-width:496px}.leader-layout{display:grid;grid-template-columns:5fr 7fr;gap:80px}.leader-picture{min-height:488px;background:#dce6f0;overflow:hidden;position:relative}.leader-circle{position:absolute;width:336px;height:336px;border:2px solid var(--blue);border-radius:50%;left:15%;top:18%}.leader-circle:after{content:&quot;&quot;;width:70%;height:90%;border-radius:50% 50% 0 0;background:var(--blue);position:absolute;top:55%;left:15%}.leader-text{max-width:640px}.leader-text h3{font-size:40px;line-height:64px;margin:24px 0 40px}.leader-text p+p{margin-top:24px}
+.company-facts{margin:0;border-top:1px solid var(--rule)}.company-facts&gt;div{display:grid;grid-template-columns:200px 1fr;gap:32px;border-bottom:1px solid var(--rule);padding:24px 0}.company-facts dt,.company-facts dd{font-size:16px;line-height:32px;margin:0}.company-facts dt{font-weight:500}.member-profile-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.role-tile{border:1px solid var(--rule);padding:24px;background:var(--paper);min-width:0}.role-tile h3{margin:24px 0 16px;font-size:24px;line-height:40px}.role-visual{height:184px;background:#dce7f2;position:relative;overflow:hidden}.role-visual:after{content:&quot;&quot;;position:absolute;top:24px;right:-48px;width:216px;height:216px;border:2px solid #34578a;border-radius:50%}.member-profile-strip .role-visual{height:216px}.work-cards-grid.three .role-tile{background:white}.role-tile&gt;.roman{display:block;margin-top:16px}
+.sdg-items{border-top:1px solid var(--rule)}.sdg-items article{display:grid;grid-template-columns:160px 1fr;gap:48px;padding:48px 0;border-bottom:1px solid var(--rule)}.sdg-symbol{display:flex;align-items:center;justify-content:center;width:112px;height:112px;border:2px solid var(--blue);border-radius:50%;font-family:var(--font-en);font-size:32px}.sdg-items h3{font-size:32px;line-height:48px;margin:16px 0}.sdg-items p{max-width:720px}
+.link-panels{display:grid;grid-template-columns:1fr 1fr;gap:24px}.link-panels button{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:32px;min-height:216px;padding:32px;background:var(--paper);border:1px solid var(--rule)}.link-panels strong{font-size:32px;line-height:48px}.link-panels button&gt;span:last-child{align-self:flex-end;font-size:24px}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px}.filter-chip{border:1px solid var(--ink);padding:12px 24px;min-height:48px;font-weight:500;background:white;color:var(--ink);font-size:16px}.filter-chip.active{background:var(--ink);color:white}.knowledge-archive{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.knowledge-tile{border:1px solid var(--rule);background:#fff;padding:0;text-align:left;display:flex;flex-direction:column;min-width:0}.knowledge-tile:hover,.archive-news-row:hover{background:var(--pale)}.tile-art{background:#d9e4f0;height:200px;display:block;position:relative;overflow:hidden;padding:24px}.knowledge-tile:nth-child(2n) .tile-art{background:#e6e9ee}.knowledge-tile:nth-child(3n) .tile-art{background:#dce7f3}.tile-art-circle{width:240px;height:240px;border:2px solid #34578a;position:absolute;right:-64px;top:24px;border-radius:50%}.tile-text{display:flex;flex-direction:column;gap:16px;padding:24px;min-height:296px}.tile-text strong{font-size:24px;line-height:40px;font-weight:500}.tile-text .text-body{flex:1}.tile-action{display:block;border-top:1px solid var(--rule);padding-top:16px;font-size:16px}
+.archive-news{border-top:1px solid var(--rule)}.archive-news-row{display:grid;grid-template-columns:136px 144px 1fr 32px;gap:32px;text-align:left;width:100%;align-items:start;border-bottom:1px solid var(--rule);background:transparent;padding:32px 0}.news-date,.news-category{font-size:16px;line-height:32px}.news-category{display:inline-flex;align-self:start;justify-content:center;border:1px solid var(--ink);padding:0 8px;white-space:nowrap}.news-description{display:flex;flex-direction:column;gap:12px}.news-description strong{font-size:20px;line-height:36px;font-weight:500}.news-description&gt;span{font-size:16px;line-height:32px}.news-arrow{font-size:24px}
+.article-hero{padding:96px 0 104px}.article-hero h1{font-size:48px;line-height:72px;font-weight:500;margin:32px 0;max-width:1000px}.article-hero .roman{display:block}.article-intro{font-size:20px;line-height:40px;max-width:776px}.back-link{background:transparent;border:0;border-bottom:1px solid currentColor;padding:8px 0 16px;display:inline-block;font-size:16px;margin-bottom:64px}.article-content-grid{display:grid;grid-template-columns:3fr 9fr;gap:48px}.article-toc{border-top:1px solid var(--ink);padding-top:24px}.article-toc ol{margin:24px 0 0;padding-left:24px}.article-toc li{font-size:16px;line-height:32px;margin-bottom:12px}.article-content{max-width:768px}.article-content h2{font-size:32px;line-height:56px;font-weight:500;margin:64px 0 24px}.article-content h2:first-child{margin-top:0}.article-content p{font-size:16px;line-height:36px;margin:0 0 24px}.article-inline-visual{display:flex;justify-content:space-between;align-items:center;background:var(--pale);padding:40px 24px;gap:16px;margin:56px 0;font:500 16px var(--font-en)}.article-visual-rule{height:1px;background:var(--blue);flex:1}.article-related{border-top:1px solid var(--ink);padding-top:32px;margin-top:64px}.article-related h3{margin:16px 0}.news-article-visual{background:#dce7f2;min-height:280px;margin-bottom:48px;display:flex;align-items:center;justify-content:center}.news-article-visual&gt;span{font-family:var(--font-en);font-size:48px;line-height:1.2;text-align:center;color:var(--blue);font-weight:500}.article-hero .news-meta{margin-top:0}
+.contact-layout{display:grid;grid-template-columns:5fr 7fr;gap:80px}.contact-side h2{font-size:32px;line-height:48px;margin:32px 0}.contact-side .text-body{max-width:400px}.contact-side-note{border-top:1px solid var(--rule);padding-top:32px;margin-top:56px}.contact-side-note p{margin-top:16px}.contact-form{padding:48px;background:white;border:1px solid var(--rule)}.form-field{margin-bottom:32px}.form-field&gt;label{display:flex;gap:16px;align-items:center;margin-bottom:16px;font-size:16px;font-weight:500}.form-field&gt;label span{border:1px solid var(--ink);padding:0 8px;line-height:24px;font-size:14px}.form-field input,.form-field select,.form-field textarea{display:block;width:100%;font:400 16px/28px var(--font);color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:0;padding:16px;min-height:64px}.form-field textarea{min-height:240px;resize:vertical}.form-field input::placeholder,.form-field textarea::placeholder{color:var(--ink);opacity:.6}.contact-consent{margin:32px 0}.contact-consent label{display:flex;gap:16px;align-items:flex-start}.contact-consent input{height:24px;width:24px;flex-shrink:0}.contact-consent a{text-decoration:underline;text-underline-offset:4px}.submit-mock{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:72px;background:var(--blue);color:white;padding:24px 32px}
+/* Distinguish mock visuals from final photography without adding on-page review labels */
+@media(max-width:1200px){.interior-hero-grid{gap:32px}.interior-hero-copy h1{font-size:48px;line-height:72px}.article-content-grid{gap:32px}.review-pick{min-width:160px}}
+@media(max-width:1000px){.work-cards-grid.three{grid-template-columns:1fr 1fr}.knowledge-archive{grid-template-columns:1fr 1fr}.contact-layout{gap:32px}.review-name{display:none}}
+@media(max-width:800px){.interior-hero-grid{grid-template-columns:1fr}.interior-hero-art{display:none}.interior-hero{min-height:0}.work-feature-grid,.editorial-split,.statement-pair,.leader-layout,.contact-layout{grid-template-columns:1fr}.work-cards-grid.three,.member-profile-strip{grid-template-columns:1fr 1fr}.article-content-grid{grid-template-columns:1fr}.article-toc{display:none}.archive-news-row{grid-template-columns:112px 120px 1fr 24px;gap:16px}.contact-form{padding:32px}.review-bar{padding:8px 16px}.review-pick{max-width:160px;min-width:120px}.review-tabs{gap:4px}}
+@media(max-width:600px){.interior-hero{padding:64px 0 72px}.interior-hero-copy&gt;.section-index{margin-bottom:40px}.interior-hero-copy h1{font-size:40px;line-height:56px}.interior-hero-copy p{margin-top:24px}.work-feature-grid,.work-cards-grid,.work-cards-grid.three,.knowledge-archive,.member-profile-strip,.link-panels{grid-template-columns:1fr}.work-feature{min-height:360px;padding:24px}.work-feature h3{font-size:32px;line-height:48px}.work-card-content{padding:24px}.editorial-split{gap:32px}.editorial-visual{height:240px}.editorial-visual span{font-size:48px}.statement-pair{gap:48px}.statement-pair h3{font-size:24px;line-height:40px}.leader-picture{min-height:320px}.leader-text h3{font-size:32px;line-height:48px;margin:16px 0 24px}.company-facts&gt;div{grid-template-columns:1fr;gap:0}.sdg-items article{grid-template-columns:1fr;gap:16px;padding:32px 0}.sdg-symbol{height:80px;width:80px;font-size:24px}.sdg-items h3{font-size:24px;line-height:40px}.archive-news-row{grid-template-columns:1fr 24px;gap:8px}.archive-news-row .news-date,.archive-news-row .news-category,.archive-news-row .news-description{grid-column:1}.archive-news-row .news-arrow{grid-column:2;grid-row:1}.archive-news-row .news-category{justify-self:start}.news-description strong{font-size:18px;line-height:32px}.article-hero{padding:64px 0 80px}.article-hero h1{font-size:32px;line-height:48px}.article-intro{font-size:16px;line-height:32px}.article-inline-visual{padding:24px 16px}.article-inline-visual span{font-size:12px}.article-content h2{font-size:24px;line-height:40px}.desktop-break{display:none}.news-article-visual{min-height:200px}.news-article-visual&gt;span{font-size:32px}.contact-form{padding:24px}.contact-side h2{font-size:24px;line-height:40px}.review-bar{height:auto;min-height:56px;gap:8px}.review-pick{font-size:14px;max-width:138px;min-width:108px;padding-inline:8px}.review-tab{font-size:14px;padding:8px}.grid-toggle{display:none}}
+[hidden]{display:none!important}
+.footer-links button{background:transparent;color:white;padding:0;font:500 16px/24px var(--font)}.tree-sub-row{border:0;background:transparent;text-align:left;cursor:pointer}.tree-row button{padding-top:8px;padding-bottom:8px}
+
+/* Lower pages / newly updated corporate identity content */
+.values-heading{display:flex;align-items:baseline;gap:32px;margin-top:80px;margin-bottom:24px}
+.values-heading h3{font-size:24px;line-height:40px;font-weight:500}
+.values-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.values-grid article{border-top:1px solid var(--ink);padding:24px 0;min-width:0}
+.values-grid strong{font:500 22px/32px var(--font-en),sans-serif;color:var(--ink)}
+.values-grid p{font-size:16px;line-height:32px;margin-top:16px}
+.sdgs-partner{border-top:1px solid var(--rule);padding:32px 0 0;display:grid;grid-template-columns:3fr 4fr 5fr;gap:24px;align-items:start}
+.sdgs-partner h3{font-size:24px;line-height:40px;font-weight:500}
+@media(max-width:900px){.values-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sdgs-partner{grid-template-columns:1fr 2fr}}
+@media(max-width:600px){.values-heading{display:block;margin-top:64px}.values-heading h3{margin-top:16px}.values-grid{grid-template-columns:1fr;gap:0}.values-grid article{padding:24px 0}.sdgs-partner{grid-template-columns:1fr;gap:16px}}
+
+/* v1.1: bilingual editorial rhythm, dropdown navigation and structured sitemap */
+.site-nav-group{position:relative;display:flex;align-items:center;align-self:stretch}
+.site-nav-trigger{display:flex;align-items:center;gap:8px}
+.site-nav-trigger .chevron{font-size:18px;line-height:16px;transition:transform .18s}
+.site-nav-group:hover .chevron,.site-nav-group:focus-within .chevron,.site-nav-group.is-expanded .chevron{transform:rotate(180deg)}
+.site-nav-dropdown{display:none;position:absolute;top:calc(100% - 1px);left:-24px;width:344px;padding:16px;background:var(--white);color:var(--ink);border:1px solid var(--rule);box-shadow:0 16px 32px rgba(17,17,17,.12);z-index:100}
+.site-nav-group:hover&gt;.site-nav-dropdown,.site-nav-group:focus-within&gt;.site-nav-dropdown,.site-nav-group.is-expanded&gt;.site-nav-dropdown{display:grid;gap:0}
+.site-menu .site-nav-dropdown button{border:0;border-bottom:1px solid var(--rule);padding:16px;text-align:left;line-height:24px;font-size:16px;font-weight:500;background:transparent;white-space:normal;width:100%}
+.site-menu .site-nav-dropdown button:last-child{border-bottom:0}
+.site-menu .site-nav-dropdown button:hover,.site-menu .site-nav-dropdown button:focus-visible{background:var(--pale)}
+.site-menu .site-nav-dropdown .nav-overview{font-weight:700;display:flex;justify-content:space-between;gap:16px}
+.editorial-english{display:block;font:400 18px/32px var(--font-en);letter-spacing:.01em;margin-top:24px;max-width:580px}
+.interior-hero-copy .editorial-english{margin-top:24px;font-size:18px;line-height:32px}
+.editorial-feature{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.editorial-feature-copy{max-width:528px}
+.editorial-feature-copy .text-body{margin-top:24px}
+.editorial-feature-copy .text-lead{font-weight:500}
+.editorial-image-panel{height:400px;background:#e7edf4;border:1px solid var(--rule);overflow:hidden;position:relative;display:flex;align-items:flex-end;padding:24px}
+.editorial-image-panel--recruit{background:#dce6f1}
+.editorial-image-panel--sustainability{background:#e4eaf0}
+.editorial-image-art{position:absolute;inset:0;overflow:hidden}
+.editorial-image-circle{width:288px;height:288px;border:2px solid var(--blue);border-radius:50%;position:absolute;left:calc(50% - 144px);top:32px;opacity:.75}
+.editorial-image-plane{position:absolute;bottom:-48px;left:8%;width:84%;height:176px;border:2px solid var(--blue);background:rgba(52,87,138,.08);transform:skew(-8deg);opacity:.5}
+.image-panel-label{position:relative;z-index:1;font:500 18px/24px var(--font-en);letter-spacing:.04em}
+.speaking-layout{display:grid;grid-template-columns:7fr 5fr;gap:48px;align-items:stretch}
+.speaking-topics h3{margin-bottom:24px;font-size:24px}
+.topic-row{display:flex;align-items:center;gap:24px;padding:18px 0;border-top:1px solid var(--rule)}
+.topic-row:last-child{border-bottom:1px solid var(--rule)}
+.topic-row span{font:500 16px/24px var(--font-en);min-width:32px}.topic-row strong{font-weight:500;font-size:20px}
+.speaking-contact{background:var(--white);padding:40px;border:1px solid var(--rule);display:flex;flex-direction:column;gap:24px;justify-content:space-between}
+.speaking-contact .button-line{align-self:flex-start}
+.recruit-style-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.recruit-style-grid article{border-top:2px solid var(--ink);padding:24px 16px 0 0}
+.recruit-style-grid h3{margin:24px 0 16px}
+.sitemap-map{margin-top:64px}
+.sitemap-root{display:flex;justify-content:center;padding-bottom:48px;position:relative}
+.sitemap-root:after{content:&#x27;&#x27;;position:absolute;width:1px;height:32px;background:var(--rule);bottom:0;left:50%}
+.sitemap-root button{border:2px solid var(--ink);background:var(--white);padding:24px 32px;min-width:224px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:20px;font-weight:600}
+.sitemap-root small{font:400 16px/24px var(--font-en)}
+.sitemap-groups{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;align-items:stretch;position:relative;padding-top:32px}
+.sitemap-groups:before{content:&#x27;&#x27;;position:absolute;height:1px;background:var(--rule);left:10%;right:10%;top:0}
+.sitemap-group{background:#fff;border:1px solid var(--rule);padding:24px 16px;position:relative;min-width:0}
+.sitemap-group:before{content:&#x27;&#x27;;position:absolute;height:32px;width:1px;background:var(--rule);left:50%;top:-32px}
+.sitemap-group h2{font:500 20px/32px var(--font-en);letter-spacing:0;margin:0 0 24px}
+.sitemap-group button,.sitemap-group .sitemap-node{border:1px solid var(--rule);background:var(--paper);padding:16px;width:100%;display:flex;flex-direction:column;gap:8px;align-items:flex-start;text-align:left;line-height:24px;font-weight:500}
+.sitemap-group .sitemap-node b{font-weight:600}
+.sitemap-group .sitemap-node small{font:400 14px/20px var(--font-en)}
+.sitemap-children{border-left:1px solid var(--rule);padding:0 0 0 16px;margin:16px 0 24px 8px;display:grid;gap:0}
+.sitemap-children button,.sitemap-children span{padding:12px 0;background:transparent;border:none;border-bottom:1px solid var(--rule);font-weight:400;line-height:24px;display:block;text-align:left;width:100%;font-size:16px;overflow-wrap:anywhere}
+.sitemap-children span{cursor:default}
+.sitemap-group button:hover{background:var(--pale)}
+.sitemap-group--future{opacity:.78}
+.sitemap-secondary{margin-top:24px}
+@media(max-width:1240px){.site-menu{gap:16px}.site-menu button{font-size:15px}.sitemap-groups{grid-template-columns:repeat(3,minmax(0,1fr))}.sitemap-groups:before,.sitemap-root:after,.sitemap-group:before{display:none}}
+@media(max-width:900px){.site-nav-group{display:block;align-self:auto;width:100%}.site-nav-group&gt;.site-nav-trigger{width:100%;justify-content:space-between}.site-nav-dropdown{display:none;position:static;top:auto;left:auto;width:100%;padding:0 0 8px 16px;box-shadow:none;background:transparent;border:none}.site-nav-group:hover&gt;.site-nav-dropdown{display:none}.site-nav-group.is-expanded&gt;.site-nav-dropdown{display:grid}.site-menu .site-nav-dropdown button{padding:12px 8px;font-size:16px}.editorial-feature,.speaking-layout{grid-template-columns:1fr;gap:32px}.editorial-feature--reverse .editorial-image-panel{order:2}.editorial-feature--reverse .editorial-feature-copy{order:1}.editorial-image-panel{height:320px}.recruit-style-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sitemap-groups{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.editorial-english{font-size:16px;line-height:24px}.editorial-image-panel{height:256px;padding:16px}.editorial-image-circle{width:216px;height:216px;left:calc(50% - 108px);top:24px}.speaking-contact{padding:24px}.topic-row strong{font-size:18px}.recruit-style-grid,.sitemap-groups{grid-template-columns:1fr}.sitemap-root{padding-bottom:24px}.sitemap-group{padding:24px}.sitemap-map{margin-top:32px}}
+
+/* v1.2: full-width mega menu. Sizes of real page typography remain unchanged. */
+:root{--bar:0px}
+body{background:var(--paper)}
+main{max-width:1440px;box-shadow:none}
+.site-header{top:0;isolation:isolate;z-index:150;overflow:visible}
+.site-header-inner{position:static}
+.site-lang-switch{display:flex;align-items:center;gap:8px;padding-left:16px;border-left:1px solid var(--rule);flex:none;font:500 16px/24px var(--font-en);white-space:nowrap}
+.site-lang-option{padding:8px 0;background:transparent;border:0;color:var(--ink);font-weight:400;opacity:.6}
+.site-lang-option.is-current{font-weight:700;opacity:1}
+.site-lang-option:hover{opacity:1}
+.site-nav-trigger{position:relative}
+.site-nav-group{position:static}
+@media(min-width:901px){
+ .site-nav-dropdown{position:absolute;left:0;right:0;top:calc(var(--nav) - 1px);width:100%;background:var(--paper);padding:40px max(24px,calc((100% - 1280px)/2));border:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);box-shadow:0 24px 32px rgba(17,17,17,.12);z-index:100}
+ .site-nav-group:hover&gt;.site-nav-dropdown,.site-nav-group:focus-within&gt;.site-nav-dropdown,.site-nav-group.is-expanded&gt;.site-nav-dropdown{display:block}
+ .mega-content{display:grid;grid-template-columns:minmax(160px,240px) minmax(0,1fr);gap:48px;align-items:start;width:100%;max-width:1280px;margin:0 auto}
+ .mega-heading{display:flex;flex-direction:column;gap:8px;padding-top:8px}
+ .mega-title{font-size:24px;line-height:40px;font-weight:500}
+ .mega-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+ .mega-links--three{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .site-menu .site-nav-dropdown .mega-links&gt;button{position:relative;min-height:160px;padding:16px 16px 48px;border:1px solid var(--rule);background:var(--white);display:flex;flex-direction:column;gap:8px;align-items:flex-start;text-align:left;white-space:normal}
+ .site-menu .site-nav-dropdown .mega-links&gt;button:last-child{border:1px solid var(--rule)}
+ .site-menu .site-nav-dropdown .mega-links&gt;button:hover{background:var(--pale)}
+ .mega-item-label{font:500 18px/32px var(--font);overflow-wrap:anywhere}
+ .mega-sub{font:400 16px/28px var(--font)}
+ .mega-arrow{position:absolute;bottom:16px;right:16px;font:400 24px/24px var(--font-en)}
+}
+@media(min-width:901px) and (max-width:1180px){
+ .site-menu{gap:12px}.site-menu button{font-size:14px}.site-lang-switch{gap:6px;padding-left:8px}
+ .site-menu .contact-link{padding:12px 16px}
+ .mega-content{grid-template-columns:176px minmax(0,1fr);gap:24px}
+ .mega-links{gap:8px}.site-menu .site-nav-dropdown .mega-links&gt;button{padding:12px 12px 48px}
+ .mega-item-label{font-size:16px;line-height:28px}.mega-sub{font-size:14px;line-height:24px}
+}
+@media(max-width:900px){
+ .site-header{top:0}
+ .site-lang-switch{margin-left:auto;padding-left:8px;font-size:14px;gap:6px}
+ .site-nav-group{position:relative}
+ .site-nav-dropdown{display:none;position:static;width:100%;padding:8px 0 16px;border:0;box-shadow:none;background:transparent}
+ .site-nav-group.is-expanded&gt;.site-nav-dropdown{display:block}
+ .site-nav-group:hover&gt;.site-nav-dropdown{display:none}
+ .site-nav-group.is-expanded:hover&gt;.site-nav-dropdown{display:block}
+ .mega-content{display:block}
+ .mega-heading{display:none}
+ .mega-links,.mega-links--three{display:grid;grid-template-columns:1fr;gap:0}
+ .site-menu .site-nav-dropdown .mega-links&gt;button{min-height:0;padding:16px;border:0;border-bottom:1px solid var(--rule);background:transparent;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+ .mega-item-label{font-size:16px;line-height:24px}
+ .mega-sub{font-size:14px;line-height:24px}
+ .mega-arrow{display:none}
+ .site-nav-group&gt;.site-nav-trigger{display:flex;align-items:center;justify-content:space-between}
+}
+@media(max-width:600px){.site-lang-switch{font-size:14px}.site-header-inner{gap:12px}.mobile-toggle{margin-left:auto}}
+@media(max-width:359px){.site-lang-switch{display:flex}.wordmark{min-width:88px}.wordmark strong{font-size:22px}}
+.locale-notice{position:fixed;inset:0;background:rgba(17,17,17,.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px}
+.locale-notice[hidden]{display:none}
+.locale-notice-dialog{max-width:520px;background:#fff;color:#111;padding:40px;display:grid;gap:24px;box-shadow:0 24px 64px rgba(0,0,0,.2)}
+.locale-notice-dialog h2{font-size:24px;line-height:40px;margin:0}
+.locale-notice-dialog p{font-size:16px;line-height:32px;margin:0}
+.locale-notice-dialog button{justify-self:start;background:var(--blue);color:#fff;padding:16px 32px}
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div aria-hidden=&quot;true&quot; class=&quot;debug-grid&quot;&gt;&lt;/div&gt;
+&lt;main&gt;
+&lt;header class=&quot;site-header&quot;&gt;&lt;div class=&quot;frame site-header-inner&quot;&gt;
+&lt;a aria-label=&quot;Bluhen TOP&quot; class=&quot;wordmark&quot; data-go=&quot;top&quot; href=&quot;#top&quot;&gt;&lt;strong&gt;Bluhen&lt;/strong&gt;&lt;/a&gt;
+&lt;nav aria-label=&quot;グローバルナビゲーション&quot; class=&quot;site-menu&quot; id=&quot;site-menu&quot;&gt;&lt;div class=&quot;site-nav-group&quot;&gt;&lt;button aria-controls=&quot;business-dropdown&quot; aria-expanded=&quot;false&quot; class=&quot;site-nav-trigger&quot; type=&quot;button&quot;&gt;事業内容 &lt;span aria-hidden=&quot;true&quot; class=&quot;chevron&quot;&gt;⌄&lt;/span&gt;&lt;/button&gt;&lt;div class=&quot;site-nav-dropdown&quot; id=&quot;business-dropdown&quot;&gt;&lt;div class=&quot;mega-content&quot;&gt;&lt;div class=&quot;mega-heading&quot;&gt;&lt;span class=&quot;roman&quot;&gt;BUSINESS&lt;/span&gt;&lt;span class=&quot;mega-title&quot;&gt;事業内容&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;mega-links&quot;&gt;&lt;button class=&quot;nav-overview&quot; data-go=&quot;work&quot; type=&quot;button&quot;&gt;&lt;span class=&quot;mega-item-label&quot;&gt;事業一覧&lt;/span&gt;&lt;span class=&quot;mega-sub&quot;&gt;すべての事業を見る&lt;/span&gt;&lt;span class=&quot;mega-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;button data-go=&quot;bm&quot; type=&quot;button&quot;&gt;&lt;span class=&quot;mega-item-label&quot;&gt;Global Branding &amp;amp; Marketing&lt;/span&gt;&lt;span class=&quot;mega-sub&quot;&gt;海外向けブランド戦略・制作&lt;/span&gt;&lt;span class=&quot;mega-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;button data-go=&quot;ir&quot; type=&quot;button&quot;&gt;&lt;span class=&quot;mega-item-label&quot;&gt;Global IR&lt;/span&gt;&lt;span class=&quot;mega-sub&quot;&gt;IR関連文書の英文編集・翻訳&lt;/span&gt;&lt;span class=&quot;mega-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;button data-go=&quot;work&quot; type=&quot;button&quot;&gt;&lt;span class=&quot;mega-item-label&quot;&gt;その他の事業&lt;/span&gt;&lt;span class=&quot;mega-sub&quot;&gt;専門事業の一覧&lt;/span&gt;&lt;span class=&quot;mega-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;button data-go=&quot;knowledge&quot;&gt;ナレッジ&lt;/button&gt;
+&lt;div class=&quot;site-nav-group&quot;&gt;&lt;button aria-controls=&quot;about-dropdown&quot; aria-expanded=&quot;false&quot; class=&quot;site-nav-trigger&quot; type=&quot;button&quot;&gt;会社情報 &lt;span aria-hidden=&quot;true&quot; class=&quot;chevron&quot;&gt;⌄&lt;/span&gt;&lt;/button&gt;&lt;div class=&quot;site-nav-dropdown&quot; id=&quot;about-dropdown&quot;&gt;&lt;div class=&quot;mega-content&quot;&gt;&lt;div class=&quot;mega-heading&quot;&gt;&lt;span class=&quot;roman&quot;&gt;COMPANY&lt;/span&gt;&lt;span class=&quot;mega-title&quot;&gt;会社情報&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;mega-links mega-links--three&quot;&gt;&lt;button class=&quot;nav-overview&quot; data-go=&quot;about&quot; type=&quot;button&quot;&gt;&lt;span class=&quot;mega-item-label&quot;&gt;Bluhenについて&lt;/span&gt;&lt;span class=&quot;mega-sub&quot;&gt;理念・組織・会社概要&lt;/span&gt;&lt;span class=&quot;mega-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;button data-go=&quot;sdgs&quot; type=&quot;button&quot;&gt;&lt;span class=&quot;mega-item-label&quot;&gt;サステナビリティ&lt;/span&gt;&lt;span class=&quot;mega-sub&quot;&gt;社会・環境への取り組み&lt;/span&gt;&lt;span class=&quot;mega-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;button data-go=&quot;recruit&quot; type=&quot;button&quot;&gt;&lt;span class=&quot;mega-item-label&quot;&gt;採用情報&lt;/span&gt;&lt;span class=&quot;mega-sub&quot;&gt;働き方・採用&lt;/span&gt;&lt;span class=&quot;mega-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;button data-go=&quot;news&quot;&gt;お知らせ&lt;/button&gt;&lt;button data-go=&quot;recruit&quot;&gt;採用情報&lt;/button&gt;&lt;button class=&quot;contact-link&quot; data-go=&quot;contact&quot;&gt;お問い合わせ →&lt;/button&gt;&lt;/nav&gt;
+&lt;button aria-controls=&quot;site-menu&quot; aria-expanded=&quot;false&quot; class=&quot;mobile-toggle&quot; id=&quot;mobile-toggle&quot;&gt;MENU ☰&lt;/button&gt;
+&lt;div aria-label=&quot;表示言語&quot; class=&quot;site-lang-switch&quot;&gt;&lt;button aria-current=&quot;true&quot; class=&quot;site-lang-option is-current&quot; id=&quot;locale-jp&quot; lang=&quot;ja&quot; type=&quot;button&quot;&gt;JP&lt;/button&gt;&lt;span aria-hidden=&quot;true&quot;&gt;/&lt;/span&gt;&lt;button class=&quot;site-lang-option&quot; id=&quot;locale-en&quot; lang=&quot;en&quot; type=&quot;button&quot;&gt;EN&lt;/button&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/header&gt;
+&lt;!-- TOP --&gt;
+&lt;div class=&quot;page is-active&quot; data-page=&quot;top&quot;&gt;
+&lt;section class=&quot;hero section--paper&quot; id=&quot;top&quot;&gt;&lt;div class=&quot;frame&quot;&gt;
+&lt;div class=&quot;hero-layout&quot;&gt;
+&lt;div class=&quot;hero-left&quot;&gt;
+&lt;h1&gt;&lt;span class=&quot;line&quot;&gt;価値を、&lt;/span&gt;&lt;span class=&quot;line line2&quot;&gt;花開かせる。&lt;/span&gt;&lt;/h1&gt;
+&lt;div class=&quot;hero-overline roman&quot;&gt;COMMUNICATION DESIGN COMPANY&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;hero-right&quot;&gt;
+&lt;svg aria-label=&quot;円弧による幾何学的なグラフィック&quot; class=&quot;hero-art&quot; role=&quot;img&quot; viewbox=&quot;0 0 620 620&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+&lt;circle cx=&quot;430&quot; cy=&quot;150&quot; fill=&quot;none&quot; r=&quot;220&quot; stroke=&quot;#34578a&quot; stroke-opacity=&quot;.34&quot; stroke-width=&quot;3&quot;&gt;&lt;/circle&gt;
+&lt;circle cx=&quot;310&quot; cy=&quot;340&quot; fill=&quot;none&quot; r=&quot;170&quot; stroke=&quot;#34578a&quot; stroke-opacity=&quot;.28&quot; stroke-width=&quot;3&quot;&gt;&lt;/circle&gt;
+&lt;circle cx=&quot;505&quot; cy=&quot;430&quot; fill=&quot;none&quot; r=&quot;210&quot; stroke=&quot;#34578a&quot; stroke-opacity=&quot;.22&quot; stroke-width=&quot;2.5&quot;&gt;&lt;/circle&gt;
+&lt;path d=&quot;M162 76a238 238 0 0 1 330 46&quot; fill=&quot;none&quot; stroke=&quot;#34578a&quot; stroke-opacity=&quot;.38&quot; stroke-width=&quot;3&quot;&gt;&lt;/path&gt;
+&lt;path d=&quot;M86 330a260 260 0 0 1 372-68&quot; fill=&quot;none&quot; stroke=&quot;#34578a&quot; stroke-opacity=&quot;.48&quot; stroke-width=&quot;3&quot;&gt;&lt;/path&gt;
+&lt;/svg&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot; id=&quot;top-statement&quot;&gt;&lt;div class=&quot;frame grid-12&quot;&gt;
+&lt;div class=&quot;section-index&quot; style=&quot;grid-column:span 3&quot;&gt;02 / 私たちは何者か&lt;/div&gt;
+&lt;div class=&quot;statement-panel&quot;&gt;
+&lt;h2&gt;企業や商品の価値を言葉にし、&lt;br/&gt;コミュニケーションを設計する。&lt;/h2&gt;
+&lt;p class=&quot;text-body statement-note&quot;&gt;Bluhenは事業や商品の背景、届けたい相手、市場の特性を踏まえ、ブランドコンセプトやストーリーを構築します。その方針に沿って表現内容と制作の方向性を定めます。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--blue&quot; id=&quot;top-business&quot;&gt;&lt;div class=&quot;frame&quot;&gt;
+&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;03 / 事業内容&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;グローバルブランディングとIR支援&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;business-list&quot;&gt;
+&lt;article class=&quot;business-item&quot;&gt;&lt;span class=&quot;roman&quot;&gt;01 / FOR BRANDS&lt;/span&gt;&lt;h3&gt;Global Branding&lt;br/&gt;&amp;amp; Marketing&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;日本のライフスタイル商品を中心に、海外市場に向けたブランド戦略、コンセプト設計、クリエイティブ制作を支援します。&lt;/p&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;bm&quot;&gt;事業内容を見る &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/article&gt;
+&lt;article class=&quot;business-item&quot;&gt;&lt;span class=&quot;roman&quot;&gt;02 / FOR IR TEAMS&lt;/span&gt;&lt;h3&gt;Global IR&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;統合報告書や経営者メッセージなど、IR情報の英文編集・翻訳と品質管理を専門的に支援します。&lt;/p&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;ir&quot;&gt;事業内容を見る &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/article&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--paper&quot; id=&quot;top-capability&quot;&gt;&lt;div class=&quot;frame&quot;&gt;
+&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;04 / 私たちの強み&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;企画と制作をつなぐ&lt;br/&gt;プロデュース体制&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;Bluhenがブランドのコンセプト、伝える内容、表現の方針を定めます。必要な国内外の専門家を編成し、制作物が同じ方針のもとで仕上がるよう全体を統括します。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;diagram-panel&quot;&gt;
+&lt;div class=&quot;diagram-panel-head&quot;&gt;&lt;strong class=&quot;micro-title&quot;&gt;HOW WE PRODUCE&lt;/strong&gt;&lt;/div&gt;
+&lt;div class=&quot;diagram-graphic&quot;&gt;
+&lt;svg aria-label=&quot;Bluhenを中心に価値発見、言葉、戦略、デザイン、市場理解を連携させる図解&quot; role=&quot;img&quot; viewbox=&quot;0 0 920 496&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+&lt;g fill=&quot;none&quot; stroke=&quot;#34578a&quot; stroke-width=&quot;2&quot;&gt;&lt;path d=&quot;M460 244 L172 84 M460 244 L460 62 M460 244 L748 84 M460 244 L748 404 M460 244 L460 426 M460 244 L172 404&quot;&gt;&lt;/path&gt;&lt;circle cx=&quot;460&quot; cy=&quot;244&quot; opacity=&quot;.5&quot; r=&quot;184&quot; stroke-dasharray=&quot;8 8&quot;&gt;&lt;/circle&gt;&lt;/g&gt;
+&lt;circle cx=&quot;460&quot; cy=&quot;244&quot; fill=&quot;#34578a&quot; r=&quot;112&quot;&gt;&lt;/circle&gt;
+&lt;text fill=&quot;#fff&quot; font-size=&quot;40&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot; x=&quot;460&quot; y=&quot;238&quot;&gt;Bluhen&lt;/text&gt;
+&lt;text fill=&quot;#fff&quot; font-size=&quot;16&quot; font-weight=&quot;700&quot; text-anchor=&quot;middle&quot; x=&quot;460&quot; y=&quot;270&quot;&gt;PRODUCE&lt;/text&gt;
+&lt;g fill=&quot;#fff&quot; stroke=&quot;#111&quot; stroke-width=&quot;2&quot;&gt;&lt;rect height=&quot;72&quot; width=&quot;192&quot; x=&quot;76&quot; y=&quot;48&quot;&gt;&lt;/rect&gt;&lt;rect height=&quot;72&quot; width=&quot;184&quot; x=&quot;368&quot; y=&quot;26&quot;&gt;&lt;/rect&gt;&lt;rect height=&quot;72&quot; width=&quot;192&quot; x=&quot;652&quot; y=&quot;48&quot;&gt;&lt;/rect&gt;&lt;rect height=&quot;72&quot; width=&quot;192&quot; x=&quot;652&quot; y=&quot;368&quot;&gt;&lt;/rect&gt;&lt;rect height=&quot;72&quot; width=&quot;184&quot; x=&quot;368&quot; y=&quot;390&quot;&gt;&lt;/rect&gt;&lt;rect height=&quot;72&quot; width=&quot;192&quot; x=&quot;76&quot; y=&quot;368&quot;&gt;&lt;/rect&gt;&lt;/g&gt;
+&lt;g fill=&quot;#111&quot; font-size=&quot;24&quot; font-weight=&quot;750&quot; text-anchor=&quot;middle&quot;&gt;&lt;text x=&quot;172&quot; y=&quot;94&quot;&gt;価値発見&lt;/text&gt;&lt;text x=&quot;460&quot; y=&quot;72&quot;&gt;言葉&lt;/text&gt;&lt;text x=&quot;748&quot; y=&quot;94&quot;&gt;戦略・企画&lt;/text&gt;&lt;text x=&quot;748&quot; y=&quot;414&quot;&gt;専門家の編成&lt;/text&gt;&lt;text x=&quot;460&quot; y=&quot;436&quot;&gt;表現・制作&lt;/text&gt;&lt;text x=&quot;172&quot; y=&quot;414&quot;&gt;市場理解&lt;/text&gt;&lt;/g&gt;
+&lt;/svg&gt;
+&lt;/div&gt;
+&lt;div class=&quot;diagram-explanation&quot;&gt;&lt;div&gt;&lt;strong class=&quot;roman&quot;&gt;01 / PLAN&lt;/strong&gt;&lt;p class=&quot;text-body&quot;&gt;コンセプト、メッセージ、表現方針をBluhenが設計します。&lt;/p&gt;&lt;/div&gt;&lt;div&gt;&lt;strong class=&quot;roman&quot;&gt;02 / NETWORK&lt;/strong&gt;&lt;p class=&quot;text-body&quot;&gt;コピー、デザイン、写真、映像などの専門家を案件ごとに編成します。&lt;/p&gt;&lt;/div&gt;&lt;div&gt;&lt;strong class=&quot;roman&quot;&gt;03 / DIRECTION&lt;/strong&gt;&lt;p class=&quot;text-body&quot;&gt;制作物の方向性と一貫性をBluhenが管理します。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--pale&quot; id=&quot;top-numbers&quot;&gt;&lt;div class=&quot;frame&quot;&gt;
+&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;05 / 実績・継続性&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;取引実績と専門人材&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;metric-list&quot;&gt;
+&lt;article class=&quot;metric&quot;&gt;&lt;span class=&quot;meta&quot;&gt;継続依頼率&lt;/span&gt;&lt;div class=&quot;metric-value&quot;&gt;&lt;span class=&quot;metric-slot&quot;&gt;—&lt;/span&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;article class=&quot;metric&quot;&gt;&lt;span class=&quot;meta&quot;&gt;最長取引年数&lt;/span&gt;&lt;div class=&quot;metric-value&quot;&gt;&lt;span class=&quot;metric-slot&quot;&gt;—&lt;/span&gt;&lt;span&gt;年&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;article class=&quot;metric&quot;&gt;&lt;span class=&quot;meta&quot;&gt;累計プロジェクト数&lt;/span&gt;&lt;div class=&quot;metric-value&quot;&gt;&lt;span class=&quot;metric-slot&quot;&gt;—&lt;/span&gt;&lt;span&gt;件&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;article class=&quot;metric&quot;&gt;&lt;span class=&quot;meta&quot;&gt;専門人材・パートナー&lt;/span&gt;&lt;div class=&quot;metric-value&quot;&gt;&lt;span class=&quot;metric-slot&quot;&gt;—&lt;/span&gt;&lt;span&gt;名&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;/div&gt;&lt;div class=&quot;metric-footer&quot;&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;about&quot;&gt;会社について &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot; id=&quot;top-approach&quot;&gt;&lt;div class=&quot;frame&quot;&gt;
+&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;06 / 仕事の進め方&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;事業理解から企画・制作まで&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;step-row&quot;&gt;
+&lt;article class=&quot;step-card&quot;&gt;&lt;span class=&quot;roman&quot;&gt;01 / RESEARCH&lt;/span&gt;&lt;h3&gt;調査・ヒアリング&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;事業の背景、商品の特徴、対象市場、想定顧客について確認します。&lt;/p&gt;&lt;/article&gt;
+&lt;article class=&quot;step-card&quot;&gt;&lt;span class=&quot;roman&quot;&gt;02 / STRATEGY&lt;/span&gt;&lt;h3&gt;戦略・コンセプト設計&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;誰に何を伝えるかを整理し、コンセプトとコミュニケーションの方針を策定します。&lt;/p&gt;&lt;/article&gt;
+&lt;article class=&quot;step-card&quot;&gt;&lt;span class=&quot;roman&quot;&gt;03 / PRODUCTION&lt;/span&gt;&lt;h3&gt;制作・実行&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;定めた方針に沿って制作を進め、各施策での表現を統一します。&lt;/p&gt;&lt;/article&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--paper&quot; id=&quot;top-knowledge&quot;&gt;&lt;div class=&quot;frame&quot;&gt;
+&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;07 / ナレッジ&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;ブランド・言語・IRの専門記事&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;cards-3&quot;&gt;&lt;article class=&quot;article-card editorial-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;article-art&quot;&gt;&lt;span&gt;01&lt;/span&gt;&lt;b&gt;BRAND STRATEGY&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;article-body&quot;&gt;&lt;span class=&quot;roman&quot;&gt;BRAND STRATEGY&lt;/span&gt;&lt;h3&gt;海外市場に向けたブランドコンセプトの設計&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;商品の特徴や市場の違いを踏まえ、ブランドの立ち位置を整理する方法。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;article-card editorial-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;article-art&quot;&gt;&lt;span&gt;02&lt;/span&gt;&lt;b&gt;LANGUAGE &amp;amp; CULTURE&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;article-body&quot;&gt;&lt;span class=&quot;roman&quot;&gt;LANGUAGE &amp;amp; CULTURE&lt;/span&gt;&lt;h3&gt;翻訳とトランスクリエーションの違い&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;言葉を置き換えるだけでは伝わらないブランドの価値をどう扱うか。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;article-card editorial-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;article-art&quot;&gt;&lt;span&gt;03&lt;/span&gt;&lt;b&gt;GLOBAL IR&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;article-body&quot;&gt;&lt;span class=&quot;roman&quot;&gt;GLOBAL IR&lt;/span&gt;&lt;h3&gt;統合報告書の英文制作と品質管理&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;財務・経営の文脈を踏まえた専門的な翻訳とレビュー。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot; id=&quot;top-other&quot;&gt;&lt;div class=&quot;frame&quot;&gt;
+&lt;div class=&quot;section-head-with-controls&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;08 / 事業展開&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;その他の事業&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;carousel-controls&quot;&gt;&lt;button aria-label=&quot;前の事業を見る&quot; class=&quot;carousel-arrow&quot; data-carousel=&quot;businesses&quot; data-direction=&quot;prev&quot;&gt;←&lt;/button&gt;&lt;button aria-label=&quot;次の事業を見る&quot; class=&quot;carousel-arrow&quot; data-carousel=&quot;businesses&quot; data-direction=&quot;next&quot;&gt;→&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div aria-label=&quot;その他の事業&quot; class=&quot;horizontal-carousel&quot; id=&quot;businesses&quot;&gt;&lt;a class=&quot;business-carousel-card&quot; href=&quot;https://pathos-lp-bluhen.web.app/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;business-cover business-cover--1&quot;&gt;&lt;i class=&quot;art-line&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;div class=&quot;business-card-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;展示会コミュニケーション&lt;/span&gt;&lt;div class=&quot;business-card-title&quot;&gt;&lt;h3&gt;PATHOS&lt;/h3&gt;&lt;span aria-hidden=&quot;true&quot;&gt;↗&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;展示会での第一接触を設計し、見込み顧客との出会いを支援。&lt;/p&gt;&lt;/div&gt;&lt;/a&gt;&lt;a class=&quot;business-carousel-card&quot; href=&quot;https://nextvisa-lp-bluhen.web.app/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;business-cover business-cover--2&quot;&gt;&lt;i class=&quot;art-line&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;div class=&quot;business-card-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;グローバル人材支援&lt;/span&gt;&lt;div class=&quot;business-card-title&quot;&gt;&lt;h3&gt;NEXT VISA&lt;/h3&gt;&lt;span aria-hidden=&quot;true&quot;&gt;↗&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;外国人材と企業をつなぎ、安心して働ける環境づくりを支援。&lt;/p&gt;&lt;/div&gt;&lt;/a&gt;&lt;a class=&quot;business-carousel-card&quot; href=&quot;https://ai-ninja-lp-2026.web.app/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;business-cover business-cover--3&quot;&gt;&lt;i class=&quot;art-line&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;div class=&quot;business-card-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;業務改善・DX支援&lt;/span&gt;&lt;div class=&quot;business-card-title&quot;&gt;&lt;h3&gt;AI忍丸くん&lt;/h3&gt;&lt;span aria-hidden=&quot;true&quot;&gt;↗&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;日々の業務に合わせたAI活用と業務フローの整備を支援。&lt;/p&gt;&lt;/div&gt;&lt;/a&gt;&lt;a class=&quot;business-carousel-card&quot; href=&quot;https://info-bluhen.studio.site/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;business-cover business-cover--4&quot;&gt;&lt;i class=&quot;art-line&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;div class=&quot;business-card-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;翻訳・国際ビジネス支援&lt;/span&gt;&lt;div class=&quot;business-card-title&quot;&gt;&lt;h3&gt;えいご屋さん&lt;/h3&gt;&lt;span aria-hidden=&quot;true&quot;&gt;↗&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;翻訳・通訳からデザイン制作やビジネス実務まで対応。&lt;/p&gt;&lt;/div&gt;&lt;/a&gt;&lt;button class=&quot;business-carousel-card&quot; data-go=&quot;work&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;business-cover business-cover--5&quot;&gt;&lt;i class=&quot;art-line&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;div class=&quot;business-card-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;キッチンカー&lt;/span&gt;&lt;div class=&quot;business-card-title&quot;&gt;&lt;h3&gt;Kitchen Welle&lt;/h3&gt;&lt;span aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;岐阜県大垣市を中心に、食を通じた地域の交流をつくる。&lt;/p&gt;&lt;/div&gt;&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;section-bottom-link&quot;&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;work&quot;&gt;事業一覧を見る &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--paper&quot; id=&quot;top-company&quot;&gt;&lt;div class=&quot;frame&quot;&gt;
+&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;09 / 会社情報&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;Bluhenについて&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;会社概要と最新のお知らせをご覧いただけます。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;company-news-grid&quot;&gt;
+&lt;div class=&quot;company-intro&quot;&gt;&lt;span class=&quot;roman&quot;&gt;ABOUT BLUHEN&lt;/span&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;company-visual&quot;&gt;&lt;div class=&quot;company-visual-inside&quot;&gt;Bluhen.&lt;/div&gt;&lt;/div&gt;&lt;h3&gt;会社概要&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;企業理念、代表メッセージ、会社概要、組織体制をご覧いただけます。&lt;/p&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;about&quot;&gt;会社情報を見る &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;news-panel&quot; id=&quot;top-news&quot;&gt;&lt;div class=&quot;news-panel-head&quot;&gt;&lt;h3&gt;お知らせ&lt;/h3&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;news&quot;&gt;一覧を見る &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;news-list&quot;&gt;&lt;article class=&quot;news-row&quot;&gt;&lt;div class=&quot;news-meta&quot;&gt;&lt;time datetime=&quot;2026-07-29&quot;&gt;2026.07.29&lt;/time&gt;&lt;span&gt;活動報告&lt;/span&gt;&lt;/div&gt;&lt;h4&gt;代表・田中結子が「中部地域女性起業家ブラジルビジネス連携調査団」に参加&lt;/h4&gt;&lt;/article&gt;&lt;article class=&quot;news-row&quot;&gt;&lt;div class=&quot;news-meta&quot;&gt;&lt;time datetime=&quot;2026-07-15&quot;&gt;2026.07.15&lt;/time&gt;&lt;span&gt;登壇情報&lt;/span&gt;&lt;/div&gt;&lt;h4&gt;代表・田中結子が「SPIRAL∞UP CHUBU2026 IN岐阜」に登壇&lt;/h4&gt;&lt;/article&gt;&lt;article class=&quot;news-row&quot;&gt;&lt;div class=&quot;news-meta&quot;&gt;&lt;time datetime=&quot;2026-07-07&quot;&gt;2026.07.07&lt;/time&gt;&lt;span&gt;プレスリリース&lt;/span&gt;&lt;/div&gt;&lt;h4&gt;展示会コミュニケーションサービス「PATHOS」を開始&lt;/h4&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;recruit-strip&quot; id=&quot;top-recruit&quot;&gt;&lt;div&gt;&lt;span class=&quot;roman&quot;&gt;RECRUIT&lt;/span&gt;&lt;h3&gt;採用情報&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;Bluhenの事業や仕事に関心のある方へ。募集情報と働き方をご案内します。&lt;/p&gt;&lt;/div&gt;&lt;a class=&quot;button-line&quot; href=&quot;https://bluhen.org/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;採用情報を見る &lt;span class=&quot;arr&quot;&gt;↗&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;cta-stage&quot; id=&quot;top-contact&quot;&gt;&lt;div class=&quot;frame cta-grid&quot;&gt;
+&lt;div class=&quot;section-index&quot;&gt;CONTACT&lt;/div&gt;
+&lt;div class=&quot;cta-text&quot;&gt;
+&lt;h2&gt;海外向けブランド戦略・&lt;br class=&quot;top-cta-break&quot;/&gt;英文IRのご相談&lt;/h2&gt;
+&lt;p class=&quot;text-body&quot;&gt;海外市場に向けたブランド戦略・クリエイティブ制作、&lt;br class=&quot;top-cta-body-break&quot;/&gt;統合報告書や経営者メッセージの英文編集・翻訳についてご相談いただけます。&lt;/p&gt;
+&lt;button class=&quot;button-solid top-cta-button&quot; data-go=&quot;contact&quot;&gt;お問い合わせフォームへ &lt;span aria-hidden=&quot;true&quot; class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;/div&gt;
+&lt;!-- GLOBAL BRANDING &amp; MARKETING --&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;bm&quot;&gt;
+&lt;section class=&quot;subhero section--paper&quot; id=&quot;bm-top&quot;&gt;&lt;div class=&quot;frame grid-12&quot;&gt;
+&lt;div class=&quot;left&quot;&gt;&lt;div class=&quot;section-index subhero-label&quot;&gt;01 / GLOBAL BRANDING &amp;amp; MARKETING&lt;/div&gt;&lt;h1&gt;ライフスタイル商品の&lt;br/&gt;海外向けブランド戦略&lt;/h1&gt;&lt;p class=&quot;text-body&quot;&gt;商品や企業の価値を整理し、海外市場に向けたブランドコンセプトとコミュニケーションを設計します。国内外のクリエイターと協働し、必要な制作までをプロデュースします。&lt;/p&gt;&lt;div class=&quot;sub-meta roman&quot;&gt;BRAND STRATEGY / COMMUNICATION / CREATIVE PRODUCING&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;right&quot;&gt;&lt;svg aria-label=&quot;言語化・戦略・表現を組み合わせる図形&quot; class=&quot;subhero-symbol&quot; role=&quot;img&quot; viewbox=&quot;0 0 384 360&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;rect fill=&quot;none&quot; height=&quot;328&quot; stroke=&quot;#34578a&quot; stroke-width=&quot;2&quot; width=&quot;352&quot; x=&quot;16&quot; y=&quot;16&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;192&quot; cy=&quot;180&quot; fill=&quot;none&quot; r=&quot;108&quot; stroke=&quot;#34578a&quot; stroke-width=&quot;32&quot;&gt;&lt;/circle&gt;&lt;rect fill=&quot;#f8f8f5&quot; height=&quot;96&quot; stroke=&quot;#111&quot; stroke-width=&quot;2&quot; width=&quot;296&quot; x=&quot;44&quot; y=&quot;132&quot;&gt;&lt;/rect&gt;&lt;text fill=&quot;#111&quot; font-size=&quot;32&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot; x=&quot;192&quot; y=&quot;190&quot;&gt;価値 → 市場&lt;/text&gt;&lt;path d=&quot;M64 64H320 M64 296H320&quot; stroke=&quot;#111&quot; stroke-width=&quot;2&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot; id=&quot;bm-what&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;02 / 事業内容&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;ブランドのコンセプトから、&lt;br/&gt;海外向けの表現まで&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;商品の特徴や開発背景、企業が大切にしてきた考え方を踏まえて、海外市場に向けたブランドコンセプトを設計します。言葉やビジュアルの方向性を定め、必要な制作までをプロデュースします。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--pale&quot; id=&quot;bm-challenges&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;03 / 課題・対象領域&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;主なご相談&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;challenge-list&quot;&gt;
+&lt;article class=&quot;challenge-row&quot;&gt;&lt;span class=&quot;roman&quot;&gt;01&lt;/span&gt;&lt;div class=&quot;problem&quot;&gt;&lt;strong class=&quot;roman&quot;&gt;課題&lt;/strong&gt;&lt;h3&gt;商品の魅力を海外の顧客にどう伝えればよいか分からない。&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;response&quot;&gt;&lt;strong class=&quot;roman&quot;&gt;対応内容&lt;/strong&gt;&lt;p class=&quot;text-body&quot;&gt;商品の特徴と開発背景を整理し、対象市場で伝えるべき価値とブランドコンセプトを定めます。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;article class=&quot;challenge-row&quot;&gt;&lt;span class=&quot;roman&quot;&gt;02&lt;/span&gt;&lt;div class=&quot;problem&quot;&gt;&lt;strong class=&quot;roman&quot;&gt;課題&lt;/strong&gt;&lt;h3&gt;翻訳した言葉やデザインが、現地の文化に合っているか判断できない。&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;response&quot;&gt;&lt;strong class=&quot;roman&quot;&gt;対応内容&lt;/strong&gt;&lt;p class=&quot;text-body&quot;&gt;市場や消費者の文脈を踏まえ、言葉とクリエイティブの方向性を見直します。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;article class=&quot;challenge-row&quot;&gt;&lt;span class=&quot;roman&quot;&gt;03&lt;/span&gt;&lt;div class=&quot;problem&quot;&gt;&lt;strong class=&quot;roman&quot;&gt;課題&lt;/strong&gt;&lt;h3&gt;海外向けの制作チームを組めない。&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;response&quot;&gt;&lt;strong class=&quot;roman&quot;&gt;対応内容&lt;/strong&gt;&lt;p class=&quot;text-body&quot;&gt;企画の設計から、国内外のクリエイターを編成した制作・実行までをプロデュースします。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;/div&gt;
+&lt;div class=&quot;focus-row&quot;&gt;&lt;span class=&quot;outline-chip&quot;&gt;スキンケア&lt;/span&gt;&lt;span class=&quot;outline-chip&quot;&gt;ウェルネス&lt;/span&gt;&lt;span class=&quot;outline-chip&quot;&gt;ファッション&lt;/span&gt;&lt;span class=&quot;outline-chip&quot;&gt;キッチン・生活用品&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot; id=&quot;bm-approach&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;04 / 進め方&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;ブランド戦略の組み立て方&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;process-list&quot;&gt;&lt;article class=&quot;process-step&quot;&gt;&lt;span class=&quot;roman&quot;&gt;01 / UNDERSTAND&lt;/span&gt;&lt;h3&gt;市場・顧客の理解&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;事業、商品の特徴、対象市場の競合や消費者について調べます。&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;process-step&quot;&gt;&lt;span class=&quot;roman&quot;&gt;02 / DEFINE&lt;/span&gt;&lt;h3&gt;価値・コンセプトの整理&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;商品が選ばれる理由を整理し、ブランドの立ち位置と伝える内容を定めます。&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;process-step&quot;&gt;&lt;span class=&quot;roman&quot;&gt;03 / LOCALIZE&lt;/span&gt;&lt;h3&gt;表現方針・ローカライズ&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;現地の言語と文化を踏まえ、コピーやビジュアルの方針を設計します。&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;process-step&quot;&gt;&lt;span class=&quot;roman&quot;&gt;04 / PRODUCE&lt;/span&gt;&lt;h3&gt;制作・展開&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;必要な専門家とともに制作を進め、想定する顧客接点に展開します。&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--paper&quot; id=&quot;bm-capability&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;05 / 提供機能&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;提供サービス&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;ブランド戦略、コンセプト、コミュニケーションの設計を中心に、必要なクリエイティブ制作と展開を支援します。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;services-grid&quot;&gt;
+&lt;article class=&quot;service-tile&quot;&gt;&lt;div class=&quot;row-title&quot;&gt;&lt;h3&gt;Strategy&lt;/h3&gt;&lt;span class=&quot;roman&quot;&gt;01&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;対象市場・競合・顧客の調査を踏まえた、ブランド戦略とポジショニングの設計。&lt;/p&gt;&lt;/article&gt;
+&lt;article class=&quot;service-tile&quot;&gt;&lt;div class=&quot;row-title&quot;&gt;&lt;h3&gt;Brand&lt;/h3&gt;&lt;span class=&quot;roman&quot;&gt;02&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;ブランドコンセプト、ストーリー、ネーミング、コピー、ビジュアルの方針設計。&lt;/p&gt;&lt;/article&gt;
+&lt;article class=&quot;service-tile&quot;&gt;&lt;div class=&quot;row-title&quot;&gt;&lt;h3&gt;Communication &amp;amp;&lt;br/&gt;Experience&lt;/h3&gt;&lt;span class=&quot;roman&quot;&gt;03&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;Web、SNS、広告、PR、映像などに向けたコミュニケーション企画と制作。&lt;/p&gt;&lt;/article&gt;
+&lt;article class=&quot;service-tile&quot;&gt;&lt;div class=&quot;row-title&quot;&gt;&lt;h3&gt;Go-to-Market&lt;/h3&gt;&lt;span class=&quot;roman&quot;&gt;04&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;海外展開に向けた情報発信や、展示会・ポップアップなどの接点づくりに関する企画・制作支援。&lt;/p&gt;&lt;/article&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot; id=&quot;bm-network&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;06 / 制作体制&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;国内外の専門家による&lt;br/&gt;プロデュース体制&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;Bluhenがブランドのコンセプト、メッセージ、表現方針を設計。案件に必要な専門家とチームを組み、制作全体の方向性を管理します。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;network-columns&quot;&gt;&lt;div class=&quot;diagram-panel&quot;&gt;&lt;div class=&quot;diagram-panel-head&quot;&gt;&lt;strong class=&quot;micro-title&quot;&gt;CREATIVE NETWORK&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;diagram-graphic&quot;&gt;&lt;svg aria-label=&quot;Bluhenと専門家ネットワークの関係図&quot; role=&quot;img&quot; viewbox=&quot;0 0 680 520&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#34578a&quot; stroke-width=&quot;2&quot;&gt;&lt;path d=&quot;M340 260L140 104M340 260L340 84M340 260L540 104M340 260L540 420M340 260L340 436M340 260L140 420&quot;&gt;&lt;/path&gt;&lt;circle cx=&quot;340&quot; cy=&quot;260&quot; opacity=&quot;.5&quot; r=&quot;184&quot; stroke-dasharray=&quot;8 8&quot;&gt;&lt;/circle&gt;&lt;/g&gt;&lt;circle cx=&quot;340&quot; cy=&quot;260&quot; fill=&quot;#34578a&quot; r=&quot;100&quot;&gt;&lt;/circle&gt;&lt;text fill=&quot;#fff&quot; font-size=&quot;32&quot; font-weight=&quot;800&quot; text-anchor=&quot;middle&quot; x=&quot;340&quot; y=&quot;254&quot;&gt;Bluhen&lt;/text&gt;&lt;text fill=&quot;#fff&quot; font-size=&quot;16&quot; font-weight=&quot;750&quot; text-anchor=&quot;middle&quot; x=&quot;340&quot; y=&quot;280&quot;&gt;PRODUCE&lt;/text&gt;&lt;g fill=&quot;#fff&quot; stroke=&quot;#111&quot; stroke-width=&quot;2&quot;&gt;&lt;rect height=&quot;80&quot; width=&quot;172&quot; x=&quot;54&quot; y=&quot;64&quot;&gt;&lt;/rect&gt;&lt;rect height=&quot;80&quot; width=&quot;172&quot; x=&quot;254&quot; y=&quot;44&quot;&gt;&lt;/rect&gt;&lt;rect height=&quot;80&quot; width=&quot;172&quot; x=&quot;454&quot; y=&quot;64&quot;&gt;&lt;/rect&gt;&lt;rect height=&quot;80&quot; width=&quot;172&quot; x=&quot;454&quot; y=&quot;380&quot;&gt;&lt;/rect&gt;&lt;rect height=&quot;80&quot; width=&quot;172&quot; x=&quot;254&quot; y=&quot;396&quot;&gt;&lt;/rect&gt;&lt;rect height=&quot;80&quot; width=&quot;172&quot; x=&quot;54&quot; y=&quot;380&quot;&gt;&lt;/rect&gt;&lt;/g&gt;&lt;g fill=&quot;#111&quot; font-size=&quot;24&quot; font-weight=&quot;750&quot; text-anchor=&quot;middle&quot;&gt;&lt;text x=&quot;140&quot; y=&quot;112&quot;&gt;戦略&lt;/text&gt;&lt;text x=&quot;340&quot; y=&quot;92&quot;&gt;言葉&lt;/text&gt;&lt;text x=&quot;540&quot; y=&quot;112&quot;&gt;デザイン&lt;/text&gt;&lt;text x=&quot;540&quot; y=&quot;428&quot;&gt;写真・映像&lt;/text&gt;&lt;text x=&quot;340&quot; y=&quot;444&quot;&gt;市場理解&lt;/text&gt;&lt;text x=&quot;140&quot; y=&quot;428&quot;&gt;体験設計&lt;/text&gt;&lt;/g&gt;&lt;/svg&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;network-steps&quot;&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;01 / STRATEGY&lt;/span&gt;&lt;h3&gt;企画・コンセプト&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;Bluhenがブランドの価値を整理し、コンセプトとコミュニケーションの方針を決めます。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;02 / TEAM&lt;/span&gt;&lt;h3&gt;専門家の編成&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;方針に必要なコピー、デザイン、写真、映像などの専門家を組み合わせます。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;03 / PRODUCTION&lt;/span&gt;&lt;h3&gt;全体のプロデュース&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;企画の意図を各制作者と共有し、制作物の方向性を統括します。&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;member-strip&quot;&gt;&lt;div class=&quot;member-head&quot;&gt;&lt;div&gt;&lt;span class=&quot;roman&quot;&gt;OUR NETWORK&lt;/span&gt;&lt;h3&gt;プロジェクトを支える専門家&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;carousel-controls&quot;&gt;&lt;button aria-label=&quot;前の専門家を見る&quot; class=&quot;carousel-arrow&quot; data-carousel=&quot;people&quot; data-direction=&quot;prev&quot;&gt;←&lt;/button&gt;&lt;button aria-label=&quot;次の専門家を見る&quot; class=&quot;carousel-arrow&quot; data-carousel=&quot;people&quot; data-direction=&quot;next&quot;&gt;→&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div aria-label=&quot;参加する専門家の領域&quot; class=&quot;horizontal-carousel&quot; id=&quot;people&quot;&gt;&lt;article class=&quot;people-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;people-portrait people-portrait--1&quot;&gt;&lt;span&gt;01&lt;/span&gt;&lt;div class=&quot;portrait-shape&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;people-info&quot;&gt;&lt;span class=&quot;roman&quot;&gt;Brand Strategy&lt;/span&gt;&lt;h4&gt;ブランドストラテジスト&lt;/h4&gt;&lt;p class=&quot;text-body&quot;&gt;商品の価値と市場の文脈を整理し、ブランドの方針を設計。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;people-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;people-portrait people-portrait--2&quot;&gt;&lt;span&gt;02&lt;/span&gt;&lt;div class=&quot;portrait-shape&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;people-info&quot;&gt;&lt;span class=&quot;roman&quot;&gt;Language&lt;/span&gt;&lt;h4&gt;コピーライター・編集者&lt;/h4&gt;&lt;p class=&quot;text-body&quot;&gt;ブランドストーリー、メッセージ、言語表現を設計。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;people-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;people-portrait people-portrait--3&quot;&gt;&lt;span&gt;03&lt;/span&gt;&lt;div class=&quot;portrait-shape&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;people-info&quot;&gt;&lt;span class=&quot;roman&quot;&gt;Design&lt;/span&gt;&lt;h4&gt;デザイナー&lt;/h4&gt;&lt;p class=&quot;text-body&quot;&gt;コンセプトをグラフィックやWebの表現に展開。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;people-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;people-portrait people-portrait--4&quot;&gt;&lt;span&gt;04&lt;/span&gt;&lt;div class=&quot;portrait-shape&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;people-info&quot;&gt;&lt;span class=&quot;roman&quot;&gt;Visual&lt;/span&gt;&lt;h4&gt;フォトグラファー・映像制作者&lt;/h4&gt;&lt;p class=&quot;text-body&quot;&gt;商品とブランドに合う写真・映像の制作。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;people-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;people-portrait people-portrait--5&quot;&gt;&lt;span&gt;05&lt;/span&gt;&lt;div class=&quot;portrait-shape&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;people-info&quot;&gt;&lt;span class=&quot;roman&quot;&gt;Local Insight&lt;/span&gt;&lt;h4&gt;現地マーケティング専門家&lt;/h4&gt;&lt;p class=&quot;text-body&quot;&gt;市場・文化・生活者の視点から表現を検討。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--pale&quot; id=&quot;bm-knowledge&quot;&gt;&lt;div class=&quot;frame&quot;&gt;
+&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;07 / ナレッジ&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;海外市場・ブランド戦略に関する記事&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;cards-3&quot;&gt;&lt;article class=&quot;article-card editorial-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;article-art&quot;&gt;&lt;span&gt;01&lt;/span&gt;&lt;b&gt;CULTURE&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;article-body&quot;&gt;&lt;span class=&quot;roman&quot;&gt;CULTURE&lt;/span&gt;&lt;h3&gt;海外市場で商品の価値が伝わらない理由&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;日本で伝わる価値を、そのまま別の市場に持ち込む前に考えたいこと。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;article-card editorial-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;article-art&quot;&gt;&lt;span&gt;02&lt;/span&gt;&lt;b&gt;BRAND STRATEGY&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;article-body&quot;&gt;&lt;span class=&quot;roman&quot;&gt;BRAND STRATEGY&lt;/span&gt;&lt;h3&gt;ブランドコンセプトを現地向けに設計する&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;誰に何を伝えるかを定めるためのリサーチと整理の進め方。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;article-card editorial-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;article-art&quot;&gt;&lt;span&gt;03&lt;/span&gt;&lt;b&gt;LANGUAGE&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;article-body&quot;&gt;&lt;span class=&quot;roman&quot;&gt;LANGUAGE&lt;/span&gt;&lt;h3&gt;翻訳とトランスクリエーションの違い&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;現地の文化や生活者の文脈に合わせて言葉を設計する。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;cta-stage&quot; id=&quot;bm-contact&quot;&gt;&lt;div class=&quot;frame cta-grid&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;08 / お問い合わせ&lt;/div&gt;&lt;div class=&quot;cta-text&quot;&gt;&lt;h2&gt;海外向けブランド戦略・制作のご相談&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;海外展開の検討状況や商品についてお知らせください。内容に応じた支援方法をご案内します。&lt;/p&gt;
+&lt;div class=&quot;consult-steps&quot;&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;01&lt;/span&gt;&lt;h3&gt;お問い合わせ&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;商品・市場・ご相談内容をお知らせください。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;02&lt;/span&gt;&lt;h3&gt;ヒアリング&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;現在の課題や目指す方向をお伺いします。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;03&lt;/span&gt;&lt;h3&gt;ご提案&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;必要な支援内容と進め方をご案内します。&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;
+&lt;button class=&quot;button-solid&quot; data-go=&quot;contact&quot;&gt;お問い合わせ &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/div&gt;
+&lt;!-- IR --&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;ir&quot;&gt;
+&lt;section class=&quot;subhero section--paper&quot; id=&quot;ir-top&quot;&gt;&lt;div class=&quot;frame grid-12&quot;&gt;&lt;div class=&quot;left&quot;&gt;&lt;div class=&quot;section-index subhero-label&quot;&gt;01 / GLOBAL IR&lt;/div&gt;&lt;h1&gt;企業価値を、&lt;br class=&quot;narrow-only&quot;/&gt;世界へ&lt;/h1&gt;&lt;p class=&quot;text-body&quot;&gt;統合報告書や経営者メッセージなど、企業の戦略や経営情報を海外の投資家に正確に伝えるための編集・翻訳を行います。&lt;/p&gt;&lt;div class=&quot;sub-meta roman&quot;&gt;IR EDITORIAL / TRANSLATION / QUALITY ASSURANCE&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;right&quot;&gt;&lt;svg aria-label=&quot;IR資料の編集と確認を示す図形&quot; class=&quot;subhero-symbol&quot; role=&quot;img&quot; viewbox=&quot;0 0 384 360&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;rect fill=&quot;#fff&quot; height=&quot;304&quot; stroke=&quot;#34578a&quot; stroke-width=&quot;3&quot; width=&quot;240&quot; x=&quot;40&quot; y=&quot;24&quot;&gt;&lt;/rect&gt;&lt;rect fill=&quot;#f8f8f5&quot; height=&quot;264&quot; stroke=&quot;#111&quot; stroke-width=&quot;2&quot; width=&quot;240&quot; x=&quot;88&quot; y=&quot;56&quot;&gt;&lt;/rect&gt;&lt;path d=&quot;M120 112H296 M120 160H296 M120 208H264 M120 256H296&quot; stroke=&quot;#34578a&quot; stroke-width=&quot;8&quot;&gt;&lt;/path&gt;&lt;text fill=&quot;#111&quot; font-size=&quot;24&quot; font-weight=&quot;750&quot; x=&quot;120&quot; y=&quot;96&quot;&gt;IR REPORT&lt;/text&gt;&lt;/svg&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot; id=&quot;ir-what&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;02 / 事業内容&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;IR・経営情報の英文コミュニケーション&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;統合報告書、経営者メッセージ、サステナビリティレポートなどの編集・翻訳に対応します。財務情報や経営方針の意味を保ち、海外のステークホルダーに伝わる英文へ整えます。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--paper&quot; id=&quot;ir-capability&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;03 / 提供機能&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;提供サービス&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;services-grid&quot;&gt;
+&lt;article class=&quot;service-tile&quot;&gt;&lt;div class=&quot;row-title&quot;&gt;&lt;h3&gt;IR Translation&lt;/h3&gt;&lt;span class=&quot;roman&quot;&gt;01&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;統合報告書、IR資料、決算関連資料などの専門的な英訳。&lt;/p&gt;&lt;/article&gt;
+&lt;article class=&quot;service-tile&quot;&gt;&lt;div class=&quot;row-title&quot;&gt;&lt;h3&gt;English Review &amp;amp; Editing&lt;/h3&gt;&lt;span class=&quot;roman&quot;&gt;02&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;英文IR資料のレビュー、リライト、用語・表現の確認。&lt;/p&gt;&lt;/article&gt;
+&lt;article class=&quot;service-tile&quot;&gt;&lt;div class=&quot;row-title&quot;&gt;&lt;h3&gt;Executive Communication&lt;/h3&gt;&lt;span class=&quot;roman&quot;&gt;03&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;経営者メッセージ、トップメッセージの英文編集・翻訳。&lt;/p&gt;&lt;/article&gt;
+&lt;article class=&quot;service-tile&quot;&gt;&lt;div class=&quot;row-title&quot;&gt;&lt;h3&gt;IR Language Management&lt;/h3&gt;&lt;span class=&quot;roman&quot;&gt;04&lt;/span&gt;&lt;/div&gt;&lt;p class=&quot;text-body&quot;&gt;用語集やスタイルガイドの整備、表現と品質の統一。&lt;/p&gt;&lt;/article&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot; id=&quot;ir-quality&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;04 / 品質管理&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;IR専門翻訳者と独立した&lt;br/&gt;品質チェック体制&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;IR専門の翻訳者が英文を作成し、上場企業のIR部門経験者などが別の立場から内容や表現を確認します。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;qa-list&quot;&gt;
+&lt;article class=&quot;qa-card&quot;&gt;&lt;span class=&quot;roman&quot;&gt;01 / INPUT&lt;/span&gt;&lt;h3&gt;経営・IR情報&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;統合報告書、経営者メッセージ、サステナビリティ関連の情報。&lt;/p&gt;&lt;/article&gt;
+&lt;article class=&quot;qa-card&quot;&gt;&lt;span class=&quot;roman&quot;&gt;02 / TRANSLATION&lt;/span&gt;&lt;h3&gt;IR専門翻訳者&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;財務・経営の文脈を理解した専門家が翻訳・編集。&lt;/p&gt;&lt;/article&gt;
+&lt;article class=&quot;qa-card&quot;&gt;&lt;span class=&quot;roman&quot;&gt;03 / REVIEW&lt;/span&gt;&lt;h3&gt;独立したチェッカー&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;翻訳者とは別の担当者が、用語、表現、内容の整合性を確認します。&lt;/p&gt;&lt;/article&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--pale&quot; id=&quot;ir-experience&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;05 / 対応領域&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;主な取扱分野・文書&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;experience-list&quot;&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;業界&lt;/span&gt;&lt;h3&gt;金融・製造&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;金融業・製造業の企業におけるIR関連文書の制作。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;文書&lt;/span&gt;&lt;h3&gt;統合報告書・経営者メッセージ&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;統合報告書、CEOメッセージ、サステナビリティレポートなど。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;継続性&lt;/span&gt;&lt;h3&gt;継続的なご依頼&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;同じ企業から複数回にわたり英文編集・翻訳のご依頼をいただいています。&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--paper&quot; id=&quot;ir-knowledge&quot;&gt;&lt;div class=&quot;frame&quot;&gt;
+&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;06 / ナレッジ&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;英文IRの実務と品質管理&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;cards-3&quot;&gt;&lt;article class=&quot;article-card editorial-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;article-art&quot;&gt;&lt;span&gt;01&lt;/span&gt;&lt;b&gt;GLOBAL IR&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;article-body&quot;&gt;&lt;span class=&quot;roman&quot;&gt;GLOBAL IR&lt;/span&gt;&lt;h3&gt;IR翻訳に求められる正確性と文脈理解&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;財務情報と経営戦略を正しく伝えるために必要な視点。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;article-card editorial-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;article-art&quot;&gt;&lt;span&gt;02&lt;/span&gt;&lt;b&gt;EDITORIAL&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;article-body&quot;&gt;&lt;span class=&quot;roman&quot;&gt;EDITORIAL&lt;/span&gt;&lt;h3&gt;統合報告書の英文編集で確認したい用語と表現&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;用語の統一や数値、経営用語の扱いなど、英文編集での確認項目。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;article-card editorial-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;article-art&quot;&gt;&lt;span&gt;03&lt;/span&gt;&lt;b&gt;EXECUTIVE&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;article-body&quot;&gt;&lt;span class=&quot;roman&quot;&gt;EXECUTIVE&lt;/span&gt;&lt;h3&gt;経営者メッセージを英語で伝える&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;発言の意図と経営方針を損なわない英文表現を考える。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;cta-stage&quot; id=&quot;ir-contact&quot;&gt;&lt;div class=&quot;frame cta-grid&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;07 / お問い合わせ&lt;/div&gt;&lt;div class=&quot;cta-text&quot;&gt;&lt;h2&gt;英文IR・統合報告書に関するご相談&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;統合報告書・経営者メッセージの英文編集、翻訳、レビューについてお問い合わせください。&lt;/p&gt;&lt;button class=&quot;button-solid&quot; data-go=&quot;contact&quot;&gt;お問い合わせ &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/div&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;work&quot;&gt;&lt;section class=&quot;interior-hero section--paper&quot;&gt;&lt;div class=&quot;frame interior-hero-grid&quot;&gt;&lt;div class=&quot;interior-hero-copy&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;01 / BUSINESS&lt;/div&gt;&lt;h1&gt;事業内容&lt;/h1&gt;&lt;p class=&quot;text-body&quot;&gt;Bluhenは、グローバルブランディングと英文IR支援を主力事業として展開しています。人材、展示会、AI活用、翻訳などの専門事業も手がけています。&lt;/p&gt;&lt;/div&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;interior-hero-art&quot;&gt;&lt;div class=&quot;orbit orbit-one&quot;&gt;&lt;/div&gt;&lt;div class=&quot;orbit orbit-two&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;02 / 主力事業&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;Global Branding &amp;amp; Marketing / Global IR&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;work-feature-grid&quot;&gt;&lt;article class=&quot;work-feature feature-blue&quot;&gt;&lt;span class=&quot;roman&quot;&gt;01 / FOR BRANDS&lt;/span&gt;&lt;h3&gt;Global Branding&lt;br/&gt;&amp;amp; Marketing&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;日本のライフスタイル商品を中心に、ブランド戦略、コンセプト設計、海外市場に向けたクリエイティブ制作を支援します。&lt;/p&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;bm&quot;&gt;事業ページを見る &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/article&gt;&lt;article class=&quot;work-feature feature-plain&quot;&gt;&lt;span class=&quot;roman&quot;&gt;02 / FOR IR TEAMS&lt;/span&gt;&lt;h3&gt;Global IR&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;統合報告書、経営者メッセージなど、IR関連情報の英文編集・翻訳と品質管理を専門的に支援します。&lt;/p&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;ir&quot;&gt;事業ページを見る &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--paper&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;03 / その他の事業&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;事業・サービス一覧&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;work-cards-grid&quot;&gt;
+&lt;article class=&quot;work-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;work-cover cover-a&quot;&gt;&lt;div class=&quot;work-cover-ring&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;work-card-content&quot;&gt;&lt;span class=&quot;roman&quot;&gt;人材・採用支援&lt;/span&gt;&lt;h3&gt;NEXT VISA&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;外国人材と採用企業のマッチングを支援するキャリアコーディネート事業。&lt;/p&gt;&lt;a class=&quot;button-line&quot; href=&quot;https://nextvisa-lp-bluhen.web.app/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;サービスサイトを見る &lt;span class=&quot;arr&quot;&gt;↗&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;article class=&quot;work-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;work-cover cover-b&quot;&gt;&lt;div class=&quot;work-cover-ring&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;work-card-content&quot;&gt;&lt;span class=&quot;roman&quot;&gt;展示会コミュニケーション&lt;/span&gt;&lt;h3&gt;PATHOS&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;展示会での声かけや来場者とのコミュニケーションを通じて、出展企業の商談機会づくりを支援します。&lt;/p&gt;&lt;a class=&quot;button-line&quot; href=&quot;https://pathos-lp-bluhen.web.app/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;サービスサイトを見る &lt;span class=&quot;arr&quot;&gt;↗&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;article class=&quot;work-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;work-cover cover-c&quot;&gt;&lt;div class=&quot;work-cover-ring&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;work-card-content&quot;&gt;&lt;span class=&quot;roman&quot;&gt;業務改善・AI&lt;/span&gt;&lt;h3&gt;AI忍丸くん&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;現場の業務内容に合わせたAI活用、業務フローや運用ルールの整備を支援します。&lt;/p&gt;&lt;a class=&quot;button-line&quot; href=&quot;https://ai-ninja-lp-2026.web.app/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;サービスサイトを見る &lt;span class=&quot;arr&quot;&gt;↗&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;article class=&quot;work-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;work-cover cover-d&quot;&gt;&lt;div class=&quot;work-cover-ring&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;work-card-content&quot;&gt;&lt;span class=&quot;roman&quot;&gt;翻訳・国際ビジネス支援&lt;/span&gt;&lt;h3&gt;えいご屋さん&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;翻訳・通訳からデザイン制作、ビジネス実務支援まで幅広く対応します。&lt;/p&gt;&lt;a class=&quot;button-line&quot; href=&quot;https://info-bluhen.studio.site/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;サービスサイトを見る &lt;span class=&quot;arr&quot;&gt;↗&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;article class=&quot;work-card&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;work-cover cover-e&quot;&gt;&lt;div class=&quot;work-cover-ring&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;work-card-content&quot;&gt;&lt;span class=&quot;roman&quot;&gt;キッチンカー&lt;/span&gt;&lt;h3&gt;Kitchen Welle&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;岐阜県大垣市を中心に、南国の雰囲気を取り入れたフードを提供するキッチンカー事業。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;cta-stage&quot;&gt;&lt;div class=&quot;frame cta-grid&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;CONTACT&lt;/div&gt;&lt;div class=&quot;cta-text&quot;&gt;&lt;h2&gt;事業・サービスについてのご相談&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;海外向けのブランド戦略、英文IR、展示会、人材支援など、ご相談内容をお知らせください。&lt;/p&gt;&lt;button class=&quot;button-solid&quot; data-go=&quot;contact&quot;&gt;お問い合わせフォームへ &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/div&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;about&quot;&gt;&lt;section class=&quot;interior-hero section--paper&quot;&gt;&lt;div class=&quot;frame interior-hero-grid&quot;&gt;&lt;div class=&quot;interior-hero-copy&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;01 / ABOUT&lt;/div&gt;&lt;h1&gt;Bluhenについて&lt;/h1&gt;&lt;p class=&quot;text-body&quot;&gt;Bluhenは、日本企業のグローバル展開を支援するコミュニケーションデザインの会社です。ブランド戦略と英文IRを中心に、企業の価値を伝えるための言葉と表現を設計します。&lt;/p&gt;&lt;p class=&quot;editorial-english&quot; lang=&quot;en&quot;&gt;We shape how brands communicate across cultures and markets.&lt;/p&gt;&lt;/div&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;interior-hero-art&quot;&gt;&lt;div class=&quot;orbit orbit-one&quot;&gt;&lt;/div&gt;&lt;div class=&quot;orbit orbit-two&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;02 / 私たちの仕事&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;ブランド戦略とコミュニケーション設計&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;editorial-split&quot;&gt;&lt;div class=&quot;editorial-copy&quot;&gt;&lt;p class=&quot;text-lead&quot;&gt;企業や商品の価値を見つけ、言葉とブランドストーリーにする。&lt;/p&gt;&lt;p class=&quot;text-body&quot;&gt;事業の背景や市場を踏まえて、ブランドの立ち位置、コンセプト、メッセージと表現の方針を設計します。Bluhenが企画の軸を定め、国内外の専門家とともに制作を進めます。英文IRでは専門翻訳と独立した品質チェック体制により、経営情報の発信を支援します。&lt;/p&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;work&quot;&gt;事業内容を見る &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;editorial-visual&quot;&gt;&lt;span&gt;Bluhen.&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--pale&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;03 / MISSION &amp;amp; VISION&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;Mission / Vision&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;statement-pair&quot;&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;MISSION&lt;/span&gt;&lt;h3&gt;可能性を、活躍へ。&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;人や企業が持つ可能性を、実際の仕事や事業の機会につなげる。Bluhenの事業の根底にある考え方です。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;VISION&lt;/span&gt;&lt;h3&gt;すべての価値が、&lt;br/&gt;ふさわしい舞台に出会える社会へ。&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;企業、商品、人材が持つ価値を見出し、それを必要とする相手に伝え、活躍できる機会につなげます。&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;
+&lt;div class=&quot;values-heading&quot;&gt;&lt;span class=&quot;roman&quot;&gt;VALUES&lt;/span&gt;&lt;h3&gt;私たちの行動指針&lt;/h3&gt;&lt;/div&gt;
+&lt;div class=&quot;values-grid&quot;&gt;&lt;article&gt;&lt;strong&gt;Be Proud.&lt;/strong&gt;&lt;p&gt;誇れる仕事をする。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;strong&gt;Go Beyond.&lt;/strong&gt;&lt;p&gt;期待を超える。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;strong&gt;Find a Way.&lt;/strong&gt;&lt;p&gt;「どうやったら？」から始める。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;strong&gt;Bet on People.&lt;/strong&gt;&lt;p&gt;人の可能性に賭ける。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;strong&gt;Power in Difference.&lt;/strong&gt;&lt;p&gt;違いを強さにする。&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;04 / 代表紹介&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;代表紹介&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;leader-layout&quot;&gt;&lt;div aria-label=&quot;代表写真を配置する画像領域&quot; class=&quot;leader-picture&quot; role=&quot;img&quot;&gt;&lt;div class=&quot;leader-circle&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;leader-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;代表取締役 CEO / YUKO TANAKA&lt;/span&gt;&lt;h3&gt;田中 結子&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;岐阜県大垣市出身。東京外国語大学在学中にアメリカとドイツへ留学。国内製薬メーカーでの勤務、翻訳・通訳の仕事を経て、IT企業で役員秘書、経営企画、海外事業開発責任者などを経験しました。&lt;/p&gt;&lt;p class=&quot;text-body&quot;&gt;2024年にブリューエン株式会社を設立。語学・海外事業の経験を背景に、企業のコミュニケーションと多様な人材の活躍に関わる事業を展開しています。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;&lt;section class=&quot;section section--pale speaking-section&quot; id=&quot;about-speaking&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;講演・登壇&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;講演・登壇・セミナーのご依頼&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;代表の田中結子は、働き方や女性の活躍、AI活用、海外展開などをテーマに、講演・登壇のご相談を受け付けています。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;speaking-layout&quot;&gt;&lt;div class=&quot;speaking-topics&quot;&gt;&lt;h3&gt;主なテーマ&lt;/h3&gt;&lt;div class=&quot;topic-row&quot;&gt;&lt;span&gt;01&lt;/span&gt;&lt;strong&gt;女性の働き方・キャリア&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;topic-row&quot;&gt;&lt;span&gt;02&lt;/span&gt;&lt;strong&gt;多様な人材と組織づくり&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;topic-row&quot;&gt;&lt;span&gt;03&lt;/span&gt;&lt;strong&gt;AI活用・業務改革&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;topic-row&quot;&gt;&lt;span&gt;04&lt;/span&gt;&lt;strong&gt;海外展開・ブランド戦略&lt;/strong&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;speaking-contact&quot;&gt;&lt;span class=&quot;roman&quot;&gt;SPEAKING &amp;amp; SEMINAR&lt;/span&gt;&lt;p class=&quot;text-body&quot;&gt;イベントの概要、テーマ、開催日時、ご依頼内容を添えてお問い合わせください。&lt;/p&gt;&lt;button class=&quot;button-line&quot; data-contact-kind=&quot;講演・登壇・セミナーのご依頼&quot; data-go=&quot;contact&quot;&gt;講演・登壇について問い合わせる &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--paper&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;05 / 会社概要&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;会社情報&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;dl class=&quot;company-facts&quot;&gt;&lt;div&gt;&lt;dt&gt;会社名&lt;/dt&gt;&lt;dd&gt;ブリューエン株式会社 / Bluhen Inc.&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;代表者&lt;/dt&gt;&lt;dd&gt;代表取締役 CEO　田中 結子&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;設立&lt;/dt&gt;&lt;dd&gt;2024年5月&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;本社所在地&lt;/dt&gt;&lt;dd&gt;岐阜県大垣市東町2-107-6&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;営業所&lt;/dt&gt;&lt;dd&gt;多治見営業所：岐阜県多治見市本町6丁目59-2 かまや202&lt;br/&gt;名古屋営業所：愛知県名古屋市中区丸の内3丁目13番12号 レジデンス丸の内七間町905号&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;資本金&lt;/dt&gt;&lt;dd&gt;1,200万円&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;事業内容&lt;/dt&gt;&lt;dd&gt;Global Branding &amp;amp; Marketing / Global IR / NEXT VISA / PATHOS / AI忍丸くん / えいご屋さん / Kitchen Welle&lt;/dd&gt;&lt;/div&gt;&lt;/dl&gt;
+&lt;div class=&quot;section-bottom-link&quot;&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;sdgs&quot;&gt;サステナビリティへの取り組み &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;06 / チーム&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;事業に合わせた専門家のチーム&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;member-profile-strip&quot;&gt;&lt;div class=&quot;role-tile&quot;&gt;&lt;div class=&quot;role-visual&quot;&gt;&lt;/div&gt;&lt;h3&gt;企画・ブランド戦略&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;事業・市場の理解、価値の言語化、戦略とブランドコンセプトの設計。&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;role-tile&quot;&gt;&lt;div class=&quot;role-visual&quot;&gt;&lt;/div&gt;&lt;h3&gt;クリエイティブ&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;決定したコンセプトと表現方針に沿って、デザイン、コピー、写真・映像を制作。&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;role-tile&quot;&gt;&lt;div class=&quot;role-visual&quot;&gt;&lt;/div&gt;&lt;h3&gt;IR・翻訳&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;IR専門翻訳者による英文制作と、独立した担当者によるレビュー。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;cta-stage&quot;&gt;&lt;div class=&quot;frame cta-grid&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;CONTACT&lt;/div&gt;&lt;div class=&quot;cta-text&quot;&gt;&lt;h2&gt;Bluhenへのお問い合わせ&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;事業内容に関するご質問や、協業・パートナーシップについてのご相談を受け付けています。&lt;/p&gt;&lt;button class=&quot;button-solid&quot; data-go=&quot;contact&quot;&gt;お問い合わせフォームへ &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/div&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;sdgs&quot;&gt;&lt;section class=&quot;interior-hero section--paper&quot;&gt;&lt;div class=&quot;frame interior-hero-grid&quot;&gt;&lt;div class=&quot;interior-hero-copy&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;01 / SUSTAINABILITY&lt;/div&gt;&lt;h1&gt;サステナビリティ&lt;/h1&gt;&lt;p class=&quot;text-body&quot;&gt;人材の活躍を後押しする事業、柔軟な働き方、環境に配慮した業務運営を通じて、持続可能な社会づくりに取り組んでいます。&lt;/p&gt;&lt;/div&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;interior-hero-art&quot;&gt;&lt;div class=&quot;orbit orbit-one&quot;&gt;&lt;/div&gt;&lt;div class=&quot;orbit orbit-two&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;02 / 方針&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;事業を通じた社会への取り組み&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;editorial-feature&quot;&gt;&lt;div class=&quot;editorial-feature-copy&quot;&gt;&lt;p class=&quot;text-lead&quot;&gt;ブリューエンは、事業活動と日々の働き方を通じて、持続可能な社会の実現に取り組んでいます。&lt;/p&gt;&lt;p class=&quot;text-body&quot;&gt;経済・社会・環境の3つの観点から、人材の活躍機会、柔軟な働き方、資源や環境への配慮を具体的な活動につなげています。&lt;/p&gt;&lt;span class=&quot;editorial-english&quot; lang=&quot;en&quot;&gt;People, society and environment.&lt;/span&gt;&lt;/div&gt;&lt;div aria-label=&quot;サステナビリティの取り組みを紹介する写真エリア&quot; class=&quot;editorial-image-panel editorial-image-panel--sustainability&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;editorial-image-art&quot;&gt;&lt;div class=&quot;editorial-image-circle&quot;&gt;&lt;/div&gt;&lt;div class=&quot;editorial-image-plane&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;image-panel-label&quot;&gt;SUSTAINABILITY&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--paper&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;03 / 取り組み&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;主な取り組み&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;sdg-items&quot;&gt;&lt;article&gt;&lt;span class=&quot;sdg-symbol&quot;&gt;01&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;roman&quot;&gt;ECONOMY&lt;/span&gt;&lt;h3&gt;人材・地域経済&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;通訳・英語などのスキルアップ講座を開催しています。また、グローバル人材と中小企業をつなぐNEXT VISAを通じて、人手不足の解消と多様な人材の活躍を後押ししています。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article&gt;&lt;span class=&quot;sdg-symbol&quot;&gt;02&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;roman&quot;&gt;SOCIETY&lt;/span&gt;&lt;h3&gt;仕事と生活の両立&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;子育てと仕事を両立できる環境づくりに向けて、リモートワーク・フルフレックスを採用。完全在宅勤務や、子どもを同伴した会議への参加ができる体制を整えています。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;article&gt;&lt;span class=&quot;sdg-symbol&quot;&gt;03&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;roman&quot;&gt;ENVIRONMENT&lt;/span&gt;&lt;h3&gt;資源・環境への配慮&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;資料の共有にはクラウドを利用し、ペーパーレス化を推進しています。また、事業所の内装には環境に配慮した製品を使用しています。&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;04 / 関連情報&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;関連する事業・制度&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;services-grid&quot;&gt;&lt;article class=&quot;service-tile&quot;&gt;&lt;h3&gt;NEXT VISA&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;外国人材と企業との接点をつくり、多様な働き手の活躍を支援する事業です。&lt;/p&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;work&quot;&gt;事業一覧へ &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/article&gt;&lt;article class=&quot;service-tile&quot;&gt;&lt;h3&gt;Bluhenの働く環境&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;さまざまなライフステージの人材が関われる組織づくりに取り組んでいます。&lt;/p&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;recruit&quot;&gt;採用情報へ &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--paper&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;sdgs-partner&quot;&gt;&lt;span class=&quot;roman&quot;&gt;SDGs PARTNERSHIP&lt;/span&gt;&lt;h3&gt;ぎふSDGsゴールドパートナー&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;「ぎふSDGsゴールドパートナー」として、持続可能な地域社会への取り組みに参加しています。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;cta-stage&quot;&gt;&lt;div class=&quot;frame cta-grid&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;CONTACT&lt;/div&gt;&lt;div class=&quot;cta-text&quot;&gt;&lt;h2&gt;取り組みに関するお問い合わせ&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;事業活動やサステナビリティについてのお問い合わせを受け付けています。&lt;/p&gt;&lt;button class=&quot;button-solid&quot; data-go=&quot;contact&quot;&gt;お問い合わせフォームへ &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/div&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;recruit&quot;&gt;&lt;section class=&quot;interior-hero section--paper&quot;&gt;&lt;div class=&quot;frame interior-hero-grid&quot;&gt;&lt;div class=&quot;interior-hero-copy&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;01 / RECRUIT&lt;/div&gt;&lt;h1&gt;採用情報&lt;/h1&gt;&lt;p class=&quot;text-body&quot;&gt;リモートワークや柔軟な働き方を取り入れ、経験や専門性の異なるメンバーが事業に取り組んでいます。&lt;/p&gt;&lt;p class=&quot;editorial-english&quot; lang=&quot;en&quot;&gt;Different backgrounds. One team.&lt;/p&gt;&lt;/div&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;interior-hero-art&quot;&gt;&lt;div class=&quot;orbit orbit-one&quot;&gt;&lt;/div&gt;&lt;div class=&quot;orbit orbit-two&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;02 / 仕事について&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;仕事の領域&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;work-cards-grid three&quot;&gt;&lt;article class=&quot;role-tile&quot;&gt;&lt;div class=&quot;role-visual&quot;&gt;&lt;/div&gt;&lt;span class=&quot;roman&quot;&gt;01 / PLANNING&lt;/span&gt;&lt;h3&gt;企画・ブランド戦略&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;企業や商品の調査、コンセプト設計、コミュニケーションの企画。&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;role-tile&quot;&gt;&lt;div class=&quot;role-visual&quot;&gt;&lt;/div&gt;&lt;span class=&quot;roman&quot;&gt;02 / CREATIVE&lt;/span&gt;&lt;h3&gt;デザイン・制作&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;コピーライティング、デザイン、写真・映像などの制作。&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;role-tile&quot;&gt;&lt;div class=&quot;role-visual&quot;&gt;&lt;/div&gt;&lt;span class=&quot;roman&quot;&gt;03 / GLOBAL IR&lt;/span&gt;&lt;h3&gt;英文編集・翻訳&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;英文IR資料の翻訳、編集、専門的なレビュー。&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--paper&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;03 / チームでの仕事&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;異なる経験や専門性を持つメンバーと働く&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;editorial-feature editorial-feature--reverse&quot;&gt;&lt;div aria-label=&quot;チームや日々の仕事の様子を掲載する写真エリア&quot; class=&quot;editorial-image-panel editorial-image-panel--recruit&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;editorial-image-art&quot;&gt;&lt;div class=&quot;editorial-image-circle&quot;&gt;&lt;/div&gt;&lt;div class=&quot;editorial-image-plane&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;image-panel-label&quot;&gt;PEOPLE &amp;amp; CULTURE&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;editorial-feature-copy&quot;&gt;&lt;span class=&quot;roman&quot;&gt;OUR WORK STYLE&lt;/span&gt;&lt;p class=&quot;text-lead&quot;&gt;それぞれの経験を活かし、案件に応じたチームで働く。&lt;/p&gt;&lt;p class=&quot;text-body&quot;&gt;Bluhenでは企画、デザイン、翻訳、海外事業などの経験を持つメンバーが協働しています。担当領域や働く場所が異なっても、案件ごとに必要な専門性を持ち寄ります。&lt;/p&gt;&lt;p class=&quot;text-body&quot;&gt;リモートワーク・フルフレックスを取り入れ、ライフステージに合わせた柔軟な働き方を大切にしています。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;&lt;section class=&quot;section section--white&quot; id=&quot;recruit-workstyle&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;働き方&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;Bluhenの働き方&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;recruit-style-grid&quot;&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;01 / REMOTE&lt;/span&gt;&lt;h3&gt;リモートワーク&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;働く場所にとらわれず、地域や生活環境の異なるメンバーが仕事に参加しています。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;02 / FLEXIBLE&lt;/span&gt;&lt;h3&gt;フルフレックス&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;家庭や生活との両立を考え、時間の使い方に柔軟性を持たせています。&lt;/p&gt;&lt;/article&gt;&lt;article&gt;&lt;span class=&quot;roman&quot;&gt;03 / SKILLS&lt;/span&gt;&lt;h3&gt;専門性を活かす仕事&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;これまでのキャリアで身につけたスキルや経験を、担当する事業・業務に活かします。&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;04 / 会社を知る&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;Bluhenについて&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;link-panels&quot;&gt;&lt;button data-go=&quot;about&quot;&gt;&lt;span class=&quot;roman&quot;&gt;ABOUT&lt;/span&gt;&lt;strong&gt;会社概要・代表メッセージ&lt;/strong&gt;&lt;span&gt;→&lt;/span&gt;&lt;/button&gt;&lt;button data-go=&quot;work&quot;&gt;&lt;span class=&quot;roman&quot;&gt;BUSINESS&lt;/span&gt;&lt;strong&gt;事業内容&lt;/strong&gt;&lt;span&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;cta-stage&quot;&gt;&lt;div class=&quot;frame cta-grid&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;CONTACT&lt;/div&gt;&lt;div class=&quot;cta-text&quot;&gt;&lt;h2&gt;採用・協業に関するお問い合わせ&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;採用や業務委託での協業についてのご質問は、お問い合わせフォームからご連絡ください。&lt;/p&gt;&lt;button class=&quot;button-solid&quot; data-go=&quot;contact&quot;&gt;お問い合わせフォームへ &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/div&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;knowledge&quot;&gt;&lt;section class=&quot;interior-hero section--paper&quot;&gt;&lt;div class=&quot;frame interior-hero-grid&quot;&gt;&lt;div class=&quot;interior-hero-copy&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;01 / KNOWLEDGE&lt;/div&gt;&lt;h1&gt;ナレッジ&lt;/h1&gt;&lt;p class=&quot;text-body&quot;&gt;海外市場に向けたブランド戦略、言葉や文化に合わせた表現、英文IRの品質管理について、実務に即した考え方を紹介します。&lt;/p&gt;&lt;/div&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;interior-hero-art&quot;&gt;&lt;div class=&quot;orbit orbit-one&quot;&gt;&lt;/div&gt;&lt;div class=&quot;orbit orbit-two&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;02 / 記事一覧&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;記事一覧&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;filter-bar&quot; data-filter-controls=&quot;knowledge&quot;&gt;&lt;button class=&quot;filter-chip active&quot; data-filter=&quot;all&quot;&gt;すべて&lt;/button&gt;&lt;button class=&quot;filter-chip&quot; data-filter=&quot;brand&quot;&gt;Branding &amp;amp; Marketing&lt;/button&gt;&lt;button class=&quot;filter-chip&quot; data-filter=&quot;ir&quot;&gt;Global IR&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;knowledge-archive&quot; data-filter-items=&quot;knowledge&quot;&gt;&lt;button class=&quot;knowledge-tile&quot; data-article-id=&quot;0&quot; data-go=&quot;knowledge-detail&quot; data-type=&quot;brand&quot;&gt;&lt;span class=&quot;tile-art&quot;&gt;&lt;span class=&quot;roman&quot;&gt;BRAND STRATEGY&lt;/span&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;tile-art-circle&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;tile-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;BRAND STRATEGY&lt;/span&gt;&lt;strong&gt;商品価値を海外市場で伝えるためのブランドコンセプト設計&lt;/strong&gt;&lt;span class=&quot;text-body&quot;&gt;対象市場と商品の特徴を踏まえ、ブランドの核となる言葉を整理する方法。&lt;/span&gt;&lt;span class=&quot;tile-action&quot;&gt;記事を読む →&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;knowledge-tile&quot; data-article-id=&quot;1&quot; data-go=&quot;knowledge-detail&quot; data-type=&quot;brand&quot;&gt;&lt;span class=&quot;tile-art&quot;&gt;&lt;span class=&quot;roman&quot;&gt;LANGUAGE &amp;amp; CULTURE&lt;/span&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;tile-art-circle&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;tile-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;LANGUAGE &amp;amp; CULTURE&lt;/span&gt;&lt;strong&gt;翻訳とトランスクリエーションの違い&lt;/strong&gt;&lt;span class=&quot;text-body&quot;&gt;現地の文化や生活者に合わせた言葉の設計を考えます。&lt;/span&gt;&lt;span class=&quot;tile-action&quot;&gt;記事を読む →&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;knowledge-tile&quot; data-article-id=&quot;2&quot; data-go=&quot;knowledge-detail&quot; data-type=&quot;ir&quot;&gt;&lt;span class=&quot;tile-art&quot;&gt;&lt;span class=&quot;roman&quot;&gt;GLOBAL IR&lt;/span&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;tile-art-circle&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;tile-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;GLOBAL IR&lt;/span&gt;&lt;strong&gt;IR翻訳に求められる正確性と文脈理解&lt;/strong&gt;&lt;span class=&quot;text-body&quot;&gt;財務・経営情報を海外の読み手に伝えるための観点。&lt;/span&gt;&lt;span class=&quot;tile-action&quot;&gt;記事を読む →&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;knowledge-tile&quot; data-article-id=&quot;3&quot; data-go=&quot;knowledge-detail&quot; data-type=&quot;ir&quot;&gt;&lt;span class=&quot;tile-art&quot;&gt;&lt;span class=&quot;roman&quot;&gt;EDITORIAL&lt;/span&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;tile-art-circle&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;tile-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;EDITORIAL&lt;/span&gt;&lt;strong&gt;統合報告書の英文編集で確認したい用語と表現&lt;/strong&gt;&lt;span class=&quot;text-body&quot;&gt;用語の統一、数値、経営用語の扱いを整理します。&lt;/span&gt;&lt;span class=&quot;tile-action&quot;&gt;記事を読む →&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;knowledge-tile&quot; data-article-id=&quot;4&quot; data-go=&quot;knowledge-detail&quot; data-type=&quot;brand&quot;&gt;&lt;span class=&quot;tile-art&quot;&gt;&lt;span class=&quot;roman&quot;&gt;GLOBAL BRANDING&lt;/span&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;tile-art-circle&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;tile-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;GLOBAL BRANDING&lt;/span&gt;&lt;strong&gt;海外市場でのブランドメッセージの組み立て方&lt;/strong&gt;&lt;span class=&quot;text-body&quot;&gt;商品の特徴を現地の生活者へどう説明するか。&lt;/span&gt;&lt;span class=&quot;tile-action&quot;&gt;記事を読む →&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;knowledge-tile&quot; data-article-id=&quot;5&quot; data-go=&quot;knowledge-detail&quot; data-type=&quot;ir&quot;&gt;&lt;span class=&quot;tile-art&quot;&gt;&lt;span class=&quot;roman&quot;&gt;EXECUTIVE COMMUNICATION&lt;/span&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;tile-art-circle&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;tile-text&quot;&gt;&lt;span class=&quot;roman&quot;&gt;EXECUTIVE COMMUNICATION&lt;/span&gt;&lt;strong&gt;経営者メッセージを英語で伝える&lt;/strong&gt;&lt;span class=&quot;text-body&quot;&gt;経営方針と発言の意図を損なわずに英文を整えます。&lt;/span&gt;&lt;span class=&quot;tile-action&quot;&gt;記事を読む →&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;cta-stage&quot;&gt;&lt;div class=&quot;frame cta-grid&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;CONTACT&lt;/div&gt;&lt;div class=&quot;cta-text&quot;&gt;&lt;h2&gt;ブランド戦略・英文IRのご相談&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;海外向けブランド戦略や英文IRについて、具体的なご相談を受け付けています。&lt;/p&gt;&lt;button class=&quot;button-solid&quot; data-go=&quot;contact&quot;&gt;お問い合わせフォームへ &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/div&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;knowledge-detail&quot;&gt;
+&lt;section class=&quot;article-hero section--paper&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;button class=&quot;back-link&quot; data-go=&quot;knowledge&quot;&gt;← ナレッジ一覧&lt;/button&gt;&lt;span class=&quot;roman&quot;&gt;BRAND STRATEGY&lt;/span&gt;&lt;h1&gt;商品価値を海外市場で伝えるための&lt;br class=&quot;desktop-break&quot;/&gt;ブランドコンセプト設計&lt;/h1&gt;&lt;p class=&quot;article-intro&quot;&gt;日本で評価されている商品でも、海外市場では同じ説明がそのまま響くとは限りません。対象市場で何を価値として伝えるかを整理するための基本的な考え方を紹介します。&lt;/p&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame article-content-grid&quot;&gt;&lt;aside class=&quot;article-toc&quot;&gt;&lt;span class=&quot;roman&quot;&gt;CONTENTS&lt;/span&gt;&lt;ol&gt;&lt;li&gt;商品の特徴と価値を分ける&lt;/li&gt;&lt;li&gt;対象市場の文脈を把握する&lt;/li&gt;&lt;li&gt;コンセプトと言葉に落とす&lt;/li&gt;&lt;/ol&gt;&lt;/aside&gt;&lt;article class=&quot;article-content&quot;&gt;&lt;h2&gt;商品の特徴と価値を分ける&lt;/h2&gt;&lt;p&gt;商品の機能や素材、製造方法は重要な情報です。一方、それだけで生活者に選ばれる理由になるとは限りません。誰にとってどんな意味があるのかを整理する必要があります。&lt;/p&gt;&lt;div class=&quot;article-inline-visual&quot;&gt;&lt;span&gt;PRODUCT&lt;/span&gt;&lt;span class=&quot;article-visual-rule&quot;&gt;&lt;/span&gt;&lt;span&gt;VALUE&lt;/span&gt;&lt;span class=&quot;article-visual-rule&quot;&gt;&lt;/span&gt;&lt;span&gt;MESSAGE&lt;/span&gt;&lt;/div&gt;&lt;h2&gt;対象市場の文脈を把握する&lt;/h2&gt;&lt;p&gt;日本の市場で前提となっている習慣や認識は、国や地域によって異なります。生活習慣、文化、競合商品との比較を通して、伝えるべきポイントを検討します。&lt;/p&gt;&lt;h2&gt;コンセプトと言葉に落とす&lt;/h2&gt;&lt;p&gt;商品の特徴、企業の考え方、市場の文脈を踏まえて、ブランドのコンセプトを整理します。コピーやビジュアル、Webサイトなどを制作する際の判断基準になるよう、表現方針を明確にします。&lt;/p&gt;&lt;div class=&quot;article-related&quot;&gt;&lt;span class=&quot;roman&quot;&gt;RELATED BUSINESS&lt;/span&gt;&lt;h3&gt;Global Branding &amp;amp; Marketing&lt;/h3&gt;&lt;p class=&quot;text-body&quot;&gt;海外市場に向けたブランドコンセプト設計とクリエイティブを支援しています。&lt;/p&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;bm&quot;&gt;事業ページを見る &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;cta-stage&quot;&gt;&lt;div class=&quot;frame cta-grid&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;CONTACT&lt;/div&gt;&lt;div class=&quot;cta-text&quot;&gt;&lt;h2&gt;海外市場に向けたブランド戦略のご相談&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;商品の特徴や進出を検討している市場など、現在の状況をお知らせください。&lt;/p&gt;&lt;button class=&quot;button-solid&quot; data-go=&quot;contact&quot;&gt;お問い合わせフォームへ &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;news&quot;&gt;&lt;section class=&quot;interior-hero section--paper&quot;&gt;&lt;div class=&quot;frame interior-hero-grid&quot;&gt;&lt;div class=&quot;interior-hero-copy&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;01 / NEWS&lt;/div&gt;&lt;h1&gt;お知らせ&lt;/h1&gt;&lt;p class=&quot;text-body&quot;&gt;事業に関するニュース、イベント・登壇情報、メディア掲載などをお知らせします。&lt;/p&gt;&lt;/div&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;interior-hero-art&quot;&gt;&lt;div class=&quot;orbit orbit-one&quot;&gt;&lt;/div&gt;&lt;div class=&quot;orbit orbit-two&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-title-row&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;02 / 最新情報&lt;/div&gt;&lt;div class=&quot;section-copy&quot;&gt;&lt;h2&gt;ニュース一覧&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;filter-bar&quot; data-filter-controls=&quot;news&quot;&gt;&lt;button class=&quot;filter-chip active&quot; data-filter=&quot;all&quot;&gt;すべて&lt;/button&gt;&lt;button class=&quot;filter-chip&quot; data-filter=&quot;お知らせ&quot;&gt;お知らせ&lt;/button&gt;&lt;button class=&quot;filter-chip&quot; data-filter=&quot;登壇情報&quot;&gt;登壇情報&lt;/button&gt;&lt;button class=&quot;filter-chip&quot; data-filter=&quot;活動報告&quot;&gt;活動報告&lt;/button&gt;&lt;button class=&quot;filter-chip&quot; data-filter=&quot;プレスリリース&quot;&gt;プレスリリース&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;archive-news&quot; data-filter-items=&quot;news&quot;&gt;&lt;button class=&quot;archive-news-row&quot; data-go=&quot;news-detail&quot; data-news-id=&quot;0&quot; data-type=&quot;お知らせ&quot;&gt;&lt;span class=&quot;news-date&quot;&gt;2026.10.01&lt;/span&gt;&lt;span class=&quot;news-category&quot;&gt;お知らせ&lt;/span&gt;&lt;span class=&quot;news-description&quot;&gt;&lt;strong&gt;セミナー「AIへのコピペ、もうやめませんか？」を開催しました&lt;/strong&gt;&lt;span&gt;日常業務でのAI活用について、手順や知識の再利用を紹介したセミナーの報告です。&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;news-arrow&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;archive-news-row&quot; data-go=&quot;news-detail&quot; data-news-id=&quot;1&quot; data-type=&quot;登壇情報&quot;&gt;&lt;span class=&quot;news-date&quot;&gt;2026.09.10&lt;/span&gt;&lt;span class=&quot;news-category&quot;&gt;登壇情報&lt;/span&gt;&lt;span class=&quot;news-description&quot;&gt;&lt;strong&gt;代表・田中結子が「大垣地域スタートアップデイ2026」に登壇します&lt;/strong&gt;&lt;span&gt;10月23日、スタートアップ・ピッチで事業内容とビジネスモデルを紹介する予定です。&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;news-arrow&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;archive-news-row&quot; data-go=&quot;news-detail&quot; data-news-id=&quot;2&quot; data-type=&quot;お知らせ&quot;&gt;&lt;span class=&quot;news-date&quot;&gt;2026.08.17&lt;/span&gt;&lt;span class=&quot;news-category&quot;&gt;お知らせ&lt;/span&gt;&lt;span class=&quot;news-description&quot;&gt;&lt;strong&gt;海外展開支援サービスを強化。JETRO「JS Links」に掲載されました&lt;/strong&gt;&lt;span&gt;日本企業が海外展開の支援事業者を探すJETROのデータベースに掲載されました。&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;news-arrow&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;archive-news-row&quot; data-go=&quot;news-detail&quot; data-news-id=&quot;3&quot; data-type=&quot;活動報告&quot;&gt;&lt;span class=&quot;news-date&quot;&gt;2026.07.29&lt;/span&gt;&lt;span class=&quot;news-category&quot;&gt;活動報告&lt;/span&gt;&lt;span class=&quot;news-description&quot;&gt;&lt;strong&gt;代表・田中結子が中部地域女性起業家ブラジルビジネス連携調査団に参加&lt;/strong&gt;&lt;span&gt;ブラジルの現地機関や企業を訪問し、事業連携の可能性を探りました。&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;news-arrow&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;archive-news-row&quot; data-go=&quot;news-detail&quot; data-news-id=&quot;4&quot; data-type=&quot;登壇情報&quot;&gt;&lt;span class=&quot;news-date&quot;&gt;2026.07.15&lt;/span&gt;&lt;span class=&quot;news-category&quot;&gt;登壇情報&lt;/span&gt;&lt;span class=&quot;news-description&quot;&gt;&lt;strong&gt;代表・田中結子が「SPIRAL∞UP CHUBU2026 IN岐阜」に登壇&lt;/strong&gt;&lt;span&gt;女性起業家向けイベントのトークセッションに参加。&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;news-arrow&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;button class=&quot;archive-news-row&quot; data-go=&quot;news-detail&quot; data-news-id=&quot;5&quot; data-type=&quot;プレスリリース&quot;&gt;&lt;span class=&quot;news-date&quot;&gt;2026.07.07&lt;/span&gt;&lt;span class=&quot;news-category&quot;&gt;プレスリリース&lt;/span&gt;&lt;span class=&quot;news-description&quot;&gt;&lt;strong&gt;展示会コミュニケーションサービス「PATHOS」を開始&lt;/strong&gt;&lt;span&gt;展示会での第一接触を支援する事業について。&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;news-arrow&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/div&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;news-detail&quot;&gt;
+&lt;section class=&quot;article-hero section--paper&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;button class=&quot;back-link&quot; data-go=&quot;news&quot;&gt;← お知らせ一覧&lt;/button&gt;&lt;div class=&quot;news-meta&quot;&gt;&lt;time datetime=&quot;2026-07-15&quot;&gt;2026.07.15&lt;/time&gt;&lt;span&gt;登壇情報&lt;/span&gt;&lt;/div&gt;&lt;h1&gt;代表・田中結子が「SPIRAL∞UP CHUBU2026 IN岐阜」に登壇&lt;/h1&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame article-content-grid&quot;&gt;&lt;aside class=&quot;article-toc&quot;&gt;&lt;span class=&quot;roman&quot;&gt;NEWS&lt;/span&gt;&lt;p class=&quot;text-body&quot;&gt;登壇情報&lt;br/&gt;2026年7月15日&lt;/p&gt;&lt;/aside&gt;&lt;article class=&quot;article-content&quot;&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;news-article-visual&quot;&gt;&lt;span&gt;SPIRAL∞UP&lt;br/&gt;CHUBU 2026&lt;/span&gt;&lt;/div&gt;&lt;p&gt;ブリューエン株式会社 代表取締役CEOの田中結子が「SPIRAL∞UP CHUBU2026 IN岐阜」に登壇することをお知らせします。&lt;/p&gt;&lt;h2&gt;イベントについて&lt;/h2&gt;&lt;p&gt;トークセッションでは、起業までの歩み、事業づくりの考え方、地域で挑戦することの意義などをお話しする予定です。&lt;/p&gt;&lt;h2&gt;トークセッションと交流会&lt;/h2&gt;&lt;p&gt;セッション終了後には、自身の想いや事業の軸を整理するワークショップおよび交流会が予定されています。&lt;/p&gt;&lt;div class=&quot;article-related&quot;&gt;&lt;button class=&quot;button-line&quot; data-go=&quot;news&quot;&gt;お知らせ一覧へ戻る &lt;span class=&quot;arr&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/div&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;contact&quot;&gt;&lt;section class=&quot;interior-hero section--paper interior-hero-compact&quot;&gt;&lt;div class=&quot;frame interior-hero-grid&quot;&gt;&lt;div class=&quot;interior-hero-copy&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;01 / CONTACT&lt;/div&gt;&lt;h1&gt;お問い合わせ&lt;/h1&gt;&lt;p class=&quot;text-body&quot;&gt;海外向けブランド戦略・制作、英文IR、その他の事業、採用・協業についてお問い合わせいただけます。&lt;/p&gt;&lt;/div&gt;&lt;div aria-hidden=&quot;true&quot; class=&quot;interior-hero-art&quot;&gt;&lt;div class=&quot;orbit orbit-one&quot;&gt;&lt;/div&gt;&lt;div class=&quot;orbit orbit-two&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;section section--white&quot;&gt;&lt;div class=&quot;frame contact-layout&quot;&gt;&lt;div class=&quot;contact-side&quot;&gt;&lt;span class=&quot;roman&quot;&gt;CONTACT FORM&lt;/span&gt;&lt;h2&gt;お問い合わせフォーム&lt;/h2&gt;&lt;p class=&quot;text-body&quot;&gt;事業やご相談内容に合わせてお問い合わせください。&lt;/p&gt;&lt;div class=&quot;contact-side-note&quot;&gt;&lt;strong&gt;営業・勧誘を目的としたご連絡について&lt;/strong&gt;&lt;p class=&quot;text-body&quot;&gt;営業・商品案内・勧誘を目的としたお問い合わせはご遠慮ください。お送りいただいても返信いたしかねます。&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;form class=&quot;contact-form&quot; id=&quot;preview-contact-form&quot; novalidate=&quot;&quot;&gt;&lt;div class=&quot;form-field&quot;&gt;&lt;label for=&quot;contact-kind&quot;&gt;お問い合わせ内容 &lt;span&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;select id=&quot;contact-kind&quot; name=&quot;kind&quot; required=&quot;&quot;&gt;&lt;option value=&quot;&quot;&gt;選択してください&lt;/option&gt;&lt;option&gt;Global Branding &amp;amp; Marketing&lt;/option&gt;&lt;option&gt;Global IR&lt;/option&gt;&lt;option&gt;その他の事業について&lt;/option&gt;&lt;option&gt;採用・協業について&lt;/option&gt;&lt;option&gt;講演・登壇・セミナーのご依頼&lt;/option&gt;&lt;option&gt;その他&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;div class=&quot;form-field&quot;&gt;&lt;label for=&quot;contact-company&quot;&gt;会社名・団体名&lt;/label&gt;&lt;input id=&quot;contact-company&quot; name=&quot;company&quot; placeholder=&quot;会社名・団体名&quot; type=&quot;text&quot;/&gt;&lt;/div&gt;&lt;div class=&quot;form-field&quot;&gt;&lt;label for=&quot;contact-name&quot;&gt;お名前 &lt;span&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;input id=&quot;contact-name&quot; name=&quot;name&quot; placeholder=&quot;お名前&quot; required=&quot;&quot; type=&quot;text&quot;/&gt;&lt;/div&gt;&lt;div class=&quot;form-field&quot;&gt;&lt;label for=&quot;contact-email&quot;&gt;メールアドレス &lt;span&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;input id=&quot;contact-email&quot; name=&quot;email&quot; placeholder=&quot;mail@example.com&quot; required=&quot;&quot; type=&quot;email&quot;/&gt;&lt;/div&gt;&lt;div class=&quot;form-field&quot;&gt;&lt;label for=&quot;contact-message&quot;&gt;お問い合わせ内容 &lt;span&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;textarea id=&quot;contact-message&quot; name=&quot;message&quot; placeholder=&quot;ご相談内容をご記入ください&quot; required=&quot;&quot; rows=&quot;7&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;contact-consent&quot;&gt;&lt;label&gt;&lt;input id=&quot;contact-agree&quot; required=&quot;&quot; type=&quot;checkbox&quot;/&gt;&lt;span&gt;&lt;a href=&quot;https://bluhen.org/privacy2/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;個人情報の取り扱い&lt;/a&gt;に同意する&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;&lt;button class=&quot;submit-mock&quot; type=&quot;submit&quot;&gt;入力内容を送信する &lt;span&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/form&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
+&lt;!-- SITEMAP --&gt;
+&lt;div class=&quot;page&quot; data-page=&quot;sitemap&quot;&gt;&lt;section class=&quot;sitemap-hero section--paper&quot;&gt;&lt;div class=&quot;frame&quot;&gt;&lt;div class=&quot;section-index&quot;&gt;INFORMATION ARCHITECTURE&lt;/div&gt;&lt;h1&gt;サイトマップ&lt;/h1&gt;&lt;div class=&quot;sitemap-map&quot;&gt;&lt;div class=&quot;sitemap-root&quot;&gt;&lt;button data-go=&quot;top&quot;&gt;&lt;span&gt;TOP&lt;/span&gt;&lt;small&gt;/&lt;/small&gt;&lt;span aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;sitemap-groups&quot;&gt;&lt;section class=&quot;sitemap-group&quot;&gt;&lt;h2&gt;Business&lt;/h2&gt;&lt;button class=&quot;sitemap-node sitemap-main&quot; data-go=&quot;work&quot;&gt;&lt;b&gt;事業内容&lt;/b&gt;&lt;small&gt;/work/&lt;/small&gt;&lt;/button&gt;&lt;div class=&quot;sitemap-children&quot;&gt;&lt;button data-go=&quot;bm&quot;&gt;Global Branding &amp;amp; Marketing&lt;/button&gt;&lt;button data-go=&quot;ir&quot;&gt;Global IR&lt;/button&gt;&lt;button data-go=&quot;work&quot;&gt;その他の事業&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;&lt;section class=&quot;sitemap-group sitemap-group--future&quot;&gt;&lt;h2&gt;Projects&lt;/h2&gt;&lt;div class=&quot;sitemap-node sitemap-main&quot;&gt;&lt;b&gt;プロジェクト&lt;/b&gt;&lt;small&gt;将来拡張&lt;/small&gt;&lt;/div&gt;&lt;div class=&quot;sitemap-children&quot;&gt;&lt;span&gt;一覧&lt;/span&gt;&lt;span&gt;詳細&lt;/span&gt;&lt;/div&gt;&lt;/section&gt;&lt;section class=&quot;sitemap-group&quot;&gt;&lt;h2&gt;Knowledge&lt;/h2&gt;&lt;button class=&quot;sitemap-node sitemap-main&quot; data-go=&quot;knowledge&quot;&gt;&lt;b&gt;ナレッジ&lt;/b&gt;&lt;small&gt;/knowledge/&lt;/small&gt;&lt;/button&gt;&lt;div class=&quot;sitemap-children&quot;&gt;&lt;button data-go=&quot;knowledge-detail&quot;&gt;記事詳細&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;&lt;section class=&quot;sitemap-group&quot;&gt;&lt;h2&gt;Company&lt;/h2&gt;&lt;button class=&quot;sitemap-node sitemap-main&quot; data-go=&quot;about&quot;&gt;&lt;b&gt;会社情報&lt;/b&gt;&lt;small&gt;/about/&lt;/small&gt;&lt;/button&gt;&lt;div class=&quot;sitemap-children&quot;&gt;&lt;button data-go=&quot;about&quot;&gt;理念・代表紹介・会社概要&lt;/button&gt;&lt;button data-go=&quot;sdgs&quot;&gt;サステナビリティ /sdgs/&lt;/button&gt;&lt;button data-go=&quot;recruit&quot;&gt;採用情報 /recruit/&lt;/button&gt;&lt;button data-anchor=&quot;about-speaking&quot; data-go=&quot;about&quot;&gt;講演・登壇のご依頼&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;&lt;section class=&quot;sitemap-group&quot;&gt;&lt;h2&gt;Operations&lt;/h2&gt;&lt;button class=&quot;sitemap-node sitemap-main&quot; data-go=&quot;news&quot;&gt;&lt;b&gt;お知らせ&lt;/b&gt;&lt;small&gt;/news/&lt;/small&gt;&lt;/button&gt;&lt;div class=&quot;sitemap-children&quot;&gt;&lt;button data-go=&quot;news-detail&quot;&gt;記事詳細&lt;/button&gt;&lt;/div&gt;&lt;button class=&quot;sitemap-node sitemap-main sitemap-secondary&quot; data-go=&quot;contact&quot;&gt;&lt;b&gt;お問い合わせ&lt;/b&gt;&lt;small&gt;/contact/&lt;/small&gt;&lt;/button&gt;&lt;div class=&quot;sitemap-children&quot;&gt;&lt;span&gt;送信完了ページ（公開時）&lt;/span&gt;&lt;span&gt;プライバシーポリシー（既存URL維持）&lt;/span&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
+&lt;footer class=&quot;footer&quot;&gt;&lt;div class=&quot;frame footer-inner&quot;&gt;&lt;span class=&quot;meta&quot;&gt;© Bluhen Inc.&lt;/span&gt;&lt;div class=&quot;footer-links&quot;&gt;&lt;button data-go=&quot;about&quot;&gt;会社情報&lt;/button&gt;&lt;button data-go=&quot;news&quot;&gt;お知らせ&lt;/button&gt;&lt;button data-go=&quot;contact&quot;&gt;お問い合わせ&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/footer&gt;
+&lt;/main&gt;&lt;div class=&quot;locale-notice&quot; id=&quot;locale-notice&quot; hidden tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-label=&quot;英語版について&quot;&gt;&lt;div class=&quot;locale-notice-dialog&quot;&gt;&lt;h2&gt;英語版について&lt;/h2&gt;&lt;p&gt;言語切替の配置を確認するためのワイヤーフレームです。英語版の各ページは、正式な英文原稿が確定した段階で制作します。&lt;/p&gt;&lt;button type=&quot;button&quot; id=&quot;locale-notice-close&quot;&gt;戻る&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script&gt;
+(()=&gt;{
+ const pages=[&#x27;top&#x27;,&#x27;bm&#x27;,&#x27;ir&#x27;,&#x27;work&#x27;,&#x27;about&#x27;,&#x27;sdgs&#x27;,&#x27;recruit&#x27;,&#x27;knowledge&#x27;,&#x27;knowledge-detail&#x27;,&#x27;news&#x27;,&#x27;news-detail&#x27;,&#x27;contact&#x27;,&#x27;sitemap&#x27;];
+ const pageEls=[...document.querySelectorAll(&#x27;.page&#x27;)];
+ const tabs=[...document.querySelectorAll(&#x27;[data-page-tab]&#x27;)];
+ const menu=document.getElementById(&#x27;site-menu&#x27;);
+ const mobileToggle=document.getElementById(&#x27;mobile-toggle&#x27;);
+ const picker=null;
+ function activate(name,anchor,updateHash=true){
+  if(!pages.includes(name))return;
+  pageEls.forEach(el=&gt;{el.classList.toggle(&#x27;is-active&#x27;,el.dataset.page===name);});
+  tabs.forEach(el=&gt;{const chosen=el.dataset.pageTab===name;el.classList.toggle(&#x27;active&#x27;,chosen);el.setAttribute(&#x27;aria-selected&#x27;,String(chosen));});
+  window.parent.postMessage({type:&#x27;bluhen:page&#x27;,page:name},&#x27;*&#x27;);
+  menu.classList.remove(&#x27;is-open&#x27;);mobileToggle.setAttribute(&#x27;aria-expanded&#x27;,&#x27;false&#x27;);
+  if(updateHash){const url=new URL(location.href);url.searchParams.set(&#x27;page&#x27;,name);url.hash=&#x27;&#x27;;history.replaceState(null,&#x27;&#x27;,url);}
+  if(anchor){requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;document.getElementById(anchor)?.scrollIntoView({block:&#x27;start&#x27;,behavior:&#x27;smooth&#x27;})));}
+  else window.scrollTo({top:0,behavior:&#x27;instant&#x27;});
+ }
+ tabs.forEach(b=&gt;b.addEventListener(&#x27;click&#x27;,()=&gt;activate(b.dataset.pageTab)));
+
+ const archiveArticleData=[{&quot;category&quot;: &quot;BRAND STRATEGY&quot;, &quot;title&quot;: &quot;商品価値を海外市場で伝えるためのブランドコンセプト設計&quot;, &quot;intro&quot;: &quot;日本で評価されている商品でも、海外市場では同じ説明がそのまま響くとは限りません。対象市場で伝える価値を整理するための考え方を紹介します。&quot;, &quot;sections&quot;: [[&quot;商品の特徴と価値を分ける&quot;, &quot;商品の機能や素材、製造方法は重要な情報です。一方、それだけで生活者に選ばれる理由になるとは限りません。誰にとってどんな意味があるのかを整理します。&quot;], [&quot;対象市場の文脈を把握する&quot;, &quot;日本の市場で前提となっている習慣や認識は、国や地域によって異なります。生活習慣や競合商品との比較を通して、伝えるべきポイントを検討します。&quot;], [&quot;コンセプトと言葉に落とす&quot;, &quot;商品の特徴、企業の考え方、市場の文脈を踏まえてコンセプトを整理します。コピーやビジュアル、Webサイトを制作する際の判断基準となるよう、表現方針を明確にします。&quot;]], &quot;business&quot;: &quot;bm&quot;}, {&quot;category&quot;: &quot;LANGUAGE &amp; CULTURE&quot;, &quot;title&quot;: &quot;翻訳とトランスクリエーションの違い&quot;, &quot;intro&quot;: &quot;言葉の意味を正しく訳すことと、ブランドの価値を市場に適した形で伝えることは、必ずしも同じではありません。&quot;, &quot;sections&quot;: [[&quot;翻訳で守るもの&quot;, &quot;まず原文が伝えている情報と意図を把握し、その意味を損なわない形で別の言語に置き換えます。&quot;], [&quot;文化や購買文脈を踏まえた表現&quot;, &quot;現地の消費者にとって自然な説明や訴求方法を検討します。ブランドの特徴は維持しながら、言い回しを調整することがあります。&quot;], [&quot;判断するための共通方針&quot;, &quot;直訳にするか表現を変えるかは、何を伝えるかというブランドの方針に沿って判断します。&quot;]], &quot;business&quot;: &quot;bm&quot;}, {&quot;category&quot;: &quot;GLOBAL IR&quot;, &quot;title&quot;: &quot;IR翻訳に求められる正確性と文脈理解&quot;, &quot;intro&quot;: &quot;IR情報の英文制作では、単語の正しさに加え、財務情報や経営戦略の意味が誤解なく伝わることが重要です。&quot;, &quot;sections&quot;: [[&quot;IR文書の内容を理解する&quot;, &quot;事業内容、経営方針、数値の位置づけなど、文章の背景を理解してから翻訳・編集を進めます。&quot;], [&quot;用語と情報の整合性&quot;, &quot;同じ概念を指す用語、前後の数値、他の開示文書との整合性を確認します。&quot;], [&quot;翻訳後の専門レビュー&quot;, &quot;翻訳者とは別の担当者が内容と表現を確認することで、見落としや誤解を防ぐ体制を整えます。&quot;]], &quot;business&quot;: &quot;ir&quot;}, {&quot;category&quot;: &quot;EDITORIAL&quot;, &quot;title&quot;: &quot;統合報告書の英文編集で確認したい用語と表現&quot;, &quot;intro&quot;: &quot;統合報告書は財務情報だけでなく、経営方針や持続可能性に関する説明を含むため、全体を通じた一貫性が求められます。&quot;, &quot;sections&quot;: [[&quot;重要語句の整理&quot;, &quot;経営方針、事業名称、指標の名称は使用する英文表現を統一します。&quot;], [&quot;数値と記述の対応&quot;, &quot;数値の単位、対象期間、図表の参照先と本文の説明に食い違いがないか確認します。&quot;], [&quot;文書全体のトーン&quot;, &quot;複数の担当者が執筆・翻訳しても読み手が違和感を覚えないよう、表現を整えます。&quot;]], &quot;business&quot;: &quot;ir&quot;}, {&quot;category&quot;: &quot;GLOBAL BRANDING&quot;, &quot;title&quot;: &quot;海外市場でのブランドメッセージの組み立て方&quot;, &quot;intro&quot;: &quot;海外向けのメッセージは、商品の特徴だけでなく、その市場の生活者にとっての意味を踏まえて考えます。&quot;, &quot;sections&quot;: [[&quot;誰に伝えるのか&quot;, &quot;対象となる顧客像と利用場面を把握し、伝える相手を具体化します。&quot;], [&quot;何を価値として示すのか&quot;, &quot;商品の機能、素材、開発背景などを整理し、選ばれる理由を検討します。&quot;], [&quot;どう表現するのか&quot;, &quot;言葉とビジュアルが同じコンセプトを伝えるよう、表現方針を設計します。&quot;]], &quot;business&quot;: &quot;bm&quot;}, {&quot;category&quot;: &quot;EXECUTIVE COMMUNICATION&quot;, &quot;title&quot;: &quot;経営者メッセージを英語で伝える&quot;, &quot;intro&quot;: &quot;経営者メッセージを英文化する際には、発言の意図と経営方針を正確に理解することが重要です。&quot;, &quot;sections&quot;: [[&quot;メッセージの目的&quot;, &quot;何を投資家やステークホルダーへ伝える文章なのかを把握します。&quot;], [&quot;経営上の言葉遣い&quot;, &quot;意思決定や方針を示す表現が、別の意味に受け取られないよう慎重に編集します。&quot;], [&quot;専門家による確認&quot;, &quot;英文の自然さだけでなく、財務・経営の文脈も含めて内容を確認します。&quot;]], &quot;business&quot;: &quot;ir&quot;}];
+ document.querySelectorAll(&#x27;.knowledge-tile[data-article-id]&#x27;).forEach(card=&gt;card.addEventListener(&#x27;click&#x27;,()=&gt;{
+    const a=archiveArticleData[Number(card.dataset.articleId)], root=document.querySelector(&#x27;.page[data-page=&quot;knowledge-detail&quot;]&#x27;);
+    root.querySelector(&#x27;.article-hero .roman&#x27;).textContent=a.category;
+    root.querySelector(&#x27;.article-hero h1&#x27;).textContent=a.title;
+    root.querySelector(&#x27;.article-intro&#x27;).textContent=a.intro;
+    const headings=root.querySelectorAll(&#x27;.article-content &gt; h2&#x27;), paragraphs=root.querySelectorAll(&#x27;.article-content &gt; p&#x27;);
+    a.sections.forEach((part,i)=&gt;{if(headings[i])headings[i].textContent=part[0];if(paragraphs[i])paragraphs[i].textContent=part[1];});
+    root.querySelectorAll(&#x27;.article-toc ol li&#x27;).forEach((li,i)=&gt;{li.textContent=a.sections[i]?.[0]||&#x27;&#x27;;});
+    root.querySelectorAll(&#x27;.article-related [data-go]&#x27;).forEach(b=&gt;b.dataset.go=a.business);
+    root.querySelector(&#x27;.article-related h3&#x27;).textContent=a.business===&#x27;bm&#x27;?&#x27;Global Branding &amp; Marketing&#x27;:&#x27;Global IR&#x27;;
+    root.querySelector(&#x27;.article-related .text-body&#x27;).textContent=a.business===&#x27;bm&#x27;?&#x27;海外市場に向けたブランドコンセプト設計とクリエイティブを支援しています。&#x27;:&#x27;統合報告書・経営者メッセージの英文編集、翻訳、品質管理を支援しています。&#x27;;
+    root.querySelectorAll(&#x27;.article-inline-visual &gt; span:not(.article-visual-rule)&#x27;).forEach((el,i)=&gt;el.textContent=(a.business===&#x27;bm&#x27;?[&#x27;PRODUCT&#x27;,&#x27;VALUE&#x27;,&#x27;MESSAGE&#x27;]:[&#x27;IR CONTENT&#x27;,&#x27;TRANSLATION&#x27;,&#x27;REVIEW&#x27;])[i]);
+ }));
+ const archiveNewsData=[{&quot;date&quot;: &quot;2026.10.01&quot;, &quot;category&quot;: &quot;お知らせ&quot;, &quot;title&quot;: &quot;セミナー「AIへのコピペ、もうやめませんか？」を開催しました&quot;, &quot;intro&quot;: &quot;社内でのAI活用をテーマとしたセミナーの開催についてお知らせします。&quot;, &quot;sectionTitle&quot;: &quot;開催報告&quot;, &quot;body&quot;: &quot;日々の業務の中でAIを利用する際の課題をテーマにしたセミナーを開催しました。&quot;}, {&quot;date&quot;: &quot;2026.09.10&quot;, &quot;category&quot;: &quot;登壇情報&quot;, &quot;title&quot;: &quot;代表・田中結子が「大垣地域スタートアップデイ2026」に登壇します&quot;, &quot;intro&quot;: &quot;2026年10月23日に大垣商工会議所主催のイベントで開催されるスタートアップ・ピッチに登壇します。&quot;, &quot;sectionTitle&quot;: &quot;スタートアップ・ピッチ&quot;, &quot;body&quot;: &quot;代表の田中結子が、事業内容と独自のビジネスモデルを紹介する予定です。&quot;}, {&quot;date&quot;: &quot;2026.08.17&quot;, &quot;category&quot;: &quot;お知らせ&quot;, &quot;title&quot;: &quot;海外展開支援サービスを強化。JETRO「JS Links」に掲載&quot;, &quot;intro&quot;: &quot;海外市場に向けた事業支援の取り組みについてお知らせします。&quot;, &quot;sectionTitle&quot;: &quot;取り組みについて&quot;, &quot;body&quot;: &quot;海外展開に関する支援サービスの情報がJETROの「JS Links」に掲載されました。&quot;}, {&quot;date&quot;: &quot;2026.07.29&quot;, &quot;category&quot;: &quot;活動報告&quot;, &quot;title&quot;: &quot;中部地域女性起業家ブラジルビジネス連携調査団に参加&quot;, &quot;intro&quot;: &quot;ブラジルとの事業連携に向けた取り組みをご紹介します。&quot;, &quot;sectionTitle&quot;: &quot;活動について&quot;, &quot;body&quot;: &quot;中部地域の女性起業家を対象としたブラジルとのビジネス連携調査団へ参加しました。&quot;}, {&quot;date&quot;: &quot;2026.07.15&quot;, &quot;category&quot;: &quot;登壇情報&quot;, &quot;title&quot;: &quot;代表・田中結子が「SPIRAL∞UP CHUBU2026 IN岐阜」に登壇&quot;, &quot;intro&quot;: &quot;女性起業家向けイベントのトークセッションへの登壇についてお知らせします。&quot;, &quot;sectionTitle&quot;: &quot;イベントについて&quot;, &quot;body&quot;: &quot;トークセッションでは、起業までの歩みや事業づくりの考え方、地域で挑戦することの意義などをお話しする予定です。&quot;}, {&quot;date&quot;: &quot;2026.07.07&quot;, &quot;category&quot;: &quot;プレスリリース&quot;, &quot;title&quot;: &quot;展示会コミュニケーションサービス「PATHOS」を開始&quot;, &quot;intro&quot;: &quot;展示会での第一接触を支援する新たなサービスについてお知らせします。&quot;, &quot;sectionTitle&quot;: &quot;PATHOSについて&quot;, &quot;body&quot;: &quot;展示会のブース来場者への声かけから商談機会づくりまでを支援するコミュニケーションサービスを開始しました。&quot;}];
+ document.querySelectorAll(&#x27;.archive-news-row[data-news-id]&#x27;).forEach(card=&gt;card.addEventListener(&#x27;click&#x27;,()=&gt;{
+    const n=archiveNewsData[Number(card.dataset.newsId)], root=document.querySelector(&#x27;.page[data-page=&quot;news-detail&quot;]&#x27;);
+    root.querySelector(&#x27;.article-hero h1&#x27;).textContent=n.title;
+    root.querySelector(&#x27;.article-hero time&#x27;).textContent=n.date;
+    root.querySelector(&#x27;.article-hero .news-meta span&#x27;).textContent=n.category;
+    root.querySelector(&#x27;.article-toc .text-body&#x27;).textContent=n.category+&#x27; / &#x27;+n.date;
+    root.querySelector(&#x27;.news-article-visual span&#x27;).textContent=&#x27;Bluhen NEWS&#x27;;
+    const ps=root.querySelectorAll(&#x27;.article-content &gt; p&#x27;), hs=root.querySelectorAll(&#x27;.article-content &gt; h2&#x27;);
+    if(ps[0])ps[0].textContent=n.intro;if(ps[1])ps[1].textContent=n.body;if(ps[2])ps[2].textContent=&#x27;ブリューエンの活動に関する最新情報は、お知らせ一覧からご覧いただけます。&#x27;;
+    if(hs[0])hs[0].textContent=n.sectionTitle;
+    if(hs[1])hs[1].textContent=&#x27;詳細&#x27;;
+ }));
+
+ document.querySelectorAll(&#x27;[data-go]&#x27;).forEach(b=&gt;b.addEventListener(&#x27;click&#x27;,e=&gt;{e.preventDefault();activate(b.dataset.go,b.dataset.anchor);}));
+ mobileToggle.addEventListener(&#x27;click&#x27;,()=&gt;{const open=menu.classList.toggle(&#x27;is-open&#x27;);mobileToggle.setAttribute(&#x27;aria-expanded&#x27;,String(open));});
+
+  // Mega menu: give the pointer time to travel from the nav label into the full-width panel.
+  // Closing is delayed, and entering the panel cancels any pending close.
+  const navigationGroups=[...document.querySelectorAll(&#x27;.site-nav-group&#x27;)];
+  navigationGroups.forEach(group=&gt;{
+    const trigger=group.querySelector(&#x27;.site-nav-trigger&#x27;);
+    const dropdown=group.querySelector(&#x27;.site-nav-dropdown&#x27;);
+    let closeTimer=null;
+    const cancelClose=()=&gt;{if(closeTimer!==null){window.clearTimeout(closeTimer);closeTimer=null;}};
+    const close=()=&gt;{cancelClose();group.classList.remove(&#x27;is-expanded&#x27;);trigger.setAttribute(&#x27;aria-expanded&#x27;,&#x27;false&#x27;);};
+    const open=()=&gt;{
+      cancelClose();
+      navigationGroups.forEach(other=&gt;{
+        if(other!==group){
+          other.classList.remove(&#x27;is-expanded&#x27;);
+          const otherTrigger=other.querySelector(&#x27;.site-nav-trigger&#x27;);
+          if(otherTrigger)otherTrigger.setAttribute(&#x27;aria-expanded&#x27;,&#x27;false&#x27;);
+        }
+      });
+      group.classList.add(&#x27;is-expanded&#x27;);
+      trigger.setAttribute(&#x27;aria-expanded&#x27;,&#x27;true&#x27;);
+    };
+    const scheduleClose=()=&gt;{
+      if(window.innerWidth&lt;=900)return;
+      cancelClose();
+      closeTimer=window.setTimeout(()=&gt;{closeTimer=null;close();},420);
+    };
+    group.addEventListener(&#x27;mouseenter&#x27;,()=&gt;{if(window.innerWidth&gt;900)open();});
+    group.addEventListener(&#x27;mouseleave&#x27;,scheduleClose);
+    if(dropdown){
+      dropdown.addEventListener(&#x27;mouseenter&#x27;,cancelClose);
+      dropdown.addEventListener(&#x27;mouseleave&#x27;,scheduleClose);
+    }
+    trigger.addEventListener(&#x27;click&#x27;,event=&gt;{
+      event.preventDefault();event.stopPropagation();
+      if(group.classList.contains(&#x27;is-expanded&#x27;))close();else open();
+    });
+    group.addEventListener(&#x27;keydown&#x27;,event=&gt;{if(event.key===&#x27;Escape&#x27;){close();trigger.focus();}});
+  });
+ document.addEventListener(&#x27;click&#x27;,event=&gt;{
+   if(!event.target.closest(&#x27;.site-nav-group&#x27;)) document.querySelectorAll(&#x27;.site-nav-group&#x27;).forEach(group=&gt;{group.classList.remove(&#x27;is-expanded&#x27;);group.querySelector(&#x27;.site-nav-trigger&#x27;).setAttribute(&#x27;aria-expanded&#x27;,&#x27;false&#x27;);});
+ });
+ document.querySelectorAll(&#x27;[data-contact-kind]&#x27;).forEach(button=&gt;button.addEventListener(&#x27;click&#x27;,()=&gt;{
+   const kind=document.querySelector(&#x27;#contact-kind&#x27;);if(kind)kind.value=button.dataset.contactKind;
+ }));
+
+
+ document.querySelectorAll(&#x27;[data-carousel]&#x27;).forEach(b=&gt;b.addEventListener(&#x27;click&#x27;,()=&gt;{
+   const slider=document.getElementById(b.dataset.carousel);if(!slider)return;
+   const card=slider.firstElementChild;if(!card)return;
+   const gap=parseFloat(getComputedStyle(slider).columnGap)||24;
+   const dir=b.dataset.direction===&#x27;next&#x27;?1:-1;
+   slider.scrollBy({left:dir*(card.getBoundingClientRect().width+gap),behavior:&#x27;smooth&#x27;});
+ }));
+ document.querySelectorAll(&#x27;[data-filter-controls]&#x27;).forEach(group=&gt;{
+   const id=group.dataset.filterControls,items=document.querySelector(`[data-filter-items=&quot;${id}&quot;]`);
+   group.querySelectorAll(&#x27;[data-filter]&#x27;).forEach(button=&gt;button.addEventListener(&#x27;click&#x27;,()=&gt;{
+     group.querySelectorAll(&#x27;[data-filter]&#x27;).forEach(x=&gt;x.classList.toggle(&#x27;active&#x27;,x===button));
+     items.querySelectorAll(&#x27;[data-type]&#x27;).forEach(x=&gt;{x.hidden=button.dataset.filter!==&#x27;all&#x27; &amp;&amp; x.dataset.type!==button.dataset.filter;});
+   }));
+ });
+ document.getElementById(&#x27;preview-contact-form&#x27;).addEventListener(&#x27;submit&#x27;,e=&gt;{
+   e.preventDefault();alert(&#x27;この画面はワイヤーフレームです。フォームの送信機能は接続されていません。&#x27;);
+ });
+
+ const localeJp=document.getElementById(&#x27;locale-jp&#x27;);
+ const localeEn=document.getElementById(&#x27;locale-en&#x27;);
+ localeJp.addEventListener(&#x27;click&#x27;,()=&gt;{localeJp.classList.add(&#x27;is-current&#x27;);localeJp.setAttribute(&#x27;aria-current&#x27;,&#x27;true&#x27;);});
+ localeEn.addEventListener(&#x27;click&#x27;,()=&gt;{
+   // Full English pages need edited, approved translations; do not display Japanese pages as English.
+   document.getElementById(&#x27;locale-notice&#x27;).hidden=false;
+   document.getElementById(&#x27;locale-notice&#x27;).focus();
+ });
+ document.getElementById(&#x27;locale-notice-close&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{document.getElementById(&#x27;locale-notice&#x27;).hidden=true;localeEn.focus();});
+ window.addEventListener(&#x27;message&#x27;,event=&gt;{
+   if(!event.data||typeof event.data!==&#x27;object&#x27;)return;
+   if(event.data.type===&#x27;bluhen:navigate&#x27;)activate(event.data.page);
+   if(event.data.type===&#x27;bluhen:grid&#x27;)document.body.classList.toggle(&#x27;show-grid&#x27;,Boolean(event.data.enabled));
+ });
+ window.parent.postMessage({type:&#x27;bluhen:page&#x27;,page:new URLSearchParams(location.search).get(&#x27;page&#x27;)||&#x27;top&#x27;},&#x27;*&#x27;);
+ const initial=new URLSearchParams(location.search).get(&#x27;page&#x27;);if(pages.includes(initial))activate(initial,null,false);
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe></div></div></div>
+<script>
+(() => {
+ const app=document.getElementById('preview-app');
+ const iframe=document.getElementById('site-preview-frame');
+ const toggle=document.getElementById('side-toggle');
+ const grid=document.getElementById('grid-toggle');
+ const links=[...document.querySelectorAll('[data-sidebar-page]')];
+ const addr=document.getElementById('preview-address');
+ const routes={'top':'/','bm':'/work/global-branding-marketing/','ir':'/work/global-ir/','work':'/work/','about':'/about/','sdgs':'/sdgs/','recruit':'/recruit/','knowledge':'/knowledge/','knowledge-detail':'/knowledge/{slug}/','news':'/news/','news-detail':'/news/{slug}/','contact':'/contact/','sitemap':'/sitemap-preview/'};
+ function choose(page,notify=true){
+    links.forEach(link=>{const active=link.dataset.sidebarPage===page;link.classList.toggle('is-current',active);link.setAttribute('aria-current',active?'page':'false');});
+    addr.textContent='https://bluhen.org'+(routes[page]||'/');
+    const u=new URL(location.href);u.searchParams.set('page',page);history.replaceState(null,'',u);
+    if(notify)iframe.contentWindow?.postMessage({type:'bluhen:navigate',page},'*');
+ }
+ links.forEach(link=>link.addEventListener('click',()=>{choose(link.dataset.sidebarPage);if(innerWidth<=900){app.classList.add('is-collapsed');toggle.setAttribute('aria-expanded','false');toggle.textContent='ナビを表示';}}));
+ toggle.addEventListener('click',()=>{const closed=app.classList.toggle('is-collapsed');toggle.setAttribute('aria-expanded',String(!closed));toggle.textContent=closed?'ナビを表示':'ナビを隠す';});
+ grid.addEventListener('click',()=>{const on=grid.getAttribute('aria-pressed')!=='true';grid.setAttribute('aria-pressed',String(on));iframe.contentWindow?.postMessage({type:'bluhen:grid',enabled:on},'*');});
+ window.addEventListener('message',event=>{if(event.source!==iframe.contentWindow||!event.data||event.data.type!=='bluhen:page')return;choose(event.data.page,false);});
+ iframe.addEventListener('load',()=>{const page=new URLSearchParams(location.search).get('page')||'top';choose(page);if(grid.getAttribute('aria-pressed')==='true')iframe.contentWindow?.postMessage({type:'bluhen:grid',enabled:true},'*');});
+ if(innerWidth<=900){app.classList.add('is-collapsed');toggle.setAttribute('aria-expanded','false');toggle.textContent='ナビを表示';}
+})();
+</script></body></html>
